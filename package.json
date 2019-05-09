@@ -1,0 +1,23 @@
+{
+  "name": "pantry_manager_be",
+  "version": "1.0.0",
+  "description": "Backend server for the Pantry Management App.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:local": "$(npm bin)/nodemon index.js"
+  },
+  "author": "Osita, Erika, J, Heriberto",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "pg-promise": "^8.6.5"
+  },
+  "devDependencies": {
+    "jest": "^24.8.0",
+    "nodemon": "^1.19.0",
+    "supertest": "^4.0.2"
+  }
+}
