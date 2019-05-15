@@ -14,7 +14,8 @@
 
 1. Download app
 2. NPM install in ./backend_server
-3. Use `npm run start:local` to run server on port #11235
+3. `cat seed.sql | psql` to create SQL database and insert data
+4. Use `npm run start:local` to run server on port #11235
 
 ### Working Routes:
 
