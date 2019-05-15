@@ -19,8 +19,8 @@
 ### Working Routes:
 
 > * `localhost:11235/user/id/:id` 
->   *  Returns data of specified user
+>   *  Returns specified user's data
 > * `localhost:11235/user/email/:email` 
->   * Returns data of specified user
+>   * Returns specified user's data
 > * `localhost:11235/recipe/:id`
->   * Returns data of specified recipe and ingredients that belong w recipe.
+>   * Returns specified recipe's data joint w its respective ingredients
