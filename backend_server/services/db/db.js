@@ -8,8 +8,8 @@ const getDbConn = (_ => {
         if (!dbConn) {
             dbConn = pgp({})(dbAddr);
         };
+        return dbConn;
     };
-    return dbConn;
 })();
 
 module.exports = {

@@ -4,7 +4,7 @@ CREATE DATABASE pantry_management;
 \c pantry_management;
 
 CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
+    user_id SERIAL PRIMARY KEY,
     name VARCHAR,
     email VARCHAR UNIQUE NOT NULL,
     dob VARCHAR,
@@ -12,49 +12,49 @@ CREATE TABLE users (
 );
 
 CREATE TABLE recipes (
-    id SERIAL PRIMARY KEY,
+    recipe_id SERIAL PRIMARY KEY,
     recipe_name VARCHAR UNIQUE NOT NULL,
     health_tags VARCHAR NOT NULL,
-    recipe_owner INT REFERENCES users(id) NOT NULL,
+    recipe_owner INT REFERENCES users(user_id) NOT NULL,
     recipe_notes VARCHAR
 );
 
 CREATE TABLE products (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR NOT NULL,
-    url VARCHAR,
-    image VARCHAR,
-    original_weight VARCHAR NOT NULL,
-    gram_weight INT NOT NULL,
-    price VARCHAR NOT NULL,
-    product_owner INT REFERENCES users(id) NOT NULL
+    product_id SERIAL PRIMARY KEY,
+    product_name VARCHAR NOT NULL,
+    product_url VARCHAR,
+    product_image VARCHAR,
+    product_original_weight VARCHAR NOT NULL,
+    product_gram_weight INT NOT NULL,
+    product_price VARCHAR NOT NULL,
+    product_owner INT REFERENCES users(user_id) NOT NULL
 );
 
 CREATE TABLE current_pantry (
-    product_id INT REFERENCES products(id),
-    owner_id INT REFERENCES users(id),
+    product_id INT REFERENCES products(product_id),
+    owner_id INT REFERENCES users(user_id),
     weight_left INT NOT NULL
 );
 
 CREATE TABLE ingredients (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR NOT NULL,
-    recipe_id INT REFERENCES recipes(id) NOT NULL,
-    product_id INT REFERENCES products(id) NOT NULL,
-    weight VARCHAR NOT NULL,
-    gram_weight INT NOT NULL
+    ingredient_id SERIAL PRIMARY KEY,
+    ingredient_name VARCHAR NOT NULL,
+    recipe_id INT REFERENCES recipes(recipe_id) NOT NULL,
+    product_id INT REFERENCES products(product_id) NOT NULL,
+    ingredient_weight VARCHAR NOT NULL,
+    ingredient_gram_weight INT NOT NULL
 );
 
 CREATE TABLE weekday (
-    id SERIAL PRIMARY KEY,
+    weekday_id SERIAL PRIMARY KEY,
     name VARCHAR NOT NULL
 );
 
 CREATE TABLE meal_schedule (
     id SERIAL PRIMARY KEY,
-    user_id INT REFERENCES users(id) NOT NULL,
-    recipe_id INT REFERENCES recipes(id) NOT NULL,
-    day_id INT REFERENCES weekday(id) NOT NULL
+    user_id INT REFERENCES users(user_id) NOT NULL,
+    recipe_id INT REFERENCES recipes(recipe_id) NOT NULL,
+    day_id INT REFERENCES weekday(weekday_id) NOT NULL
 );
 
 INSERT INTO weekday (name) VALUES
@@ -69,7 +69,7 @@ INSERT INTO recipes (recipe_name, health_tags, recipe_owner, recipe_notes) VALUE
 ('Beef Over Rice', 'None', 1, 'Very tasteful Dominican recipe.'),
 ('Chicken Alfredo', 'None', 2, 'Very tasteful Italian recipe.');
 
-INSERT INTO products (name, url, image, original_weight, gram_weight, price, product_owner) VALUES
+INSERT INTO products (product_name, product_url, product_image, product_original_weight, product_gram_weight, product_price, product_owner) VALUES
 (
     'Lundberg California White Basmati Rice', 'https://www.amazon.com/Lundberg-Family-Farms-Organic-Basmati/dp/B01E6OKVY0/ref=sr_1_3?keywords=organic%2Brice&qid=1557879879&s=gateway&sr=8-3&th=1', 
     'https://images-na.ssl-images-amazon.com/images/I/91U%2Be2ZGLkL._SY679_.jpg', '4 Pounds', 1814, '11.49', 1
@@ -98,7 +98,7 @@ INSERT INTO current_pantry (product_id, owner_id, weight_left) VALUES
 (4, 2, 680),
 (5, 2, 411);
 
-INSERT INTO ingredients (name, recipe_id, product_id, weight, gram_weight) VALUES
+INSERT INTO ingredients (ingredient_name, recipe_id, product_id, ingredient_weight, ingredient_gram_weight) VALUES
 ('Rice', 1, 1, '3 cups', 500),
 ('Chicken', 1, 2, '2 pounds', 907),
 ('Rice', 2, 1, '3 cups', 500),
