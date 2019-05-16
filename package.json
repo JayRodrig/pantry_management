@@ -4,7 +4,7 @@
   "description": "Backend server for the Pantry Management App.",
   "main": "index.js",
   "scripts": {
-    "test": "$(npm bin)/jest --coverage && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
+    "test": "$(npm bin)/jest --coverage",
     "start:local": "$(npm bin)/nodemon index.js",
     "write-coveralls": "rm -rf .coveralls.yml && echo \"repo_token:$COVERAGE_TOKEN\" >> .coveralls.yml"
   },
@@ -17,7 +17,6 @@
     "pg-promise": "^8.6.5"
   },
   "devDependencies": {
-    "coveralls": "^3.0.3",
     "jest": "^24.8.0",
     "nodemon": "^1.19.0",
     "supertest": "^4.0.2"
