@@ -1,3 +1,5 @@
+[![Coverage Status](https://coveralls.io/repos/github/JayRodrig/pantry_managementBE/badge.svg?branch=master)](https://coveralls.io/github/JayRodrig/pantry_managementBE?branch=master)
+
 # Pantry Management BE
 
 > Backend Server for the Pantry Management App. 
