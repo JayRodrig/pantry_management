@@ -32,6 +32,6 @@ test('getApp tests', done => {
     const app = getApp();
 
     expect(app).toEqual(mockApp);
-    expect(mockUse.mock.calls[0][0]).toBe(5);
+    expect(mockUse.mock.calls[0][0]).toBe('test');
     done();
 });
