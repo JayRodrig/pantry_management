@@ -8,3 +8,9 @@ before_script:
 script:
   - npm run write-coveralls
   - npm test
+deploy:
+  provider: heroku
+  api_key: $HEROKU_KEY
+  app: pantry-managementbe
+  on: master 
+  strategy: git
