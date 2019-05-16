@@ -1,10 +1,7 @@
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS recipes;
-DROP TABLE IF EXISTS products;
-DROP TABLE IF EXISTS current_pantry;
-DROP TABLE IF EXISTS ingredients;
-DROP TABLE IF EXISTS weekday;
-DROP TABLE IF EXISTS meal_schedule;
+DROP DATABASE IF EXISTS pantry_management;
+CREATE DATABASE pantry_management;
+
+\c pantry_management;
 
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,

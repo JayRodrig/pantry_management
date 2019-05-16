@@ -6,7 +6,8 @@
   "scripts": {
     "test": "$(npm bin)/jest --coverage && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
     "start:local": "$(npm bin)/nodemon index.js",
-    "write-coveralls": "rm -rf .coveralls.yml && echo \"repo_token:$COVERAGE_TOKEN\" >> .coveralls.yml"
+    "write-coveralls": "rm -rf .coveralls.yml && echo \"repo_token:$COVERAGE_TOKEN\" >> .coveralls.yml",
+    "start": "node index.js"
   },
   "author": "Osita, Erika, J, Heriberto",
   "license": "ISC",
