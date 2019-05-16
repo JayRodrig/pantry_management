@@ -1,4 +1,4 @@
-[![Coverage Status](https://coveralls.io/repos/github/JayRodrig/pantry_managementBE/badge.svg?branch=master)](https://coveralls.io/github/JayRodrig/pantry_managementBE?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/JayRodrig/pantry_managementBE/badge.svg?branch=master)](https://coveralls.io/github/JayRodrig/pantry_managementBE?branch=master) [![Build Status](https://travis-ci.org/JayRodrig/pantry_managementBE.svg?branch=master)](https://travis-ci.org/JayRodrig/pantry_managementBE) 
 
 # Pantry Management BE
 
