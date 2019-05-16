@@ -1,5 +1,3 @@
-
-
 //Convert teaspoon to grams 
 const tspToGrams = (teaspoons) => {
     const grams = teaspoons * 5;
