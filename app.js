@@ -4,8 +4,9 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 // EXPRESS ROUTERS
-const {getUserRouter,} = require('./routes/publicUser');
-const {getRecipeRouter,} = require('./routes/privateRecipe');
+const {getUserRouter,} = require('./routes/user');
+const {getRecipeRouter,} = require('./routes/recipe');
+const {getProductRouter,} = require('./routes/product');
 
 // FUNCTION THAT RETURNS THE EXPRESS APP / SERVER
 const getApp = _ => {
@@ -16,6 +17,7 @@ const getApp = _ => {
 
     app.use('/user', getUserRouter());
     app.use('/recipe', getRecipeRouter());
+    app.use('/product', getProductRouter());
 
     return app;
 };

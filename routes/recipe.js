@@ -36,4 +36,4 @@ const getRecipeRouter = _ => {
 
 module.exports = {
     getRecipeRouter,
-}
+};

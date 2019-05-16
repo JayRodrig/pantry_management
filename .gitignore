@@ -1,3 +1,4 @@
-backend_server/node_modules/*
-backend_server/.DS_Store
+node_modules/*
+./.DS_Store
+coverage/
 ./.DS_Store

@@ -16,12 +16,12 @@ const getUserByID = (request, response) => {
             response.status(200).json({
                 'msg': `Successfully retrieved user data.`,
                 data,
-            })
-            .catch(e => {
-                response.status(400).json({
-                    'msg': `Something went wrong.`,
-                    e,
-                });
+            });
+        })
+        .catch(e => {
+            response.status(400).json({
+                'msg': `Something went wrong.`,
+                e,
             });
         });
 };
@@ -33,12 +33,12 @@ const getUserByEmail = (request, response) => {
             response.status(200).json({
                 'msg': `Successfully retrieved user data.`,
                 data,
-            })
-            .catch(e => {
-                response.status(400).json({
-                    'msg': `Something went wrong.`,
-                    e,
-                });
+            });
+        })
+        .catch(e => {
+            response.status(400).json({
+                'msg': `Something went wrong.`,
+                e,
             });
         });
 };
@@ -54,4 +54,4 @@ const getUserRouter = _ => {
 
 module.exports = {
     getUserRouter,
-}
+};
