@@ -101,7 +101,7 @@ INSERT INTO current_pantry (product_id, owner_id, weight_left) VALUES
 
 INSERT INTO ingredients (ingredient_name, recipe_id, product_id, ingredient_weight, ingredient_gram_weight) VALUES
 ('Rice', 1, 1, 3,'cups', 500),
-('Chicken', 1, 2, 2,'pounds' 907),
+('Chicken', 1, 2, 2,'pounds', 907),
 ('Rice', 2, 1, 3,'cups', 500),
 ('Beef', 2, 3, 10,'onces', 283),
 ('Chicken Breast', 3, 4, 0.5,'pounds', 227),
