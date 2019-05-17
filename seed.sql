@@ -44,7 +44,8 @@ CREATE TABLE ingredients (
     ingredient_name VARCHAR NOT NULL,
     recipe_id INT REFERENCES recipes(recipe_id) NOT NULL,
     product_id INT REFERENCES products(product_id) NOT NULL,
-    ingredient_weight VARCHAR NOT NULL,
+    ingredient_weight INT NOT NULL,
+    ingredient_weight_type VARCHAR NOT NULL,
     ingredient_gram_weight INT NOT NULL
 );
 
@@ -101,13 +102,13 @@ INSERT INTO current_pantry (product_id, owner_id, weight_left) VALUES
 (4, 2, 680),
 (5, 2, 411);
 
-INSERT INTO ingredients (ingredient_name, recipe_id, product_id, ingredient_weight, ingredient_gram_weight) VALUES
-('Rice', 1, 1, '3 cups', 500),
-('Chicken', 1, 2, '2 pounds', 907),
-('Rice', 2, 1, '3 cups', 500),
-('Beef', 2, 3, '10 oz', 283),
-('Chicken Breast', 3, 4, '0.5 lbs', 227),
-('Alfredo Sauce', 3, 5, '5 oz', 142);
+INSERT INTO ingredients (ingredient_name, recipe_id, product_id, ingredient_weight, ingredient_weight_type, ingredient_gram_weight) VALUES
+('Rice', 1, 1, 3,'cups', 500),
+('Chicken', 1, 2, 2,'pounds' 907),
+('Rice', 2, 1, 3,'cups', 500),
+('Beef', 2, 3, 10,'onces', 283),
+('Chicken Breast', 3, 4, 0.5,'pounds', 227),
+('Alfredo Sauce', 3, 5, 5, 'ounces', 142);
 
 INSERT INTO meal_schedule (user_id, recipe_id, day_id) VALUES
 (1, 1, 1),
