@@ -45,6 +45,7 @@ CREATE TABLE ingredients (
     recipe_id INT REFERENCES recipes(recipe_id) NOT NULL,
     product_id INT REFERENCES products(product_id) NOT NULL,
     ingredient_weight VARCHAR NOT NULL,
+    ingredient_weight_type INT NOT NULL,
     ingredient_gram_weight INT NOT NULL
 );
 
