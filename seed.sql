@@ -44,8 +44,8 @@ CREATE TABLE ingredients (
     ingredient_name VARCHAR NOT NULL,
     recipe_id INT REFERENCES recipes(recipe_id) NOT NULL,
     product_id INT REFERENCES products(product_id) NOT NULL,
-    ingredient_weight VARCHAR NOT NULL,
-    ingredient_weight_type INT NOT NULL,
+    ingredient_weight INT NOT NULL,
+    ingredient_weight_type VARCHAR NOT NULL,
     ingredient_gram_weight INT NOT NULL
 );
 
@@ -102,7 +102,7 @@ INSERT INTO current_pantry (product_id, owner_id, weight_left) VALUES
 (4, 2, 680),
 (5, 2, 411);
 
-INSERT INTO ingredients (ingredient_name, recipe_id, product_id, ingredient_weight, ingredient_gram_weight) VALUES
+INSERT INTO ingredients (ingredient_name, recipe_id, product_id, ingredient_weight, ingredient_weight_type, ingredient_gram_weight) VALUES
 ('Rice', 1, 1, 3,'cups', 500),
 ('Chicken', 1, 2, 2,'pounds' 907),
 ('Rice', 2, 1, 3,'cups', 500),
