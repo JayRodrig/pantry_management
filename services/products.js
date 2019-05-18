@@ -10,7 +10,7 @@ const postProduct = (
         INSERT INTO products 
             (product_name, product_url, product_image, product_original_weight, product_original_weight_type, product_gram_weight, product_price, product_owner)
         VALUES 
-            ($[product_name], $[product_url], $[product_image], $[product_original_weight], $[product_gram_weight], $[product_price], $[product_owner])
+            ($[product_name], $[product_url], $[product_image], $[product_original_weight], $[product_original_weight_type], $[product_gram_weight], $[product_price], $[product_owner])
     `, {product_name, product_url, product_image, product_original_weight, product_original_weight_type, product_gram_weight, product_price, product_owner}
 );
 
