@@ -11,9 +11,9 @@ const ProductServices = require('../services/products');
 
 const postProduct = (request, response) => {
     const {
-        product_name, product_url, product_image, product_original_weight, product_gram_weight, product_price, product_owner,
+        product_name, product_url, product_image, product_original_weight, product_original_weight_type, product_gram_weight, product_price, product_owner,
     } = request.body;
-    ProductServices.postProduct(product_name, product_url, product_image, product_original_weight, product_gram_weight, product_price, product_owner)
+    ProductServices.postProduct(product_name, product_url, product_image, product_original_weight, product_original_weight_type, product_gram_weight, product_price, product_owner)
         .then(data => {
             response.status(200).json({
                 'msg': `Successfully created user.`,
