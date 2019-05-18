@@ -22,7 +22,29 @@ const getProductByID = id => getDbConn(dbAddr).any(
     `, {id,}
 );
 
+const updateProduct = (
+        id, product_name, product_url, product_image, product_original_weight, product_original_weight_type, product_gram_weight, product_price, product_owner
+    ) => getDbConn(dbAddr).oneOrNone(
+    `
+        UPDATE products
+            SET
+        product_name = $[product_name], product_url = $[product_url], product_image = $[product_image], product_original_weight = $[product_original_weight],
+        product_original_weight_type = $[product_original_weight_type], product_gram_weight = $[product_gram_weight], product_price = $[product_price], product_owner = $[product_owner]
+            WHERE
+        products.product_id = $[id] RETURNING product_id
+    `, {id, product_name, product_url, product_image, product_original_weight, product_original_weight_type, product_gram_weight, product_price, product_owner}
+);
+
+const deleteProduct = id => getDbConn(dbAddr).oneOrNone(
+    `DELETE FROM products
+        WHERE
+    product_id = $[id] RETURNING product_id
+    `, {id}
+);
+
 module.exports = {
     postProduct,
     getProductByID,
+    updateProduct,
+    deleteProduct,
 };
