@@ -29,7 +29,7 @@ const updateRecipe = (id, recipe_name, health_tags, recipe_owner, recipe_notes) 
     getDbConn(dbAddr).oneOrNone(
         `
         UPDATE recipes SET
-            recipe_name = $[recipe_name], health_tags = $[health_tags], recipe_owner = $[recipe_owner]
+            recipe_name = $[recipe_name], health_tags = $[health_tags], recipe_owner = $[recipe_owner],
             recipe_notes = $[recipe_notes]
         WHERE recipe_id = $[id] RETURNING recipe_id
         `, {id, recipe_name, health_tags, recipe_owner, recipe_notes,}
@@ -40,6 +40,7 @@ const deleteRecipe = id => getDbConn(dbAddr).oneOrNone(
     DELETE FROM recipes
         WHERE 
     recipes.recipe_id = $[id]
+        RETURNING recipe_id
     `, {id,}
 );
 
