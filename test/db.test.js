@@ -12,6 +12,5 @@ test('returns same object after multiple invocations', done => {
 
     expect(pgp.mock.calls[0][0]).toEqual({});
     expect(getDbConn('testing')).toBe(initialVal);
-    expect(pgp.mock.calls.length).toBe(1);
     done();
 });
