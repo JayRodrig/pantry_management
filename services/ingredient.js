@@ -55,9 +55,25 @@ const getRecipeIngredients = id => getDbConn(dbAddr).any(
     `, { id, }
 );
 
+//UPDATE INGREDIENT BY ID
+const updateIngredient = (id, ingredient_name, recipe_id, product_id, ingredient_weight, ingredient_weight_type, ingredient_gram_weight) => getDbConn(dbAddr).none(
+    `   
+        UPDATE ingredients 
+        SET
+        ingredient_name=$[ingredient_name], 
+        recipe_id=$[recipe_id], 
+        product_id=$[product_id],
+        ingredient_weight=$[ingredient_weight], 
+        ingredient_weight_type=$[ingredient_weight_type], 
+        ingredient_gram_weight=$[ingredient_gram_weight]
+         WHERE ingredients.ingredient_id=$[id];`
+        , { id, ingredient_name, recipe_id, product_id, ingredient_weight, ingredient_weight_type, ingredient_gram_weight }
+);
+
 module.exports = {
     getIngredientByID,
     getIngredientByName,
     createIngredient,
     getRecipeIngredients,
+    updateIngredient,
 };

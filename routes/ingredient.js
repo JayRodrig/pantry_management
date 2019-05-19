@@ -12,7 +12,7 @@ const createIngredient = (request, response) => {
     IngredientServices.createIngredient(ingredient_name, recipe_id, product_id, ingredient_weight, ingredient_weight_type, ingredient_gram_weight)
         .then(data => {
             response.status(200).json({
-                'msg': `Successfully retrieved user data.`,
+                'msg': `Successfully added ingredient with ID ${data.id}.`,
                 data,
             });
         })
@@ -23,7 +23,6 @@ const createIngredient = (request, response) => {
                 e,
             });
         });
-
 }
 
 //GET INGREDIENT BY ID
@@ -32,7 +31,7 @@ const getIngredientByID = (request, response) => {
     IngredientServices.getIngredientByID(id)
         .then(data => {
             response.status(200).json({
-                'msg': `Successfully retrieved user data.`,
+                'msg': `Successfully retrieved ingredient data.`,
                 data,
             });
         })
@@ -50,7 +49,7 @@ const getIngredientByName = (request, response) => {
     IngredientServices.getIngredientByName(name)
         .then(data => {
             response.status(200).json({
-                'msg': `Successfully retrieved user data.`,
+                'msg': `Successfully retrieved ingredient data.`,
                 data,
             });
         })
@@ -68,7 +67,7 @@ const getRecipeIngredients = (request, response) => {
     IngredientServices.getRecipeIngredients(id)
         .then(data => {
             response.status(200).json({
-                'msg': `Successfully retrieved user data.`,
+                'msg': `Successfully retrieved ingredients data.`,
                 data,
             });
         })
@@ -80,6 +79,27 @@ const getRecipeIngredients = (request, response) => {
         });
 };
 
+//UPDATE INGREDIENT BY ID
+const updateIngredient = (request, response) => {
+    const { ingredient_name, recipe_id, product_id, ingredient_weight, ingredient_weight_type } = request.body;
+    const { id } = request.params;
+    const ingredient_gram_weight = convertToGrams(ingredient_weight, ingredient_weight_type);
+    IngredientServices.updateIngredient(id, ingredient_name, recipe_id, product_id, ingredient_weight, ingredient_weight_type, ingredient_gram_weight)
+        .then(() => {
+            response.status(200).json({
+                'msg': `Successfully updated ingredient with ID ${id}`,
+                'data': id
+            });
+        })
+        .catch(e => {
+            console.log(e)
+            response.status(400).json({
+                'msg': `Something went wrong.`,
+                e,
+            });
+        });
+}
+
 
 const getIngredientRouter = _ => {
     const IngredientRouter = express.Router();
@@ -87,19 +107,12 @@ const getIngredientRouter = _ => {
     IngredientRouter.get('/:id', getIngredientByID);
     IngredientRouter.get('/name/:name', getIngredientByName);
     IngredientRouter.get('/recipe/:id', getRecipeIngredients);
-
-    return IngredientRouter;
-};
-
-const createIngredientRouter = _ => {
-    const IngredientRouter = express.Router();
-
     IngredientRouter.post('/', createIngredient);
+    IngredientRouter.put('/:id', updateIngredient);
 
     return IngredientRouter;
 };
 
 module.exports = {
     getIngredientRouter,
-    createIngredientRouter,
 };
