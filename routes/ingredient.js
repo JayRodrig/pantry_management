@@ -3,7 +3,7 @@ const express = require('express');
 
 // LOCAL MODULES
 const IngredientServices = require('../services/ingredient');
-const  { convertToGrams } = require('../services/weightConversions');
+const { convertToGrams } = require('../services/weightConversions');
 
 //CREATE NEW INGREDIENT
 const createIngredient = (request, response) => {
