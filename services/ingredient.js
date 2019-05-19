@@ -70,10 +70,16 @@ const updateIngredient = (id, ingredient_name, recipe_id, product_id, ingredient
         , { id, ingredient_name, recipe_id, product_id, ingredient_weight, ingredient_weight_type, ingredient_gram_weight }
 );
 
+//DELETE INGREDIENT BY ID 
+const deleteIngredient = (id) => getDbConn(dbAddr).none( 
+    `DELETE FROM ingredients WHERE ingredients.ingredient_id = $[id];`, { id, }
+);
+
 module.exports = {
     getIngredientByID,
     getIngredientByName,
     createIngredient,
     getRecipeIngredients,
     updateIngredient,
+    deleteIngredient,
 };

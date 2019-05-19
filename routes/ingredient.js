@@ -100,6 +100,26 @@ const updateIngredient = (request, response) => {
         });
 }
 
+//DELETE INGREDIENT BY ID
+const deleteIngredient = (request, response) => {
+    const { id } = request.params;
+    console.log(id)
+    IngredientServices.deleteIngredient(id)
+        .then(()=> {
+            response.status(200).json({
+                'msg': `Successfully deleted ingredient with ID ${id}`,
+                'data': id
+            });
+        })
+        .catch(e => {
+            console.log(e)
+            response.status(400).json({
+                'msg': `Something went wrong.`,
+                e,
+            });
+        });
+}
+
 
 const getIngredientRouter = _ => {
     const IngredientRouter = express.Router();
@@ -109,6 +129,7 @@ const getIngredientRouter = _ => {
     IngredientRouter.get('/recipe/:id', getRecipeIngredients);
     IngredientRouter.post('/', createIngredient);
     IngredientRouter.put('/:id', updateIngredient);
+    IngredientRouter.delete('/:id', deleteIngredient);
 
     return IngredientRouter;
 };
