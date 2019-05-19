@@ -7,6 +7,8 @@ const cors = require('cors');
 const {getUserRouter,} = require('./routes/user');
 const {getRecipeRouter,} = require('./routes/recipe');
 const {getProductRouter,} = require('./routes/product');
+const {getIngredientRouter,} = require('./routes/ingredient');
+
 
 // FUNCTION THAT RETURNS THE EXPRESS APP / SERVER
 const getApp = _ => {
@@ -18,7 +20,7 @@ const getApp = _ => {
     app.use('/user', getUserRouter());
     app.use('/recipe', getRecipeRouter());
     app.use('/product', getProductRouter());
-
+    app.use('/ingredient', getIngredientRouter());
     return app;
 };
 
