@@ -21,6 +21,7 @@ const getApp = _ => {
     app.use('/recipe', getRecipeRouter());
     app.use('/product', getProductRouter());
     app.use('/ingredient', getIngredientRouter());
+    
     return app;
 };
 
