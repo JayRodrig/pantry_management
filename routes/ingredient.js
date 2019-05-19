@@ -105,7 +105,7 @@ const deleteIngredient = (request, response) => {
     const { id } = request.params;
     console.log(id)
     IngredientServices.deleteIngredient(id)
-        .then(()=> {
+        .then(() => {
             response.status(200).json({
                 'msg': `Successfully deleted ingredient with ID ${id}`,
                 'data': id

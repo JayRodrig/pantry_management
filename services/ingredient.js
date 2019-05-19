@@ -21,7 +21,7 @@ const createIngredient = (ingredient_name, recipe_id, product_id, ingredient_wei
         $[ingredient_weight],
         $[ingredient_weight_type], 
         $[ingredient_gram_weight]) RETURNING ingredient_id;`
-        , { ingredient_name, recipe_id, product_id, ingredient_weight, ingredient_weight_type, ingredient_gram_weight }
+    , { ingredient_name, recipe_id, product_id, ingredient_weight, ingredient_weight_type, ingredient_gram_weight }
 );
 
 
@@ -67,11 +67,11 @@ const updateIngredient = (id, ingredient_name, recipe_id, product_id, ingredient
         ingredient_weight_type=$[ingredient_weight_type], 
         ingredient_gram_weight=$[ingredient_gram_weight]
          WHERE ingredients.ingredient_id=$[id];`
-        , { id, ingredient_name, recipe_id, product_id, ingredient_weight, ingredient_weight_type, ingredient_gram_weight }
+    , { id, ingredient_name, recipe_id, product_id, ingredient_weight, ingredient_weight_type, ingredient_gram_weight }
 );
 
 //DELETE INGREDIENT BY ID 
-const deleteIngredient = (id) => getDbConn(dbAddr).none( 
+const deleteIngredient = (id) => getDbConn(dbAddr).none(
     `DELETE FROM ingredients WHERE ingredients.ingredient_id = $[id];`, { id, }
 );
 
