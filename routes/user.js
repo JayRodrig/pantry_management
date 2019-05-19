@@ -60,12 +60,50 @@ const getUserByEmail = (request, response) => {
         });
 };
 
+const updateUser = (request, response) => {
+    const {id,} = request.params;
+    const {name, username, email, dob, phone_number,} = request.body;
+    UserServices.updateUser(id, name, username, email, dob, phone_number)
+        .then(data => {
+            response.status(200).json({
+                'msg': `Successfully updated user`,
+                data,
+            });
+        })
+        .catch(e => {
+            console.log(e);
+            response.status(400).json({
+                'msg': `Something went wrong`,
+                e,
+            });
+        });
+};
+
+const deleteUser = (request, response) => {
+    const {id,} = request.params;
+    UserServices.deleteUser(id)
+        .then(data => {
+            response.status(200).json({
+                'msg': `Successfully deleted user`,
+                data,
+            });
+        })
+        .catch(e => {
+            response.status(400).json({
+                'msg': `Something went wrong`,
+                e,
+            });
+        });
+};
+
 const getUserRouter = _ => {
     const UserRouter = express.Router();
 
     UserRouter.post('/', createUser);
     UserRouter.get('/id/:id', getUserByID);
     UserRouter.get('/email/:email', getUserByEmail);
+    UserRouter.put('/:id', updateUser);
+    UserRouter.delete('/:id', deleteUser);
 
     return UserRouter;
 };
