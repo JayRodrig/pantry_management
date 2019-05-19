@@ -43,9 +43,21 @@ const getIngredientByName = name => getDbConn(dbAddr).any(
     `, { name, }
 );
 
+//GET INGREDIENTS OF RECIPE BY RECIPE ID
+const getRecipeIngredients = id => getDbConn(dbAddr).any(
+    `
+        SELECT ingredients.*, 
+            recipes.recipe_name
+        FROM ingredients 
+        JOIN recipes
+        ON ingredients.recipe_id = recipes.recipe_id
+        WHERE ingredients.recipe_id = $[id]
+    `, { id, }
+);
 
 module.exports = {
     getIngredientByID,
     getIngredientByName,
     createIngredient,
+    getRecipeIngredients,
 };

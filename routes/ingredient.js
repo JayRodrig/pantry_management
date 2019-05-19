@@ -8,11 +8,9 @@ const { convertToGrams } = require('../services/weightConversions');
 //CREATE NEW INGREDIENT
 const createIngredient = (request, response) => {
     const { ingredient_name, recipe_id, product_id, ingredient_weight, ingredient_weight_type } = request.body;
-    console.log(request.body)
     const ingredient_gram_weight = convertToGrams(ingredient_weight, ingredient_weight_type);
     IngredientServices.createIngredient(ingredient_name, recipe_id, product_id, ingredient_weight, ingredient_weight_type, ingredient_gram_weight)
         .then(data => {
-            console.log(data);
             response.status(200).json({
                 'msg': `Successfully retrieved user data.`,
                 data,
@@ -64,6 +62,23 @@ const getIngredientByName = (request, response) => {
         });
 };
 
+//GET INGREDIENTS OF RECIPE BY RECIPE ID
+const getRecipeIngredients = (request, response) => {
+    const { id, } = request.params;
+    IngredientServices.getRecipeIngredients(id)
+        .then(data => {
+            response.status(200).json({
+                'msg': `Successfully retrieved user data.`,
+                data,
+            });
+        })
+        .catch(e => {
+            response.status(400).json({
+                'msg': `Something went wrong.`,
+                e,
+            });
+        });
+};
 
 
 const getIngredientRouter = _ => {
@@ -71,6 +86,7 @@ const getIngredientRouter = _ => {
 
     IngredientRouter.get('/:id', getIngredientByID);
     IngredientRouter.get('/name/:name', getIngredientByName);
+    IngredientRouter.get('/recipe/:id', getRecipeIngredients);
 
     return IngredientRouter;
 };
