@@ -8,6 +8,7 @@ const {getUserRouter,} = require('./routes/user');
 const {getRecipeRouter,} = require('./routes/recipe');
 const {getProductRouter,} = require('./routes/product');
 const {getIngredientRouter,} = require('./routes/ingredient');
+const {getCurrentPantryRouter,} = require('./routes/currentPantry');
 
 
 // FUNCTION THAT RETURNS THE EXPRESS APP / SERVER
@@ -21,6 +22,7 @@ const getApp = _ => {
     app.use('/recipe', getRecipeRouter());
     app.use('/product', getProductRouter());
     app.use('/ingredient', getIngredientRouter());
+    app.use('/currentPantry', getCurrentPantryRouter());
     
     return app;
 };
