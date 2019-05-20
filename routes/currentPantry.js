@@ -23,11 +23,32 @@ const getPantryItemByID = (request, response) => {
         });
 };
 
+//GET PANTRY ITEM/ITEMS THAT INCLUDE NAME
+const getPantryItemByName = (request, response) => {
+    const { name, } = request.params;
+    const likeName = `%${name}%`;
+    console.log(likeName)
+    CurrentPantryServices.getPantryItemByName(likeName)
+        .then(data => {
+            response.status(200).json({
+                'msg': `Successfully retrieved ingredient data.`,
+                data,
+            });
+        })
+        .catch(e => {
+            response.status(400).json({
+                'msg': `Something went wrong.`,
+                e,
+            });
+        });
+};
+
 
 const getCurrentPantryRouter = _ => {
     const CurrentPantryRouter = express.Router();
 
     CurrentPantryRouter.get('/:id', getPantryItemByID);
+    CurrentPantryRouter.get('/name/:name', getPantryItemByName);
 
     return CurrentPantryRouter;
 };
