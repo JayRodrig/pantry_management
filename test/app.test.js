@@ -10,12 +10,14 @@ jest.mock('../routes/product');
 jest.mock('../routes/recipe');
 jest.mock('../routes/user');
 jest.mock('../routes/ingredient');
+jest.mock('../routes/currentPantry');
 
 
 const {getUserRouter,} = require('../routes/user');
 const {getProductRouter,} = require('../routes/product');
 const {getRecipeRouter,} = require('../routes/recipe');
 const {getIngredientRouter,} = require('../routes/ingredient');
+const {getCurrentPantryRouter,} = require('./routes/currentPantry');
 
 const express = require('express');
 const bodyParser = require('body-parser');
