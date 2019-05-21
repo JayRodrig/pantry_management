@@ -3,7 +3,6 @@ const express = require('express');
 
 // LOCAL MODULES
 const CurrentPantryServices = require('../services/currentPantry');
-const { convertToGrams } = require('../services/weightConversions');
 
 //CREATE ADD PRODUCT TO CURRENT_PANRTY
 const createProductInPantry = (request, response) => {
@@ -79,7 +78,7 @@ const getPantryItemsOfUser= (request, response) => {
         });
 };
 
-//GET PANTRY ITEM/ITEMS THAT INCLUDE NAME
+//GET PANTRY ITEM/ITEMS THAT INCLUDE NAME FOR SPECIFIC USER
 const getPantryItemOfUserByName = (request, response) => {
     const { name, id } = request.params;
     const likeName = `%${name}%`;
