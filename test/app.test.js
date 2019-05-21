@@ -17,7 +17,7 @@ const {getUserRouter,} = require('../routes/user');
 const {getProductRouter,} = require('../routes/product');
 const {getRecipeRouter,} = require('../routes/recipe');
 const {getIngredientRouter,} = require('../routes/ingredient');
-const {getCurrentPantryRouter,} = require('./routes/currentPantry');
+const {getCurrentPantryRouter,} = require('../routes/currentPantry');
 
 const express = require('express');
 const bodyParser = require('body-parser');
