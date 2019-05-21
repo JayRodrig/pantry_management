@@ -5,6 +5,25 @@ const express = require('express');
 const CurrentPantryServices = require('../services/currentPantry');
 const { convertToGrams } = require('../services/weightConversions');
 
+//CREATE ADD PRODUCT TO CURRENT_PANRTY
+const createProductInPantry = (request, response) => {
+    const { product_id, owner_id, weight_left } = request.body;
+    CurrentPantryServices.createProductInPantry(product_id, owner_id, weight_left)
+        .then(data => {
+            response.status(200).json({
+                'msg': `Successfully added product to pantry with weight left of ${data.weight_left}.`,
+                data,
+            });
+        })
+        .catch(e => {
+            console.log(e)
+            response.status(400).json({
+                'msg': `Something went wrong.`,
+                e,
+            });
+        });
+}
+
 //GET PANTRY ITEM BY ID
 const getPantryItemByID = (request, response) => {
     const { id, } = request.params;
@@ -27,7 +46,6 @@ const getPantryItemByID = (request, response) => {
 const getPantryItemByName = (request, response) => {
     const { name, } = request.params;
     const likeName = `%${name}%`;
-    console.log(likeName)
     CurrentPantryServices.getPantryItemByName(likeName)
         .then(data => {
             response.status(200).json({
@@ -47,6 +65,7 @@ const getPantryItemByName = (request, response) => {
 const getCurrentPantryRouter = _ => {
     const CurrentPantryRouter = express.Router();
 
+    CurrentPantryRouter.post('/', createProductInPantry);
     CurrentPantryRouter.get('/:id', getPantryItemByID);
     CurrentPantryRouter.get('/name/:name', getPantryItemByName);
 

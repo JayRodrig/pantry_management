@@ -2,6 +2,19 @@
 const { getDbConn, } = require('./db/db');
 const { dbAddr, } = require('./db/config');
 
+//CREATE PRODUCT
+const createProductInPantry = (product_id, owner_id, weight_left) => getDbConn(dbAddr).one(
+    `   
+        INSERT INTO current_pantry
+        (product_id, 
+        owner_id, 
+        weight_left) 
+        VALUES 
+        ($[product_id], 
+        $[owner_id], 
+        $[weight_left]) RETURNING weight_left;`
+    , { product_id, owner_id, weight_left }
+);
 
 //GET INGREDIENT BY ID
 const getPantryItemByID = id => getDbConn(dbAddr).any(
@@ -30,4 +43,5 @@ const getPantryItemByName = name => getDbConn(dbAddr).any(
 module.exports = {
     getPantryItemByID,
     getPantryItemByName,
+    createProductInPantry,    
 };
