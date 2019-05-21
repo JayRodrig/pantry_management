@@ -30,7 +30,7 @@ const getPantryItemByID = (request, response) => {
     CurrentPantryServices.getPantryItemByID(id)
         .then(data => {
             response.status(200).json({
-                'msg': `Successfully retrieved ingredient data.`,
+                'msg': `Successfully retrieved current_pantry data.`,
                 data,
             });
         })
@@ -49,7 +49,46 @@ const getPantryItemByName = (request, response) => {
     CurrentPantryServices.getPantryItemByName(likeName)
         .then(data => {
             response.status(200).json({
-                'msg': `Successfully retrieved ingredient data.`,
+                'msg': `Successfully retrieved current_pantry data.`,
+                data,
+            });
+        })
+        .catch(e => {
+            response.status(400).json({
+                'msg': `Something went wrong.`,
+                e,
+            });
+        });
+};
+
+//GET PANTRY ITEMS OF USER BY USER ID
+const getPantryItemsOfUser= (request, response) => {
+    const { id, } = request.params;
+    CurrentPantryServices.getPantryItemsOfUser(id)
+        .then(data => {
+            response.status(200).json({
+                'msg': `Successfully retrieved current_pantry data.`,
+                data,
+            });
+        })
+        .catch(e => {
+            response.status(400).json({
+                'msg': `Something went wrong.`,
+                e,
+            });
+        });
+};
+
+//GET PANTRY ITEM/ITEMS THAT INCLUDE NAME
+const getPantryItemOfUserByName = (request, response) => {
+    const { name, id } = request.params;
+    const likeName = `%${name}%`;
+    console.log(likeName)
+    console.log(id)
+    CurrentPantryServices.getPantryItemOfUserByName(likeName, id)
+        .then(data => {
+            response.status(200).json({
+                'msg': `Successfully retrieved current_pantry data.`,
                 data,
             });
         })
@@ -68,6 +107,8 @@ const getCurrentPantryRouter = _ => {
     CurrentPantryRouter.post('/', createProductInPantry);
     CurrentPantryRouter.get('/:id', getPantryItemByID);
     CurrentPantryRouter.get('/name/:name', getPantryItemByName);
+    CurrentPantryRouter.get('/user/:id', getPantryItemsOfUser);
+    CurrentPantryRouter.get('/user/:id/:name', getPantryItemOfUserByName);
 
     return CurrentPantryRouter;
 };
