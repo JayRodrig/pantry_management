@@ -48,8 +48,27 @@ const getAScheduledMeal = (request, response) => {
     MealScheduleServices.getAScheduledMeal(id)
         .then(data => {
             response.status(200).json({
-                'msg': `Successfully retrieved meal_schedule data for user with ID ${id}.`,
+                'msg': `Successfully retrieved meal_schedule data for meal with ID ${id}.`,
                 data,
+            });
+        })
+        .catch(e => {
+            console.log(e)
+            response.status(400).json({
+                'msg': `Something went wrong.`,
+                e,
+            });
+        });
+};
+
+//UPDATE SCHEDULED MEAL FOR USER
+const updateScheduledMeal = (request, response) => {
+    const { user_id, recipe_id, day_id } = request.body;
+    const { id } = request.params;
+    MealScheduleServices.updateScheduledMeal(id, user_id, recipe_id, day_id)
+        .then(() => {
+            response.status(200).json({
+                'msg': `Successfully updated scheduled meal with ID ${id}.`
             });
         })
         .catch(e => {
@@ -67,6 +86,7 @@ const getMealScheduleRouter = _ => {
     MealScheduleRouter.post('/', createScheduledMeal);
     MealScheduleRouter.get('/user/:id', getScheduledMeals);
     MealScheduleRouter.get('/:id', getAScheduledMeal);
+    MealScheduleRouter.put('/:id', updateScheduledMeal);
 
     return MealScheduleRouter;
 };

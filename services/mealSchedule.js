@@ -40,13 +40,25 @@ const getAScheduledMeal = (id) => getDbConn(dbAddr).any(
         ON recipes.recipe_id = meal_schedule.recipe_id
      INNER JOIN weekday
         ON meal_schedule.day_id = weekday.weekday_id
-     WHERE meal_schedule.id = $[id]
+     WHERE meal_schedule.id = $[id];
     `, { id, }
 );
 
+//UPDATE SCHEDULED MEAL FOR USER
+const updateScheduledMeal = ( id, user_id, recipe_id, day_id) => getDbConn(dbAddr).none(
+    `   
+        UPDATE meal_schedule
+        SET 
+        user_id = $[user_id], 
+        recipe_id = $[recipe_id], 
+        day_id = $[day_id]
+        WHERE meal_schedule.id = $[id];`
+    , { id, user_id, recipe_id, day_id }
+);
 
 module.exports = {
     createScheduledMeal,  
     getScheduledMeals,
     getAScheduledMeal,
+    updateScheduledMeal,
 };
