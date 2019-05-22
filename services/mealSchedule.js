@@ -56,9 +56,17 @@ const updateScheduledMeal = ( id, user_id, recipe_id, day_id) => getDbConn(dbAdd
     , { id, user_id, recipe_id, day_id }
 );
 
+//DELETE A SCHEDULED MEAL BY ID
 const deleteAScheduledMeal = (id) => getDbConn(dbAddr).none(
     `
     DELETE FROM meal_schedule WHERE meal_schedule.id = $[id];
+    `, { id, }
+);
+
+//DELETE ALL SCHEDULED MEALS FOR USER BY ID
+const deleteAllScheduledMealsForUser = (id) => getDbConn(dbAddr).none(
+    `
+    DELETE FROM meal_schedule WHERE meal_schedule.user_id = $[id];
     `, { id, }
 );
 
@@ -68,4 +76,5 @@ module.exports = {
     getAScheduledMeal,
     updateScheduledMeal,
     deleteAScheduledMeal,
+    deleteAllScheduledMealsForUser,
 };

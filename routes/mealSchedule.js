@@ -80,13 +80,31 @@ const updateScheduledMeal = (request, response) => {
         });
 };
 
-//DELETE SCHEDULED MEAL BY ID
+//DELETE A SCHEDULED MEAL BY ID
 const deleteAScheduledMeal = (request, response) => {
     const { id } = request.params;
     MealScheduleServices.deleteAScheduledMeal(id)
     .then(() => {
         response.status(200).json({
             'msg': `Successfully deleted scheduled meal with ID ${id}.`
+        });
+    })
+    .catch(e => {
+        console.log(e)
+        response.status(400).json({
+            'msg': `Something went wrong.`,
+            e,
+        });
+    });
+};
+
+//DELETE ALL SCHEDULED MEALS FOR USER BY ID
+const deleteAllScheduledMealsForUser = (request, response) => {
+    const { id } = request.params;
+    MealScheduleServices.deleteAllScheduledMealsForUser(id)
+    .then(() => {
+        response.status(200).json({
+            'msg': `Successfully deleted all scheduled meal  for user with ID ${id}.`
         });
     })
     .catch(e => {
@@ -106,6 +124,7 @@ const getMealScheduleRouter = _ => {
     MealScheduleRouter.get('/:id', getAScheduledMeal);
     MealScheduleRouter.put('/:id', updateScheduledMeal);
     MealScheduleRouter.delete('/:id', deleteAScheduledMeal);
+    MealScheduleRouter.delete('/user/:id', deleteAllScheduledMealsForUser);
 
     return MealScheduleRouter;
 };
