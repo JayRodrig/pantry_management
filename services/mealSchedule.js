@@ -30,7 +30,23 @@ const getScheduledMeals = id => getDbConn(dbAddr).any(
     `, { id, }
 );
 
+//GET SCHEDULED MEAL BY ID
+const getAScheduledMeal = (id) => getDbConn(dbAddr).any(
+    `
+    SELECT recipes.*,
+           weekday.*
+     FROM meal_schedule
+     INNER JOIN recipes
+        ON recipes.recipe_id = meal_schedule.recipe_id
+     INNER JOIN weekday
+        ON meal_schedule.day_id = weekday.weekday_id
+     WHERE meal_schedule.id = $[id]
+    `, { id, }
+);
+
+
 module.exports = {
     createScheduledMeal,  
     getScheduledMeals,
+    getAScheduledMeal,
 };
