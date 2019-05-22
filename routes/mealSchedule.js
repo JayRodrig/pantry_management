@@ -23,10 +23,30 @@ const createScheduledMeal = (request, response) => {
         });
 };
 
+//GET ALL SCHEDULED MEALS FOR A SPECIFIC USER
+const getScheduledMeals = (request, response) => {
+    const { id } = request.params;
+    MealScheduleServices.getScheduledMeals(id)
+        .then(data => {
+            response.status(200).json({
+                'msg': `Successfully retrieved meal_schedule data for user with ID ${id}.`,
+                data,
+            });
+        })
+        .catch(e => {
+            console.log(e)
+            response.status(400).json({
+                'msg': `Something went wrong.`,
+                e,
+            });
+        });
+};
+
 const getMealScheduleRouter = _ => {
     const MealScheduleRouter = express.Router();
 
     MealScheduleRouter.post('/', createScheduledMeal);
+    MealScheduleRouter.get('/user/:id', getScheduledMeals);
 
     return MealScheduleRouter;
 };
