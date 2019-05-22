@@ -80,6 +80,24 @@ const updateScheduledMeal = (request, response) => {
         });
 };
 
+//DELETE SCHEDULED MEAL BY ID
+const deleteAScheduledMeal = (request, response) => {
+    const { id } = request.params;
+    MealScheduleServices.deleteAScheduledMeal(id)
+    .then(() => {
+        response.status(200).json({
+            'msg': `Successfully deleted scheduled meal with ID ${id}.`
+        });
+    })
+    .catch(e => {
+        console.log(e)
+        response.status(400).json({
+            'msg': `Something went wrong.`,
+            e,
+        });
+    });
+};
+
 const getMealScheduleRouter = _ => {
     const MealScheduleRouter = express.Router();
 
@@ -87,6 +105,7 @@ const getMealScheduleRouter = _ => {
     MealScheduleRouter.get('/user/:id', getScheduledMeals);
     MealScheduleRouter.get('/:id', getAScheduledMeal);
     MealScheduleRouter.put('/:id', updateScheduledMeal);
+    MealScheduleRouter.delete('/:id', deleteAScheduledMeal);
 
     return MealScheduleRouter;
 };
