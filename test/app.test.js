@@ -10,12 +10,14 @@ jest.mock('../routes/product');
 jest.mock('../routes/recipe');
 jest.mock('../routes/user');
 jest.mock('../routes/ingredient');
+jest.mock('../routes/currentPantry');
 
 
 const {getUserRouter,} = require('../routes/user');
 const {getProductRouter,} = require('../routes/product');
 const {getRecipeRouter,} = require('../routes/recipe');
 const {getIngredientRouter,} = require('../routes/ingredient');
+const {getCurrentPantryRouter,} = require('../routes/currentPantry');
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -35,6 +37,6 @@ test('getApp tests', done => {
 
     expect(app).toEqual(mockApp);
     expect(mockUse.mock.calls[0][0]).toBe('test');
-    expect(mockUse.mock.calls.length).toEqual(6);
+    expect(mockUse.mock.calls.length).toEqual(7);
     done();
 });
