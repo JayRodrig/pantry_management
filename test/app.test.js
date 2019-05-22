@@ -19,7 +19,7 @@ const {getProductRouter,} = require('../routes/product');
 const {getRecipeRouter,} = require('../routes/recipe');
 const {getIngredientRouter,} = require('../routes/ingredient');
 const {getCurrentPantryRouter,} = require('../routes/currentPantry');
-const {getMealScheduleRouter,} = require('./routes/mealSchedule');
+const {getMealScheduleRouter,} = require('../routes/mealSchedule');
 
 const express = require('express');
 const bodyParser = require('body-parser');
