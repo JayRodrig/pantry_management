@@ -39,7 +39,7 @@ CREATE TABLE products (
 );
 
 CREATE TABLE current_pantry (
-    product_id INT REFERENCES products(product_id),
+    product_id INT REFERENCES products(product_id) ON DELETE CASCADE,
     owner_id INT REFERENCES users(user_id) ON DELETE CASCADE,
     weight_left INT NOT NULL
 );
