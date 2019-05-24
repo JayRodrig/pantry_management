@@ -10,8 +10,8 @@ const express = require('express');
 const UserServices = require('../services/users');
 
 const createUser = (request, response) => {
-    const {name, username, email, dob, phone_number} = request.body;
-    UserServices.postUser(name, username, email, dob, phone_number)
+    const {name, username, email, dob, phone_number, diet_preference, food_limitations, food_alergies,} = request.body;
+    UserServices.postUser(name, username, email, dob, phone_number, diet_preference, food_limitations, food_alergies)
         .then(data => {
             response.status(200).json({
                 'msg': `Successfully created user.`,
@@ -62,8 +62,8 @@ const getUserByEmail = (request, response) => {
 
 const updateUser = (request, response) => {
     const {id,} = request.params;
-    const {name, username, email, dob, phone_number,} = request.body;
-    UserServices.updateUser(id, name, username, email, dob, phone_number)
+    const {name, username, email, dob, phone_number, diet_preference, food_limitations, food_alergies,} = request.body;
+    UserServices.updateUser(id, name, username, email, dob, phone_number, diet_preference, food_limitations, food_alergies)
         .then(data => {
             response.status(200).json({
                 'msg': `Successfully updated user`,
