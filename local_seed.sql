@@ -19,7 +19,7 @@ CREATE TABLE recipes (
     recipe_id SERIAL PRIMARY KEY,
     recipe_name VARCHAR UNIQUE NOT NULL,
     health_tags VARCHAR NOT NULL,
-    recipe_owner INT REFERENCES users(user_id) NOT NULL,
+    recipe_owner INT REFERENCES users(user_id) ON DELETE CASCADE,
     recipe_notes VARCHAR
 );
 
@@ -32,20 +32,20 @@ CREATE TABLE products (
     product_original_weight_type VARCHAR NOT NULL,
     product_gram_weight INT NOT NULL,
     product_price VARCHAR NOT NULL,
-    product_owner INT REFERENCES users(user_id) NOT NULL
+    product_owner INT REFERENCES users(user_id) ON DELETE CASCADE
 );
 
 CREATE TABLE current_pantry (
-    product_id INT REFERENCES products(product_id),
-    owner_id INT REFERENCES users(user_id),
+    product_id INT REFERENCES products(product_id) ON DELETE CASCADE,
+    owner_id INT REFERENCES users(user_id) ON DELETE CASCADE,
     weight_left INT NOT NULL
 );
 
 CREATE TABLE ingredients (
     ingredient_id SERIAL PRIMARY KEY,
     ingredient_name VARCHAR NOT NULL,
-    recipe_id INT REFERENCES recipes(recipe_id) NOT NULL,
-    product_id INT REFERENCES products(product_id) NOT NULL,
+    recipe_id INT REFERENCES recipes(recipe_id) ON DELETE CASCADE,
+    product_id INT REFERENCES products(product_id) ON DELETE CASCADE,
     ingredient_weight INT NOT NULL,
     ingredient_weight_type VARCHAR NOT NULL,
     ingredient_gram_weight INT NOT NULL
@@ -58,9 +58,9 @@ CREATE TABLE weekday (
 
 CREATE TABLE meal_schedule (
     id SERIAL PRIMARY KEY,
-    user_id INT REFERENCES users(user_id) NOT NULL,
-    recipe_id INT REFERENCES recipes(recipe_id) NOT NULL,
-    day_id INT REFERENCES weekday(weekday_id) NOT NULL
+    user_id INT REFERENCES users(user_id) ON DELETE CASCADE,
+    recipe_id INT REFERENCES recipes(recipe_id) ON DELETE CASCADE,
+    day_id INT REFERENCES weekday(weekday_id) ON DELETE CASCADE
 );
 
 INSERT INTO weekday (name) VALUES
