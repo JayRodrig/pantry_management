@@ -12,7 +12,10 @@ CREATE TABLE users (
     username VARCHAR NOT NULL,
     email VARCHAR UNIQUE NOT NULL,
     dob VARCHAR,
-    phone_number VARCHAR UNIQUE NOT NULL
+    phone_number VARCHAR UNIQUE NOT NULL,
+    diet_preference VARCHAR,
+    food_limitations VARCHAR,
+    food_allergies VARCHAR
 );
 
 CREATE TABLE recipes (
@@ -66,9 +69,9 @@ CREATE TABLE meal_schedule (
 INSERT INTO weekday (name) VALUES
 ('Monday'), ('Tuesday'), ('Wednesday'), ('Thursday'), ('Friday');
 
-INSERT INTO users (name, username, email, dob, phone_number) VALUES
-('Jose Rodriguez', 'josemlrod', 'joserodriguez@pursuit.org', '01/01/1990', '1234567890'),
-('Heriberto Uroza', 'heriUroza', 'heribertouroza@pursuit.org', '01/01/1990', '0987654321');
+INSERT INTO users (name, username, email, dob, phone_number, diet_preference, food_limitations, food_allergies) VALUES
+('Jose Rodriguez', 'josemlrod', 'joserodriguez@pursuit.org', '01/01/1990', '1234567890', 'None', 'None', 'None'),
+('Heriberto Uroza', 'heriUroza', 'heribertouroza@pursuit.org', '01/01/1990', '0987654321', 'None', 'None', 'None');
 
 INSERT INTO recipes (recipe_name, health_tags, recipe_owner, recipe_notes) VALUES
 ('Chicken Over Rice', 'None', 1, 'Very tasteful Dominican recipe.'),
