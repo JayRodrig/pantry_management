@@ -9,14 +9,17 @@ CREATE TABLE users (
     username VARCHAR NOT NULL,
     email VARCHAR UNIQUE NOT NULL,
     dob VARCHAR,
-    phone_number VARCHAR UNIQUE NOT NULL
+    phone_number VARCHAR UNIQUE NOT NULL,
+    diet_preference VARCHAR,
+    food_limitations VARCHAR,
+    food_allergies VARCHAR
 );
 
 CREATE TABLE recipes (
     recipe_id SERIAL PRIMARY KEY,
     recipe_name VARCHAR UNIQUE NOT NULL,
     health_tags VARCHAR NOT NULL,
-    recipe_owner INT REFERENCES users(user_id) NOT NULL,
+    recipe_owner INT REFERENCES users(user_id) ON DELETE CASCADE,
     recipe_notes VARCHAR
 );
 
@@ -29,20 +32,20 @@ CREATE TABLE products (
     product_original_weight_type VARCHAR NOT NULL,
     product_gram_weight INT NOT NULL,
     product_price VARCHAR NOT NULL,
-    product_owner INT REFERENCES users(user_id) NOT NULL
+    product_owner INT REFERENCES users(user_id) ON DELETE CASCADE
 );
 
 CREATE TABLE current_pantry (
-    product_id INT REFERENCES products(product_id),
-    owner_id INT REFERENCES users(user_id),
+    product_id INT REFERENCES products(product_id) ON DELETE CASCADE,
+    owner_id INT REFERENCES users(user_id) ON DELETE CASCADE,
     weight_left INT NOT NULL
 );
 
 CREATE TABLE ingredients (
     ingredient_id SERIAL PRIMARY KEY,
     ingredient_name VARCHAR NOT NULL,
-    recipe_id INT REFERENCES recipes(recipe_id) NOT NULL,
-    product_id INT REFERENCES products(product_id) NOT NULL,
+    recipe_id INT REFERENCES recipes(recipe_id) ON DELETE CASCADE,
+    product_id INT REFERENCES products(product_id) ON DELETE CASCADE,
     ingredient_weight INT NOT NULL,
     ingredient_weight_type VARCHAR NOT NULL,
     ingredient_gram_weight INT NOT NULL
@@ -55,17 +58,17 @@ CREATE TABLE weekday (
 
 CREATE TABLE meal_schedule (
     id SERIAL PRIMARY KEY,
-    user_id INT REFERENCES users(user_id) NOT NULL,
-    recipe_id INT REFERENCES recipes(recipe_id) NOT NULL,
-    day_id INT REFERENCES weekday(weekday_id) NOT NULL
+    user_id INT REFERENCES users(user_id) ON DELETE CASCADE,
+    recipe_id INT REFERENCES recipes(recipe_id) ON DELETE CASCADE,
+    day_id INT REFERENCES weekday(weekday_id) ON DELETE CASCADE
 );
 
 INSERT INTO weekday (name) VALUES
 ('Monday'), ('Tuesday'), ('Wednesday'), ('Thursday'), ('Friday');
 
-INSERT INTO users (name, username, email, dob, phone_number) VALUES
-('Jose Rodriguez', 'josemlrod', 'joserodriguez@pursuit.org', '01/01/1990', '1234567890'),
-('Heriberto Uroza', 'heriUroza', 'heribertouroza@pursuit.org', '01/01/1990', '0987654321');
+INSERT INTO users (name, username, email, dob, phone_number, diet_preference, food_limitations, food_allergies) VALUES
+('Jose Rodriguez', 'josemlrod', 'joserodriguez@pursuit.org', '01/01/1990', '1234567890', 'None', 'None', 'None'),
+('Heriberto Uroza', 'heriUroza', 'heribertouroza@pursuit.org', '01/01/1990', '0987654321', 'None', 'None', 'None');
 
 INSERT INTO recipes (recipe_name, health_tags, recipe_owner, recipe_notes) VALUES
 ('Chicken Over Rice', 'None', 1, 'Very tasteful Dominican recipe.'),

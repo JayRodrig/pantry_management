@@ -2,77 +2,62 @@ jest.mock('../../services/db/db');
 const {getDbConn,} = require('../../services/db/db');
 
 const {
-    postUser,
-    getUserByID,
-    getUserByEmail,
-    updateUser,
-    deleteUser,
-} = require('../../services/users');
+    postRecipe,
+    getRecipeByID,
+    updateRecipe,
+    deleteRecipe,
+} = require('../../services/recipes');
 
-test('postUser will call getDbConnect.oneOrNone', done => {
+test('postRecipe will return getDbConn.onerOrNone', done => {
     const mockOneOrNone = jest.fn(() => Promise.resolve());
     getDbConn.mockImplementation(() => {
         return {
             oneOrNone: mockOneOrNone,
-        }
+        };
     });
-    postUser()
+    postRecipe()
         .then(_ => {
             expect(mockOneOrNone.mock.calls.length).toBe(1);
             done();
         });
 });
 
-test('getUserById will call getDbConnect.one', done => {
-    const mockOne = jest.fn(() => Promise.resolve());
+test('getRecipeByID will return getDbConn.any', done => {
+    const mockAny = jest.fn(() => Promise.resolve());
     getDbConn.mockImplementation(() => {
         return {
-            one: mockOne,
-        }
+            any: mockAny,
+        };
     });
-    getUserByID()
+    getRecipeByID()
         .then(_ => {
-            expect(mockOne.mock.calls.length).toBe(1);
+            expect(mockAny.mock.calls.length).toBe(1);
             done();
         });
 });
 
-test('getUserByEmail will call getDbConnect.one', done => {
-    const mockOne = jest.fn(() => Promise.resolve());
-    getDbConn.mockImplementation(() => {
-        return {
-            one: mockOne,
-        }
-    });
-    getUserByEmail()
-        .then(_ => {
-            expect(mockOne.mock.calls.length).toBe(1);
-            done();
-        });
-});
-
-test('updateUser will call getDbConnect.oneOrNone', done => {
+test('updateRecipe will return getDbConn.onerOrNone', done => {
     const mockOneOrNone = jest.fn(() => Promise.resolve());
     getDbConn.mockImplementation(() => {
         return {
             oneOrNone: mockOneOrNone,
-        }
+        };
     });
-    updateUser()
+    updateRecipe()
         .then(_ => {
             expect(mockOneOrNone.mock.calls.length).toBe(1);
             done();
         });
 });
 
-test('deleteUser will call getDbConnect.oneOrNone', done => {
+test('deleteRecipe will return getDbConn.onerOrNone', done => {
     const mockOneOrNone = jest.fn(() => Promise.resolve());
     getDbConn.mockImplementation(() => {
         return {
             oneOrNone: mockOneOrNone,
-        }
+        };
     });
-    deleteUser()
+    deleteRecipe()
         .then(_ => {
             expect(mockOneOrNone.mock.calls.length).toBe(1);
             done();
