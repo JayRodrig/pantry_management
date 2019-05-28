@@ -28,13 +28,6 @@ const getAllWeeklyMeals = async _ => {
 
     let existingIng = {};
     for (let ingredient of usersCurrPantryArr) {
-        // existingIng = existingIng.concat({
-        //     ing_name: ingredient.ingredient_name,
-        //     weight_left: ingredient.weight_left,
-        //     product_used: ingredient.product_name,
-        //     product_img: ingredient.product_image,
-        //     product_url: ingredient.product_url
-        // });
         if (!existingIng[ingredient.ingredient_name]) {
             existingIng[ingredient.ingredient_name] = {
                 weight_left: ingredient.weight_left,
@@ -54,10 +47,51 @@ const getAllWeeklyMeals = async _ => {
         necessaryIng = necessaryIng.concat(recipeIng);
     };
 
-    console.log('needs... ', necessaryIng);
-    console.log('has... ', existingIng);
+    // console.log(necessaryIng);
+    let list = {};
 
+    for(let ingredient of necessaryIng) {
+        if (!existingIng[ingredient.ingredient_name]) {
+            // IF ING DOESN'T EXIST, JUST ADD IT TO THE LIST, DON'T GO FURTHER
+            console.log(1);
+            if (list[ingredient.ingredient_name]) {
+                list[ingredient.ingredient_name].needed_weight += ingredient.ingredient_gram_weight;
+            } else {
+                list[ingredient.ingredient_name] = {
+                    needed_weight: ingredient.ingredient_gram_weight,
+                    weightOnPantry: 0,
+                    product_name: ingredient.product_name,
+                    product_url: ingredient.product_url,
+                    product_price: ingredient.product_price,
+                };
+            };
+        } else if (existingIng[ingredient.ingredient_name]) {
+            // CHECK IF THE WEIGHT ON THE EXISTINGING DICT IS LESSER THAN 
+            // THE WEIGHT THAT IS NECESSARY
+            console.log(2)
+            if ((existingIng[ingredient.ingredient_name].weight_left - ingredient.ingredient_gram_weight) > 0) {
+                // IF ENOUGH WEIGHT EXISTS JUST GO ON
+                console.log(3)
+                continue;
+            } else if (!list[ingredient.ingredient_name]) {
+                // IF NOT ENOUGH WEIGHT, CREATE A NEW KEY ON THE LIST DICT
+                console.log(4)
+                list[ingredient.ingredient_name] = {
+                    needed_weight: ingredient.ingredient_gram_weight,
+                    weightOnPantry: existingIng[ingredient.ingredient_name].weight_left,
+                    product_name: ingredient.product_name,
+                    product_url: ingredient.product_url,
+                    product_price: ingredient.product_price,
+                }
+            }
+        } else {
+            console.log(5)
+            // IF NOT ENOUGH WEIGHT AND KEY ALREADY EXISTS, JUST ADD TO NEEDED WEIGHT
+            list[ingredient.ingredient_name].needed_weight += ingredient.ingredient_gram_weight;
+        };
+    };
 
+    console.log(list);
 };
 
 console.log(getAllWeeklyMeals());
