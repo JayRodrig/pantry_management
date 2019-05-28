@@ -47,10 +47,13 @@ const getIngredientByName = name => getDbConn(dbAddr).any(
 const getRecipeIngredients = id => getDbConn(dbAddr).any(
     `
         SELECT ingredients.*, 
-            recipes.recipe_name
+            recipes.recipe_name,
+            products.*
         FROM ingredients 
         JOIN recipes
         ON ingredients.recipe_id = recipes.recipe_id
+        JOIN products
+        ON ingredients.product_id = products.product_id
         WHERE ingredients.recipe_id = $[id]
     `, { id, }
 );
