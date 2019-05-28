@@ -5,12 +5,13 @@ const {dbAddr,} = require('./db/config');
 // PRODUCT SERVICE FUNCTIONS
 const postProduct = (
         product_name, product_url, product_image, product_original_weight, product_original_weight_type, product_gram_weight, product_price, product_owner
-    ) => getDbConn(dbAddr).none(
+    ) => getDbConn(dbAddr).one(
     `
         INSERT INTO products 
             (product_name, product_url, product_image, product_original_weight, product_original_weight_type, product_gram_weight, product_price, product_owner)
         VALUES 
             ($[product_name], $[product_url], $[product_image], $[product_original_weight], $[product_original_weight_type], $[product_gram_weight], $[product_price], $[product_owner])
+        RETURNING product_id
     `, {product_name, product_url, product_image, product_original_weight, product_original_weight_type, product_gram_weight, product_price, product_owner}
 );
 

@@ -8,7 +8,9 @@ const { convertToGrams } = require('../services/weightConversions');
 //CREATE NEW INGREDIENT
 const createIngredient = (request, response) => {
     const { ingredient_name, recipe_id, product_id, ingredient_weight, ingredient_weight_type } = request.body;
-    const ingredient_gram_weight = convertToGrams(ingredient_weight, ingredient_weight_type);
+    const lowercasedType = ingredient_weight_type.toLowerCase()
+    const ingredient_gram_weight = convertToGrams(ingredient_weight, lowercasedType);
+
     IngredientServices.createIngredient(ingredient_name, recipe_id, product_id, ingredient_weight, ingredient_weight_type, ingredient_gram_weight)
         .then(data => {
             response.status(200).json({
@@ -20,7 +22,7 @@ const createIngredient = (request, response) => {
             console.log(e)
             response.status(400).json({
                 'msg': `Something went wrong.`,
-                e,
+                e: e.toString(),
             });
         });
 }
