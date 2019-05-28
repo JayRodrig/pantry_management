@@ -19,7 +19,7 @@ const axios = require('axios');
 
 
 const getAllWeeklyMeals = async _ => {
-    const weekMealsCall = await axios.get('http://pantry-managementbe.herokuapp.com/mealSchedule/user/1');
+    const weekMealsCall = await axios.get('http://localhost:11235/mealSchedule/user/1');
     const usersCurrPantryCall = await axios.get('http://localhost:11235/currentPantry/user/1');
     // /ingredient/recipe/:id :: recipe.recipe_id
 
@@ -71,6 +71,8 @@ const getAllWeeklyMeals = async _ => {
             console.log(2)
             if ((existingIng[ingredient.ingredient_name].weight_left - ingredient.ingredient_gram_weight) > 0) {
                 // IF ENOUGH WEIGHT EXISTS JUST GO ON
+                existingIng[ingredient.ingredient_name].weight_left = existingIng[ingredient.ingredient_name].weight_left - ingredient.ingredient_gram_weight;
+                console.log(existingIng[ingredient.ingredient_name].weight_left);
                 console.log(3)
                 continue;
             } else if (!list[ingredient.ingredient_name]) {
@@ -90,7 +92,7 @@ const getAllWeeklyMeals = async _ => {
             list[ingredient.ingredient_name].needed_weight += ingredient.ingredient_gram_weight;
         };
     };
-
+    console.log(necessaryIng)
     console.log(list);
 };
 
