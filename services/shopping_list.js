@@ -21,7 +21,6 @@ const axios = require('axios');
 const getAllWeeklyMeals = async _ => {
     const weekMealsCall = await axios.get('http://localhost:11235/mealSchedule/user/1');
     const usersCurrPantryCall = await axios.get('http://localhost:11235/currentPantry/user/1');
-    // /ingredient/recipe/:id :: recipe.recipe_id
 
     const {data: usersCurrPantryArr,} = usersCurrPantryCall.data;
     const {data: weekRecipes,} = weekMealsCall.data;
@@ -47,7 +46,6 @@ const getAllWeeklyMeals = async _ => {
         necessaryIng = necessaryIng.concat(recipeIng);
     };
 
-    // console.log(necessaryIng);
     let list = {};
 
     for(let ingredient of necessaryIng) {
@@ -63,6 +61,7 @@ const getAllWeeklyMeals = async _ => {
                     product_name: ingredient.product_name,
                     product_url: ingredient.product_url,
                     product_price: ingredient.product_price,
+                    product_image: ingredient.product_image,
                 };
             };
         } else if (existingIng[ingredient.ingredient_name]) {
@@ -84,6 +83,7 @@ const getAllWeeklyMeals = async _ => {
                     product_name: ingredient.product_name,
                     product_url: ingredient.product_url,
                     product_price: ingredient.product_price,
+                    product_image: ingredient.product_image,
                 }
             }
         } else {
@@ -92,9 +92,7 @@ const getAllWeeklyMeals = async _ => {
             list[ingredient.ingredient_name].needed_weight += ingredient.ingredient_gram_weight;
         };
     };
-    console.log(necessaryIng)
     console.log(list);
 };
 
 console.log(getAllWeeklyMeals());
-// getAllWeeklyMeals();
