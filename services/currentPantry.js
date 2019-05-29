@@ -44,10 +44,13 @@ const getPantryItemByName = name => getDbConn(dbAddr).any(
 const getPantryItemsOfUser = id => getDbConn(dbAddr).any(
     `
         SELECT current_pantry.*,
-            products.*
+            products.*,
+            ingredients.*
             FROM current_pantry
             JOIN products
             ON products.product_id = current_pantry.product_id
+            JOIN ingredients
+            ON ingredients.product_id = products.product_id
         WHERE current_pantry.owner_id = $[id]
     `, { id, }
 );
