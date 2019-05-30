@@ -60,7 +60,9 @@ CREATE TABLE meal_schedule (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(user_id) ON DELETE CASCADE,
     recipe_id INT REFERENCES recipes(recipe_id) ON DELETE CASCADE,
-    day_id INT REFERENCES weekday(weekday_id) ON DELETE CASCADE
+    day_id INT REFERENCES weekday(weekday_id) ON DELETE CASCADE,
+    date VARCHAR NOT NULL,
+    cooked VARCHAR NOT NULL
 );
 
 INSERT INTO weekday (name) VALUES
@@ -112,7 +114,7 @@ INSERT INTO ingredients (ingredient_name, recipe_id, product_id, ingredient_weig
 ('Chicken Breast', 3, 4, 0.5,'pounds', 227),
 ('Alfredo Sauce', 3, 5, 5, 'ounces', 142);
 
-INSERT INTO meal_schedule (user_id, recipe_id, day_id) VALUES
-(1, 1, 1),
-(1, 2, 4),
-(2, 3, 3);
+INSERT INTO meal_schedule (user_id, recipe_id, day_id, date, cooked) VALUES
+(1, 1, 1, '06/03/2019', 'false'),
+(1, 2, 4, '06/04/2019', 'false'),
+(2, 3, 3, '06/03/2019', 'false');
