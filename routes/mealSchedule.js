@@ -6,8 +6,8 @@ const MealScheduleServices = require('../services/mealSchedule');
 
 //ADD SCHEDULED MEAL FOR USER
 const createScheduledMeal = (request, response) => {
-    const { user_id, recipe_id, day_id } = request.body;
-    MealScheduleServices.createScheduledMeal(user_id, recipe_id, day_id)
+    const { user_id, recipe_id, day_id, date, cooked } = request.body;
+    MealScheduleServices.createScheduledMeal(user_id, recipe_id, day_id, date, cooked)
         .then(data => {
             response.status(200).json({
                 'msg': `Successfully scheduled meal with ID ${data.id}.`,
@@ -63,9 +63,9 @@ const getAScheduledMeal = (request, response) => {
 
 //UPDATE SCHEDULED MEAL FOR USER
 const updateScheduledMeal = (request, response) => {
-    const { user_id, recipe_id, day_id } = request.body;
+    const { user_id, recipe_id, day_id, date, cooked } = request.body;
     const { id } = request.params;
-    MealScheduleServices.updateScheduledMeal(id, user_id, recipe_id, day_id)
+    MealScheduleServices.updateScheduledMeal(id, user_id, recipe_id, day_id, date, cooked)
         .then(() => {
             response.status(200).json({
                 'msg': `Successfully updated scheduled meal with ID ${id}.`

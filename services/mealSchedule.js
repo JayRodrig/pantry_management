@@ -3,17 +3,19 @@ const { getDbConn, } = require('./db/db');
 const { dbAddr, } = require('./db/config');
 
 //ADD SCHEDULED MEAL FOR USER
-const createScheduledMeal = (user_id, recipe_id, day_id) => getDbConn(dbAddr).one(
+const createScheduledMeal = (user_id, recipe_id, day_id, date, cooked) => getDbConn(dbAddr).one(
     `   
         INSERT INTO meal_schedule
         (user_id, 
         recipe_id, 
-        day_id) 
+        day_id,
+        date,
+        cooked) 
         VALUES 
         ($[user_id], 
         $[recipe_id], 
         $[day_id]) RETURNING id;`
-    , { user_id, recipe_id, day_id }
+    , { user_id, recipe_id, day_id, date, cooked }
 );
 
 //GET SCHEDULED MEALS FOR SPECIFIC USER ID
@@ -45,15 +47,17 @@ const getAScheduledMeal = (id) => getDbConn(dbAddr).any(
 );
 
 //UPDATE SCHEDULED MEAL FOR USER
-const updateScheduledMeal = ( id, user_id, recipe_id, day_id) => getDbConn(dbAddr).none(
+const updateScheduledMeal = ( id, user_id, recipe_id, day_id, date, cooked ) => getDbConn(dbAddr).none(
     `   
         UPDATE meal_schedule
         SET 
         user_id = $[user_id], 
         recipe_id = $[recipe_id], 
-        day_id = $[day_id]
+        day_id = $[day_id],
+        date = $[date],
+        cooked = $[cooked]
         WHERE meal_schedule.id = $[id];`
-    , { id, user_id, recipe_id, day_id }
+    , { id, user_id, recipe_id, day_id, date, cooked }
 );
 
 //DELETE A SCHEDULED MEAL BY ID
