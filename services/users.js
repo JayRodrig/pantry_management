@@ -3,14 +3,14 @@ const {getDbConn,} = require('./db/db');
 const {dbAddr,} = require('./db/config');
 
 // USER SERVICE FUNCTIONS
-const postUser = (name, username, email, firebase_uid, dob, phone_number, diet_preference, food_limitations, food_alergies) => getDbConn(dbAddr).oneOrNone(
+const postUser = (name, username, email, firebase_uid, dob, phone_number, diet_preference, food_limitations, food_allergies) => getDbConn(dbAddr).oneOrNone(
     `
         INSERT INTO users
-            (name, username, email, firebase_uid, dob, phone_number, diet_preference, food_limitations, food_alergies) 
+            (name, username, email, firebase_uid, dob, phone_number, diet_preference, food_limitations, food_allergies) 
         VALUES
-            ($[name], $[username], $[email], $[firebase_uid], $[dob], $[phone_number], $[diet_preference], $[food_limitations], $[food_alergies])
+            ($[name], $[username], $[email], $[firebase_uid], $[dob], $[phone_number], $[diet_preference], $[food_limitations], $[food_allergies])
         RETURNING user_id
-    `, {name, username, email, firebase_uid, dob, phone_number, diet_preference, food_limitations, food_alergies}
+    `, {name, username, email, firebase_uid, dob, phone_number, diet_preference, food_limitations, food_allergies}
 );
 
 const getUserByID = id => getDbConn(dbAddr).one(
