@@ -14,7 +14,9 @@ const createScheduledMeal = (user_id, recipe_id, day_id, date, cooked) => getDbC
         VALUES 
         ($[user_id], 
         $[recipe_id], 
-        $[day_id]) RETURNING id;`
+        $[day_id],
+        $[date],
+        $[cooked]) RETURNING id;`
     , { user_id, recipe_id, day_id, date, cooked }
 );
 

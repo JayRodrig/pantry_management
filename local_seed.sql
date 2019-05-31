@@ -8,6 +8,7 @@ CREATE TABLE users (
     name VARCHAR,
     username VARCHAR NOT NULL,
     email VARCHAR UNIQUE NOT NULL,
+    firebase_uid VARCHAR UNIQUE NOT NULL,
     dob VARCHAR,
     phone_number VARCHAR UNIQUE NOT NULL,
     diet_preference VARCHAR,
@@ -68,9 +69,9 @@ CREATE TABLE meal_schedule (
 INSERT INTO weekday (name) VALUES
 ('Monday'), ('Tuesday'), ('Wednesday'), ('Thursday'), ('Friday');
 
-INSERT INTO users (name, username, email, dob, phone_number, diet_preference, food_limitations, food_allergies) VALUES
-('Jose Rodriguez', 'josemlrod', 'joserodriguez@pursuit.org', '01/01/1990', '1234567890', 'None', 'None', 'None'),
-('Heriberto Uroza', 'heriUroza', 'heribertouroza@pursuit.org', '01/01/1990', '0987654321', 'None', 'None', 'None');
+INSERT INTO users (name, username, email, firebase_uid, dob, phone_number, diet_preference, food_limitations, food_allergies) VALUES
+('Jose Rodriguez', 'josemlrod', 'joserodriguez@pursuit.org', 'sampleuid', '01/01/1990', '1234567890', 'None', 'None', 'None'),
+('Heriberto Uroza', 'heriUroza', 'heribertouroza@pursuit.org', 'sampleuid', '01/01/1990', '0987654321', 'None', 'None', 'None');
 
 INSERT INTO recipes (recipe_name, health_tags, recipe_owner, recipe_notes) VALUES
 ('Chicken Over Rice', 'None', 1, 'Very tasteful Dominican recipe.'),
