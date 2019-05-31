@@ -8,17 +8,15 @@ const express = require('express');
 
 // LOCAL MODULES
 const ProductServices = require('../services/products');
+const { convertToGrams } = require('../services/weightConversions');
 
 const postProduct = (request, response) => {
     const {
-        product_name, product_url, product_owner,
+        product_name, product_url, product_owner, product_image, product_original_weight, product_original_weight_type, product_price
     } = request.body;
-    let product_image = 'webscrapper'
-    let product_original_weight = 'webscrapper'
-    let product_original_weight_type = 'webscrapper'
-    let product_gram_weight = 1234
-    let product_price = 'webscrapper'
-    console.log('postproduct', product_name)
+    const lowerCasedProductType = product_original_weight_type.toLowerCase()
+    const product_gram_weight = convertToGrams(product_original_weight, lowerCasedProductType);
+    
     ProductServices.postProduct(product_name, product_url, product_image, product_original_weight, product_original_weight_type, product_gram_weight, product_price, product_owner)
         .then(data => {
             response.status(200).json({
