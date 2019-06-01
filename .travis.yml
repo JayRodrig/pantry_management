@@ -9,7 +9,6 @@ before_script:
   - export F_CLIENT_EMAIL=$F_CLIENT_EMAIL
   - export F_CLIENT_ID=$F_CLIENT_ID
 script:
-  - npm run write-firebase
   - npm run write-coveralls
   - npm test
 deploy:

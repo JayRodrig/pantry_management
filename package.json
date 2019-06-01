@@ -7,7 +7,6 @@
     "test": "$(npm bin)/jest --coverage && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
     "start:local": "$(npm bin)/nodemon index.js",
     "write-coveralls": "rm -rf .coveralls.yml && echo \"repo_token:$COVERAGE_TOKEN\" >> .coveralls.yml",
-    "write-firebase": "echo \"$FIREBASE_ADMIN_KEY\" >> ./services/firebase/ppantry-d0edc-firebase-adminsdk-t7s8x-4d16b9136f.json",
     "start": "node index.js"
   },
   "author": "Osita, Erika, J, Heriberto",
