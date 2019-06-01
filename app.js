@@ -3,6 +3,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
+// // LOCAL MODULES
+const {authMiddleware,} = require('./services/firebase/authMiddleware');
+
 // EXPRESS ROUTERS
 const {getUserRouter,} = require('./routes/user');
 const {getRecipeRouter,} = require('./routes/recipe');
@@ -21,6 +24,7 @@ const getApp = _ => {
 
     app.use('/user', getUserRouter());
     app.use('/recipe', getRecipeRouter());
+    app.use(authMiddleware);
     app.use('/product', getProductRouter());
     app.use('/ingredient', getIngredientRouter());
     app.use('/currentPantry', getCurrentPantryRouter());

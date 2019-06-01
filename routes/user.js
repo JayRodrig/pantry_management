@@ -10,6 +10,7 @@ const axios = require('axios');
 // LOCAL MODULES
 const UserServices = require('../services/users');
 const CurrentPantryServices = require('../services/currentPantry');
+// const {authMiddleware,} = require('../services/firebase/authMiddleware');
 
 const createUser = (request, response) => {
     const {name, username, email, firebase_uid, dob, phone_number, diet_preference, food_limitations, food_allergies,} = request.body;
@@ -140,6 +141,7 @@ const getUserRouter = _ => {
     const UserRouter = express.Router();
 
     UserRouter.post('/', createUser);
+    // UserRouter.use(authMiddleware);
     UserRouter.get('/id/:id', getUserByID);
     UserRouter.get('/email/:email', getUserByEmail);
     UserRouter.get('/recipebypantry/:email', recipesByPantry)

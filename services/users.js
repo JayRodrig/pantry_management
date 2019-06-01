@@ -29,7 +29,7 @@ const updateUser = (id, name, username, email, firebase_uid, dob, phone_number, 
     `
         UPDATE users
             SET
-        name = $[name], username = $[username], email = $[email], firebase_uid = $[firebase_uid] dob = $[dob], 
+        name = $[name], username = $[username], email = $[email], firebase_uid = $[firebase_uid], dob = $[dob], 
         phone_number = $[phone_number], diet_preference = $[diet_preference], food_limitations = $[food_limitations],
         food_allergies = $[food_allergies]
             WHERE
