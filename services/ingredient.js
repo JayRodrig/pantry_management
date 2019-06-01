@@ -44,7 +44,7 @@ const getIngredientByName = name => getDbConn(dbAddr).any(
 );
 
 //GET INGREDIENTS OF RECIPE BY RECIPE ID
-const getRecipeIngredients = id => getDbConn(dbAddr).any(
+const getRecipeIngredients = recipe_id => getDbConn(dbAddr).any(
     `
         SELECT ingredients.*, 
             recipes.recipe_name,
@@ -54,8 +54,8 @@ const getRecipeIngredients = id => getDbConn(dbAddr).any(
         ON ingredients.recipe_id = recipes.recipe_id
         JOIN products
         ON ingredients.product_id = products.product_id
-        WHERE ingredients.recipe_id = $[id]
-    `, { id, }
+        WHERE ingredients.recipe_id = $[recipe_id]
+    `, { recipe_id, }
 );
 
 //UPDATE INGREDIENT BY ID
