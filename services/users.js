@@ -25,7 +25,7 @@ const getUserByEmail = email => getDbConn(dbAddr).one(
     `, {email,}
 );
 
-const updateUser = (id, name, username, email, firebase_uid, dob, phone_number, diet_preference, food_limitations, food_alergies) => getDbConn(dbAddr).oneOrNone(
+const updateUser = (id, name, username, email, firebase_uid, dob, phone_number, diet_preference, food_limitations, food_allergies) => getDbConn(dbAddr).oneOrNone(
     `
         UPDATE users
             SET
@@ -34,7 +34,7 @@ const updateUser = (id, name, username, email, firebase_uid, dob, phone_number, 
         food_allergies = $[food_allergies]
             WHERE
         users.user_id = $[id] RETURNING user_id
-    `, {id, name, username, email, firebase_uid, dob, phone_number, diet_preference, food_limitations, food_alergies,}
+    `, {id, name, username, email, firebase_uid, dob, phone_number, diet_preference, food_limitations, food_allergies,}
 );
 
 const deleteUser = id => getDbConn(dbAddr).oneOrNone(
