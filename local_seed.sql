@@ -20,7 +20,8 @@ CREATE TABLE recipes (
     recipe_name VARCHAR UNIQUE NOT NULL,
     health_tags VARCHAR NOT NULL,
     recipe_owner INT REFERENCES users(user_id) ON DELETE CASCADE,
-    recipe_notes VARCHAR
+    recipe_notes VARCHAR,
+    recipe_image_url VARCHAR,
 );
 
 CREATE TABLE products (
