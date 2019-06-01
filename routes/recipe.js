@@ -104,6 +104,7 @@ const getRecipeRouter = _ => {
     RecipeRouter.get('/:id', getRecipeByID);
     RecipeRouter.use(authMiddleware);
     RecipeRouter.post('/', postRecipe);
+    RecipeRouter.get('/user/:user_id', getRecipesByUserID);
     RecipeRouter.put('/:id', updateRecipe);
     RecipeRouter.delete('/:id', deleteRecipe);
 

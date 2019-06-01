@@ -138,17 +138,12 @@ const recipesByPantry = (request, response) => {
         });
 };
 
-const getUpcomingMealsIngList = (request, response) => {
+const getUpcomingMealsIngList = async (request, response) => {
     const {user_id,} = request.params;
+    const ingredientsList = await upcomingMealsIngList(user_id);
     response.status(200).json({
         'msg': `Successfully retrieved users upcoming meals ingredient list`,
-        data: upcomingMealsIngList(user_id),
-    })
-    .catch(e => {
-        response.status(400).json({
-            'msg': `Something went wrong`,
-            e: e.toString(),
-        });
+        data: ingredientsList,
     });
 };
 

@@ -3,6 +3,7 @@ const express = require('express');
 
 // LOCAL MODULES
 const CurrentPantryServices = require('../services/currentPantry');
+const {authMiddleware,} = require('../services/firebase/authMiddleware');
 
 //CREATE ADD PRODUCT TO CURRENT_PANRTY
 const createProductInPantry = (request, response) => {
@@ -103,10 +104,11 @@ const getPantryItemOfUserByName = (request, response) => {
 const getCurrentPantryRouter = _ => {
     const CurrentPantryRouter = express.Router();
 
+    CurrentPantryRouter.get('/user/:id', getPantryItemsOfUser);
+    CurrentPantryRouter.use(authMiddleware);
     CurrentPantryRouter.post('/', createProductInPantry);
     CurrentPantryRouter.get('/:id', getPantryItemByID);
     CurrentPantryRouter.get('/name/:name', getPantryItemByName);
-    CurrentPantryRouter.get('/user/:id', getPantryItemsOfUser);
     CurrentPantryRouter.get('/user/:id/:name', getPantryItemOfUserByName);
 
     return CurrentPantryRouter;
