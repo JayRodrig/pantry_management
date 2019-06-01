@@ -2,4 +2,3 @@ node_modules/*
 ./.DS_Store
 coverage/
 ./.DS_Store
-services/firebase/ppantry-d0edc-firebase-adminsdk-t7s8x-4d16b9136f.json
