@@ -11,6 +11,7 @@ const axios = require('axios');
 const UserServices = require('../services/users');
 const CurrentPantryServices = require('../services/currentPantry');
 const {authMiddleware,} = require('../services/firebase/authMiddleware');
+const {upcomingMealsIngList,} = require('../services/shopping_list');
 
 const createUser = (request, response) => {
     const {name, username, email, firebase_uid, dob, phone_number, diet_preference, food_limitations, food_allergies,} = request.body;
@@ -137,6 +138,20 @@ const recipesByPantry = (request, response) => {
         });
 };
 
+const getUpcomingMealsIngList = (request, response) => {
+    const {user_id,} = request.params;
+    response.status(200).json({
+        'msg': `Successfully retrieved users upcoming meals ingredient list`,
+        data: upcomingMealsIngList(user_id),
+    })
+    .catch(e => {
+        response.status(400).json({
+            'msg': `Something went wrong`,
+            e: e.toString(),
+        });
+    });
+};
+
 const getUserRouter = _ => {
     const UserRouter = express.Router();
 
@@ -144,7 +159,8 @@ const getUserRouter = _ => {
     UserRouter.use(authMiddleware);
     UserRouter.get('/id/:id', getUserByID);
     UserRouter.get('/email/:email', getUserByEmail);
-    UserRouter.get('/recipebypantry/:email', recipesByPantry)
+    UserRouter.get('/recipebypantry/:email', recipesByPantry);
+    UserRouter.get('/upcomingIngList/:user_id', getUpcomingMealsIngList);
     UserRouter.put('/:id', updateUser);
     UserRouter.delete('/:id', deleteUser);
 
