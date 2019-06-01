@@ -25,6 +25,15 @@ const getRecipeByID = id => getDbConn(dbAddr).any(
     `, {id,}
 );
 
+//GET RECIPES OF AN USER BY USER ID
+const getRecipesByUserID = user_id => getDbConn(dbAddr).any(
+    `
+        SELECT * 
+            FROM recipes 
+            WHERE recipes.recipe_owner = $[user_id]
+    `, {user_id,}
+);
+
 const updateRecipe = (id, recipe_name, health_tags, recipe_owner, recipe_notes) => 
     getDbConn(dbAddr).oneOrNone(
         `
@@ -49,4 +58,5 @@ module.exports = {
     getRecipeByID,
     updateRecipe,
     deleteRecipe,
+    getRecipesByUserID,
 };
