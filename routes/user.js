@@ -10,10 +10,11 @@ const axios = require('axios');
 // LOCAL MODULES
 const UserServices = require('../services/users');
 const CurrentPantryServices = require('../services/currentPantry');
+const {authMiddleware,} = require('../services/firebase/authMiddleware');
 
 const createUser = (request, response) => {
-    const {name, username, email, dob, phone_number, diet_preference, food_limitations, food_alergies,} = request.body;
-    UserServices.postUser(name, username, email, dob, phone_number, diet_preference, food_limitations, food_alergies)
+    const {name, username, email, firebase_uid, dob, phone_number, diet_preference, food_limitations, food_allergies,} = request.body;
+    UserServices.postUser(name, username, email, firebase_uid, dob, phone_number, diet_preference, food_limitations, food_allergies)
         .then(data => {
             response.status(200).json({
                 'msg': `Successfully created user.`,
@@ -21,6 +22,7 @@ const createUser = (request, response) => {
             });
         })
         .catch(e => {
+            console.log(e);
             response.status(400).json({
                 'msg': `Something went wrong`,
                 e,
@@ -139,6 +141,7 @@ const getUserRouter = _ => {
     const UserRouter = express.Router();
 
     UserRouter.post('/', createUser);
+    UserRouter.use(authMiddleware);
     UserRouter.get('/id/:id', getUserByID);
     UserRouter.get('/email/:email', getUserByEmail);
     UserRouter.get('/recipebypantry/:email', recipesByPantry)

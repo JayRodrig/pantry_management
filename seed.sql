@@ -11,6 +11,7 @@ CREATE TABLE users (
     name VARCHAR,
     username VARCHAR NOT NULL,
     email VARCHAR UNIQUE NOT NULL,
+    firebase_uid VARCHAR UNIQUE NOT NULL,
     dob VARCHAR,
     phone_number VARCHAR UNIQUE NOT NULL,
     diet_preference VARCHAR,
@@ -64,15 +65,17 @@ CREATE TABLE meal_schedule (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(user_id) ON DELETE CASCADE,
     recipe_id INT REFERENCES recipes(recipe_id) ON DELETE CASCADE,
-    day_id INT REFERENCES weekday(weekday_id) ON DELETE CASCADE
+    day_id INT REFERENCES weekday(weekday_id) ON DELETE CASCADE,
+    date VARCHAR NOT NULL,
+    cooked VARCHAR NOT NULL
 );
 
 INSERT INTO weekday (name) VALUES
 ('Monday'), ('Tuesday'), ('Wednesday'), ('Thursday'), ('Friday');
 
-INSERT INTO users (name, username, email, dob, phone_number, diet_preference, food_limitations, food_allergies) VALUES
-('Jose Rodriguez', 'josemlrod', 'joserodriguez@pursuit.org', '01/01/1990', '1234567890', 'None', 'None', 'None'),
-('Heriberto Uroza', 'heriUroza', 'heribertouroza@pursuit.org', '01/01/1990', '0987654321', 'None', 'None', 'None');
+INSERT INTO users (name, username, email, firebase_uid, dob, phone_number, diet_preference, food_limitations, food_allergies) VALUES
+('Jose Rodriguez', 'josemlrod', 'joserodriguez@pursuit.org', 'sampleuid1', '01/01/1990', '1234567890', 'None', 'None', 'None'),
+('Heriberto Uroza', 'heriUroza', 'heribertouroza@pursuit.org', 'sampleuid2', '01/01/1990', '0987654321', 'None', 'None', 'None');
 
 INSERT INTO recipes (recipe_name, health_tags, recipe_owner, recipe_notes, recipe_image_url) VALUES
 ('Chicken Over Rice', 'None', 1, 'Very tasteful Dominican recipe.', 'https://images.pexels.com/photos/769289/pexels-photo-769289.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'),
@@ -116,7 +119,7 @@ INSERT INTO ingredients (ingredient_name, recipe_id, product_id, ingredient_weig
 ('Chicken Breast', 3, 4, 0.5,'pounds', 227),
 ('Alfredo Sauce', 3, 5, 5, 'ounces', 142);
 
-INSERT INTO meal_schedule (user_id, recipe_id, day_id) VALUES
-(1, 1, 1),
-(1, 2, 4),
-(2, 3, 3);
+INSERT INTO meal_schedule (user_id, recipe_id, day_id, date, cooked) VALUES
+(1, 1, 1, '06/03/2019', 'false'),
+(1, 2, 4, '06/04/2019', 'false'),
+(2, 3, 3, '06/03/2019', 'false');

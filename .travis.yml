@@ -5,6 +5,9 @@ install:
   - npm install
 before_script:
   - export COVERAGE_TOKEN=$COVERAGE_TOKEN
+  - export F_PRIVATE_KEY_ID=$F_PRIVATE_KEY_ID
+  - export F_CLIENT_EMAIL=$F_CLIENT_EMAIL
+  - export F_CLIENT_ID=$F_CLIENT_ID
 script:
   - npm run write-coveralls
   - npm test
