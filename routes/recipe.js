@@ -45,7 +45,7 @@ const getRecipeByID = (request, response) => {
 
 //GET ALL RECIPES FOR A USER BY USER ID
 const getRecipesByUserID = (request, response) => {
-    const user_id = request.params.id;
+    const { user_id } = request.params;
     RecipeServices.getRecipesByUserID(user_id)
         .then(data => {
             response.status(200).json({
@@ -102,7 +102,7 @@ const getRecipeRouter = _ => {
 
     RecipeRouter.post('/', postRecipe);
     RecipeRouter.get('/:id', getRecipeByID);
-    RecipeRouter.get('/user/:id', getRecipesByUserID);
+    RecipeRouter.get('/user/:user_id', getRecipesByUserID);
     RecipeRouter.put('/:id', updateRecipe);
     RecipeRouter.delete('/:id', deleteRecipe);
 
