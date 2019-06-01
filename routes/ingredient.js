@@ -63,8 +63,8 @@ const getIngredientByName = (request, response) => {
 
 //GET INGREDIENTS OF RECIPE BY RECIPE ID
 const getRecipeIngredients = (request, response) => {
-    const { id, } = request.params;
-    IngredientServices.getRecipeIngredients(id)
+    const { recipe_id, } = request.params;
+    IngredientServices.getRecipeIngredients(recipe_id)
         .then(data => {
             response.status(200).json({
                 'msg': `Successfully retrieved ingredients data.`,
@@ -126,7 +126,7 @@ const getIngredientRouter = _ => {
 
     IngredientRouter.get('/:id', getIngredientByID);
     IngredientRouter.get('/name/:name', getIngredientByName);
-    IngredientRouter.get('/recipe/:id', getRecipeIngredients);
+    IngredientRouter.get('/recipe/:recipe_id', getRecipeIngredients);
     IngredientRouter.post('/', createIngredient);
     IngredientRouter.put('/:id', updateIngredient);
     IngredientRouter.delete('/:id', deleteIngredient);
