@@ -1,6 +1,6 @@
 var admin = require("firebase-admin");
 
-var serviceAccount = require("./ppantry-d0edc-firebase-adminsdk-t7s8x-4d16b9136f.json");
+var serviceAccount = require("./pantry-managementbe_key");
 
 const getFirebaseApp = (_ => {
     firebase = null;
