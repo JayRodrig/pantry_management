@@ -43,6 +43,24 @@ const getRecipeByID = (request, response) => {
         });
 };
 
+//GET ALL RECIPES FOR A USER BY USER ID
+const getRecipesByUserID = (request, response) => {
+    const { user_id } = request.params;
+    RecipeServices.getRecipesByUserID(user_id)
+        .then(data => {
+            response.status(200).json({
+                'msg': `Successfully retrieved recipes data.`,
+                data,
+            });
+        })
+        .catch(e => {
+            response.status(400).json({
+                'msg': `Something went wrong`,
+                'err': e.toString(),
+            });
+        });
+};
+
 const updateRecipe = (request, response) => {
     const {id,} = request.params;
     const {recipe_name, health_tags, recipe_owner, recipe_notes,} = request.body;
@@ -84,6 +102,7 @@ const getRecipeRouter = _ => {
 
     RecipeRouter.post('/', postRecipe);
     RecipeRouter.get('/:id', getRecipeByID);
+    RecipeRouter.get('/user/:user_id', getRecipesByUserID);
     RecipeRouter.put('/:id', updateRecipe);
     RecipeRouter.delete('/:id', deleteRecipe);
 
