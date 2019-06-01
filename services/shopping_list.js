@@ -18,9 +18,9 @@ const axios = require('axios');
 */
 
 
-const getAllWeeklyMeals = async _ => {
-    const weekMealsCall = await axios.get('http://localhost:11235/mealSchedule/user/1');
-    const usersCurrPantryCall = await axios.get('http://localhost:11235/currentPantry/user/1');
+const upcomingMealsIngList = async user_id => {
+    const weekMealsCall = await axios.get(`http://localhost:11235/mealSchedule/user/${user_id}`);
+    const usersCurrPantryCall = await axios.get(`http://localhost:11235/currentPantry/user/${user_id}`);
 
     const {data: usersCurrPantryArr,} = usersCurrPantryCall.data;
     const {data: weekRecipes,} = weekMealsCall.data;
@@ -46,16 +46,15 @@ const getAllWeeklyMeals = async _ => {
         necessaryIng = necessaryIng.concat(recipeIng);
     };
 
-    let list = {};
+    let ingredientsList = {};
 
     for(let ingredient of necessaryIng) {
         if (!existingIng[ingredient.ingredient_name]) {
             // IF ING DOESN'T EXIST, JUST ADD IT TO THE LIST, DON'T GO FURTHER
-            console.log(1);
-            if (list[ingredient.ingredient_name]) {
-                list[ingredient.ingredient_name].needed_weight += ingredient.ingredient_gram_weight;
+            if (ingredientsList[ingredient.ingredient_name]) {
+                ingredientsList[ingredient.ingredient_name].needed_weight += ingredient.ingredient_gram_weight;
             } else {
-                list[ingredient.ingredient_name] = {
+                ingredientsList[ingredient.ingredient_name] = {
                     needed_weight: ingredient.ingredient_gram_weight,
                     weightOnPantry: 0,
                     product_name: ingredient.product_name,
@@ -67,17 +66,13 @@ const getAllWeeklyMeals = async _ => {
         } else if (existingIng[ingredient.ingredient_name]) {
             // CHECK IF THE WEIGHT ON THE EXISTINGING DICT IS LESSER THAN 
             // THE WEIGHT THAT IS NECESSARY
-            console.log(2)
             if ((existingIng[ingredient.ingredient_name].weight_left - ingredient.ingredient_gram_weight) > 0) {
                 // IF ENOUGH WEIGHT EXISTS JUST GO ON
                 existingIng[ingredient.ingredient_name].weight_left = existingIng[ingredient.ingredient_name].weight_left - ingredient.ingredient_gram_weight;
-                console.log(existingIng[ingredient.ingredient_name].weight_left);
-                console.log(3)
                 continue;
-            } else if (!list[ingredient.ingredient_name]) {
+            } else if (!ingredientsList[ingredient.ingredient_name]) {
                 // IF NOT ENOUGH WEIGHT, CREATE A NEW KEY ON THE LIST DICT
-                console.log(4)
-                list[ingredient.ingredient_name] = {
+                ingredientsList[ingredient.ingredient_name] = {
                     needed_weight: ingredient.ingredient_gram_weight,
                     weightOnPantry: existingIng[ingredient.ingredient_name].weight_left,
                     product_name: ingredient.product_name,
@@ -87,12 +82,13 @@ const getAllWeeklyMeals = async _ => {
                 }
             }
         } else {
-            console.log(5)
             // IF NOT ENOUGH WEIGHT AND KEY ALREADY EXISTS, JUST ADD TO NEEDED WEIGHT
-            list[ingredient.ingredient_name].needed_weight += ingredient.ingredient_gram_weight;
+            ingredientsList[ingredient.ingredient_name].needed_weight += ingredient.ingredient_gram_weight;
         };
     };
-    console.log(list);
+    return ingredientsList;
 };
 
-console.log(getAllWeeklyMeals());
+module.exports = {
+    upcomingMealsIngList,
+};
