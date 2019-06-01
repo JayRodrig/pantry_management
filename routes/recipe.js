@@ -8,6 +8,7 @@ const express = require('express');
 
 // LOCAL MODULES
 const RecipeServices = require('../services/recipes');
+const {authMiddleware,} = require('../services/firebase/authMiddleware');
 
 const postRecipe = (request, response) => {
     const {recipe_name, health_tags, recipe_owner, recipe_notes,} = request.body;
@@ -82,8 +83,9 @@ const deleteRecipe = (request, response) => {
 const getRecipeRouter = _ => {
     const RecipeRouter = express.Router();
 
-    RecipeRouter.post('/', postRecipe);
     RecipeRouter.get('/:id', getRecipeByID);
+    RecipeRouter.use(authMiddleware);
+    RecipeRouter.post('/', postRecipe);
     RecipeRouter.put('/:id', updateRecipe);
     RecipeRouter.delete('/:id', deleteRecipe);
 
