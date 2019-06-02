@@ -8,7 +8,6 @@ const express = require('express');
 
 // LOCAL MODULES
 const ProductServices = require('../services/products');
-const {authMiddleware,} = require('../services/firebase/authMiddleware');
 
 const postProduct = (request, response) => {
     const {
@@ -92,7 +91,6 @@ const deleteProduct = (request, response) => {
 const getProductRouter = _ => {
     const ProductRouter = express.Router();
 
-    ProductRouter.use(authMiddleware);
     ProductRouter.post('/', postProduct);
     ProductRouter.get('/id/:id', getProductByID);
     ProductRouter.put('/:id', updateProduct);

@@ -3,7 +3,6 @@ const express = require('express');
 
 // LOCAL MODULES
 const MealScheduleServices = require('../services/mealSchedule');
-const {authMiddleware,} = require('../services/firebase/authMiddleware');
 
 //ADD SCHEDULED MEAL FOR USER
 const createScheduledMeal = (request, response) => {
@@ -121,7 +120,6 @@ const getMealScheduleRouter = _ => {
     const MealScheduleRouter = express.Router();
 
     MealScheduleRouter.get('/user/:id', getScheduledMeals);
-    MealScheduleRouter.use(authMiddleware);
     MealScheduleRouter.post('/', createScheduledMeal);
     MealScheduleRouter.get('/:id', getAScheduledMeal);
     MealScheduleRouter.put('/:id', updateScheduledMeal);
