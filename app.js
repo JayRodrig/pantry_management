@@ -25,7 +25,7 @@ const getApp = _ => {
     app.use('/user', getUserRouter());
     app.use('/recipe', getRecipeRouter());
 
-    // app.use(authMiddleware);
+    app.use(authMiddleware);
 
     app.use('/ingredient', getIngredientRouter());
     app.use('/mealSchedule', getMealScheduleRouter());
