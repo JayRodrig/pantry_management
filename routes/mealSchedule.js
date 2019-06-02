@@ -3,6 +3,8 @@ const express = require('express');
 
 // LOCAL MODULES
 const MealScheduleServices = require('../services/mealSchedule');
+const IngredientServices = require('../services/ingredient');
+const CurrentPantryServices = require('../services/currentPantry');
 
 //ADD SCHEDULED MEAL FOR USER
 const createScheduledMeal = (request, response) => {
@@ -62,22 +64,29 @@ const getAScheduledMeal = (request, response) => {
 };
 
 //UPDATE SCHEDULED MEAL FOR USER
-const updateScheduledMeal = (request, response) => {
+const updateScheduledMeal = async (request, response) => {
     const { user_id, recipe_id, day_id, date, cooked } = request.body;
     const { id } = request.params;
-    MealScheduleServices.updateScheduledMeal(id, user_id, recipe_id, day_id, date, cooked)
-        .then(() => {
-            response.status(200).json({
-                'msg': `Successfully updated scheduled meal with ID ${id}.`
-            });
-        })
-        .catch(e => {
-            console.log(e)
-            response.status(400).json({
-                'msg': `Something went wrong.`,
-                e,
-            });
-        });
+    const recipeIngredients = await IngredientServices.getRecipeIngredients(recipe_id);
+    const currentPantryProducts = await CurrentPantryServices.getPantryItemsOfUser(user_id);
+
+    response.json({
+        recipeIng: recipeIngredients,
+        currentPantry: currentPantryProducts,
+    });
+    // MealScheduleServices.updateScheduledMeal(id, user_id, recipe_id, day_id, date, cooked)
+    //     .then(() => {
+    //         response.status(200).json({
+    //             'msg': `Successfully updated scheduled meal with ID ${id}.`
+    //         });
+    //     })
+    //     .catch(e => {
+    //         console.log(e)
+    //         response.status(400).json({
+    //             'msg': `Something went wrong.`,
+    //             e,
+    //         });
+    //     });
 };
 
 //DELETE A SCHEDULED MEAL BY ID
