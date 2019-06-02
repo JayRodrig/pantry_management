@@ -1,4 +1,10 @@
+// NPM MODULES
 const axios = require('axios');
+
+// LOCAL MODULES
+const {mealSchedule,} = require('./mealSchedule');
+const {currentPantry,} = require('./currentPantry');
+
 /*
     TODO: 
     INGREDIENT NAME SHOULD MATCH PRODUCT NAME
@@ -21,7 +27,7 @@ const axios = require('axios');
 const upcomingMealsIngList = async user_id => {
     const weekMealsCall = await axios.get(`http://localhost:11235/mealSchedule/user/${user_id}`);
     const usersCurrPantryCall = await axios.get(`http://localhost:11235/currentPantry/user/${user_id}`);
-
+    
     const {data: usersCurrPantryArr,} = usersCurrPantryCall.data;
     const {data: weekRecipes,} = weekMealsCall.data;
 

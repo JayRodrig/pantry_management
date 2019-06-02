@@ -39,6 +39,6 @@ test('getApp tests', done => {
 
     expect(app).toEqual(mockApp);
     expect(mockUse.mock.calls[0][0]).toBe('test');
-    expect(mockUse.mock.calls.length).toEqual(9);
+    expect(mockUse.mock.calls.length).toEqual(8);
     done();
 });

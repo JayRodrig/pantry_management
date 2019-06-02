@@ -4,6 +4,7 @@ const express = require('express');
 // LOCAL MODULES
 const IngredientServices = require('../services/ingredient');
 const { convertToGrams } = require('../services/weightConversions');
+const {authMiddleware,} = require('../services/firebase/authMiddleware');
 
 //CREATE NEW INGREDIENT
 const createIngredient = (request, response) => {
@@ -124,9 +125,10 @@ const deleteIngredient = (request, response) => {
 const getIngredientRouter = _ => {
     const IngredientRouter = express.Router();
 
+    IngredientRouter.get('/recipe/:recipe_id', getRecipeIngredients);
+    IngredientRouter.use(authMiddleware);
     IngredientRouter.get('/:id', getIngredientByID);
     IngredientRouter.get('/name/:name', getIngredientByName);
-    IngredientRouter.get('/recipe/:recipe_id', getRecipeIngredients);
     IngredientRouter.post('/', createIngredient);
     IngredientRouter.put('/:id', updateIngredient);
     IngredientRouter.delete('/:id', deleteIngredient);
