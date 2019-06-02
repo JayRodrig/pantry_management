@@ -3,6 +3,8 @@ const express = require('express');
 
 // LOCAL MODULES
 const MealScheduleServices = require('../services/mealSchedule');
+const IngredientServices = require('../services/ingredient');
+const CurrentPantryServices = require('../services/currentPantry');
 
 //ADD SCHEDULED MEAL FOR USER
 const createScheduledMeal = (request, response) => {
@@ -62,22 +64,50 @@ const getAScheduledMeal = (request, response) => {
 };
 
 //UPDATE SCHEDULED MEAL FOR USER
-const updateScheduledMeal = (request, response) => {
+const updateScheduledMeal = async (request, response) => {
     const { user_id, recipe_id, day_id, date, cooked } = request.body;
     const { id } = request.params;
-    MealScheduleServices.updateScheduledMeal(id, user_id, recipe_id, day_id, date, cooked)
-        .then(() => {
-            response.status(200).json({
-                'msg': `Successfully updated scheduled meal with ID ${id}.`
-            });
-        })
-        .catch(e => {
-            console.log(e)
-            response.status(400).json({
-                'msg': `Something went wrong.`,
-                e,
-            });
+    const recipeIngredients = await IngredientServices.getRecipeIngredients(recipe_id);
+    const currentPantryProducts = await CurrentPantryServices.getPantryItemsOfUser(user_id);
+
+    let currentPantry = {};
+    
+    for (let product of currentPantryProducts) {
+        if (!currentPantry[product.product_id]) {
+            currentPantry[product.product_id] = product;
+        } else {
+            continue;
+        }
+    }
+
+    let usedProducts = [];
+
+    for (let ingredients of recipeIngredients) {
+        if (currentPantry[ingredients.product_id]) {
+            currentPantry[ingredients.product_id].weight_left = 
+                currentPantry[ingredients.product_id].weight_left - ingredients.ingredient_gram_weight;
+            usedProducts.push(currentPantry[ingredients.product_id]);
+        } else {
+            continue;
+        }
+    };
+
+    try {
+        const postMealSchedule = 
+            await MealScheduleServices.updateScheduledMeal(id, user_id, recipe_id, day_id, date, cooked);
+        for (let product of usedProducts) {
+            const postUpdatedPantryProd = 
+                await CurrentPantryServices.updatePantryItemByProductID(product.product_id, product.weight_left);
+        };
+        response.status(200).json({
+            'msg': `Success`,
         });
+    } catch(e) {
+        response.status(400).json({
+            'msg': `Something went wrong`,
+            e: e.toString(),
+        });
+    };
 };
 
 //DELETE A SCHEDULED MEAL BY ID
