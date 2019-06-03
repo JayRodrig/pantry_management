@@ -83,7 +83,7 @@ const convertToGrams = (weight, weightType) => {
     if (weightType === 'tablespoon'){
         return tbspToGrams(weight);
     }
-    if (weightType === 'dessertspoon'){
+    if (weightType === 'dessert spoon'){
         return dspToGrams(weight);
     }
     if (weightType === 'fluid ounce'){
