@@ -9,15 +9,15 @@ const {
 } = require('../../services/products');
 
 test('postProduct will return getDbConn.onerOrNone', done => {
-    const mockNone = jest.fn(() => Promise.resolve());
+    const mockOneOrNone = jest.fn(() => Promise.resolve());
     getDbConn.mockImplementation(() => {
         return {
-            none: mockNone,
+            oneOrNone: mockOneOrNone,
         };
     });
     postProduct()
         .then(_ => {
-            expect(mockNone.mock.calls.length).toBe(1);
+            expect(mockOneOrNone.mock.calls.length).toBe(1);
             done();
         });
 });

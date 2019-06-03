@@ -8,7 +8,7 @@ const { convertToGrams } = require('../services/weightConversions');
 //CREATE NEW INGREDIENT
 const createIngredient = (request, response) => {
     const { ingredient_name, recipe_id, product_id, ingredient_weight, ingredient_weight_type } = request.body;
-    const ingredient_gram_weight = convertToGrams(ingredient_weight, ingredient_weight_type);
+    const ingredient_gram_weight = convertToGrams(ingredient_weight, ingredient_weight_type.toLowerCase());
     IngredientServices.createIngredient(ingredient_name, recipe_id, product_id, ingredient_weight, ingredient_weight_type, ingredient_gram_weight)
         .then(data => {
             response.status(200).json({
