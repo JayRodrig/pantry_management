@@ -22,9 +22,9 @@ test('tbspToGrams will multiply weight * 14 to return grams', done => {
 });
 
 test('dspToGrams will multiply weight * 10 to return grams', done => {
-    expect(convertToGrams(5, 'dessertspoon')).toEqual(50);
-    expect(convertToGrams(10, 'dessertspoon')).toEqual(100);
-    expect(convertToGrams(2, 'dessertspoon')).toEqual(20);
+    expect(convertToGrams(5, 'dessert spoon')).toEqual(50);
+    expect(convertToGrams(10, 'dessert spoon')).toEqual(100);
+    expect(convertToGrams(2, 'dessert spoon')).toEqual(20);
     done();
 });
 
