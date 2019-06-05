@@ -8,12 +8,13 @@ const express = require('express');
 
 // LOCAL MODULES
 const ProductServices = require('../services/products');
-const {authMiddleware,} = require('../services/firebase/authMiddleware');
+const {convertToGrams,} = require('../services/weightConversions');
 
 const postProduct = (request, response) => {
     const {
-        product_name, product_url, product_image, product_original_weight, product_original_weight_type, product_gram_weight, product_price, product_owner,
+        product_name, product_url, product_image, product_original_weight, product_original_weight_type, product_price, product_owner,
     } = request.body;
+    const product_gram_weight = convertToGrams(product_original_weight, product_original_weight_type.toLowerCase());
     ProductServices.postProduct(product_name, product_url, product_image, product_original_weight, product_original_weight_type, product_gram_weight, product_price, product_owner)
         .then(data => {
             response.status(200).json({
@@ -92,7 +93,6 @@ const deleteProduct = (request, response) => {
 const getProductRouter = _ => {
     const ProductRouter = express.Router();
 
-    ProductRouter.use(authMiddleware);
     ProductRouter.post('/', postProduct);
     ProductRouter.get('/id/:id', getProductByID);
     ProductRouter.put('/:id', updateProduct);

@@ -67,6 +67,17 @@ const getPantryItemOfUserByName = (name, id) => getDbConn(dbAddr).any(
     `, { name, id, }
 );
 
+// UPDATE PANTRY ITEM BY PRODUCT_ID
+const updatePantryItemByProductID = (product_id, weight_left) => getDbConn(dbAddr).oneOrNone(
+    `
+        UPDATE 
+            current_pantry
+        SET
+            weight_left = $[weight_left]
+        WHERE
+            product_id = $[product_id]    
+    `, {product_id, weight_left,}
+);
 
 module.exports = {
     getPantryItemByID,
@@ -74,4 +85,5 @@ module.exports = {
     createProductInPantry, 
     getPantryItemsOfUser, 
     getPantryItemOfUserByName,  
+    updatePantryItemByProductID,
 };

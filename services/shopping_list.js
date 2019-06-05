@@ -1,9 +1,7 @@
-// NPM MODULES
-const axios = require('axios');
-
 // LOCAL MODULES
-const {mealSchedule,} = require('./mealSchedule');
-const {currentPantry,} = require('./currentPantry');
+const MealSchedule = require('./mealSchedule');
+const CurrentPantry = require('./currentPantry');
+const Ingredient = require('./ingredient');
 
 /*
     TODO: 
@@ -25,11 +23,8 @@ const {currentPantry,} = require('./currentPantry');
 
 
 const upcomingMealsIngList = async user_id => {
-    const weekMealsCall = await axios.get(`http://localhost:11235/mealSchedule/user/${user_id}`);
-    const usersCurrPantryCall = await axios.get(`http://localhost:11235/currentPantry/user/${user_id}`);
-    
-    const {data: usersCurrPantryArr,} = usersCurrPantryCall.data;
-    const {data: weekRecipes,} = weekMealsCall.data;
+    const weekRecipes = await MealSchedule.getScheduledMeals(user_id);
+    const usersCurrPantryArr = await CurrentPantry.getPantryItemsOfUser(user_id);
 
     let existingIng = {};
     for (let ingredient of usersCurrPantryArr) {
@@ -47,8 +42,7 @@ const upcomingMealsIngList = async user_id => {
 
     let necessaryIng = [];
     for (let recipe of weekRecipes) {
-        const ingCall = await axios.get(`http://localhost:11235/ingredient/recipe/${recipe.recipe_id}`);
-        const {data: recipeIng,} = ingCall.data;
+        const recipeIng = await Ingredient.getRecipeIngredients(recipe.recipe_id);
         necessaryIng = necessaryIng.concat(recipeIng);
     };
 
