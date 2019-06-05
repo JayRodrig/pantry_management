@@ -65,6 +65,7 @@ const getAScheduledMeal = (request, response) => {
 //UPDATE SCHEDULED MEAL FOR USER
 const updateScheduledMeal = (request, response) => {
     const { user_id, recipe_id, day_id, date, cooked } = request.body;
+    console.log('request', request.body)
     const { id } = request.params;
     MealScheduleServices.updateScheduledMeal(id, user_id, recipe_id, day_id, date, cooked)
         .then(() => {
