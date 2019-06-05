@@ -7,8 +7,8 @@ const {authMiddleware,} = require('../services/firebase/authMiddleware');
 
 //ADD SCHEDULED MEAL FOR USER
 const createScheduledMeal = (request, response) => {
-    const { user_id, recipe_id, day_id, date, cooked } = request.body;
-    MealScheduleServices.createScheduledMeal(user_id, recipe_id, day_id, date, cooked)
+    const { user_id, recipe_id, day_id, date, cooked, current_week } = request.body;
+    MealScheduleServices.createScheduledMeal(user_id, recipe_id, day_id, date, cooked, current_week)
         .then(data => {
             response.status(200).json({
                 'msg': `Successfully scheduled meal with ID ${data.id}.`,
@@ -64,9 +64,9 @@ const getAScheduledMeal = (request, response) => {
 
 //UPDATE SCHEDULED MEAL FOR USER
 const updateScheduledMeal = (request, response) => {
-    const { user_id, recipe_id, day_id, date, cooked } = request.body;
+    const { user_id, recipe_id, day_id, date, cooked, current_week } = request.body;
     const { id } = request.params;
-    MealScheduleServices.updateScheduledMeal(id, user_id, recipe_id, day_id, date, cooked)
+    MealScheduleServices.updateScheduledMeal(id, user_id, recipe_id, day_id, date, cooked, current_week)
         .then(() => {
             response.status(200).json({
                 'msg': `Successfully updated scheduled meal with ID ${id}.`
