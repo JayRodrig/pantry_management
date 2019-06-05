@@ -8,8 +8,8 @@ const CurrentPantryServices = require('../services/currentPantry');
 
 //ADD SCHEDULED MEAL FOR USER
 const createScheduledMeal = (request, response) => {
-    const { user_id, recipe_id, day_id, date, cooked } = request.body;
-    MealScheduleServices.createScheduledMeal(user_id, recipe_id, day_id, date, cooked)
+    const { user_id, recipe_id, day_id, date, cooked, current_week } = request.body;
+    MealScheduleServices.createScheduledMeal(user_id, recipe_id, day_id, date, cooked, current_week)
         .then(data => {
             response.status(200).json({
                 'msg': `Successfully scheduled meal with ID ${data.id}.`,
@@ -65,13 +65,13 @@ const getAScheduledMeal = (request, response) => {
 
 //UPDATE SCHEDULED MEAL FOR USER
 const updateScheduledMeal = async (request, response) => {
-    const { user_id, recipe_id, day_id, date, cooked } = request.body;
+    const { user_id, recipe_id, day_id, date, cooked, current_week } = request.body;
     const { id } = request.params;
     const recipeIngredients = await IngredientServices.getRecipeIngredients(recipe_id);
     const currentPantryProducts = await CurrentPantryServices.getPantryItemsOfUser(user_id);
 
     let currentPantry = {};
-    
+
     for (let product of currentPantryProducts) {
         if (!currentPantry[product.product_id]) {
             currentPantry[product.product_id] = product;
@@ -84,7 +84,7 @@ const updateScheduledMeal = async (request, response) => {
 
     for (let ingredients of recipeIngredients) {
         if (currentPantry[ingredients.product_id]) {
-            currentPantry[ingredients.product_id].weight_left = 
+            currentPantry[ingredients.product_id].weight_left =
                 currentPantry[ingredients.product_id].weight_left - ingredients.ingredient_gram_weight;
             usedProducts.push(currentPantry[ingredients.product_id]);
         } else {
@@ -93,16 +93,16 @@ const updateScheduledMeal = async (request, response) => {
     };
 
     try {
-        const postMealSchedule = 
-            await MealScheduleServices.updateScheduledMeal(id, user_id, recipe_id, day_id, date, cooked);
+        const postMealSchedule =
+            await MealScheduleServices.updateScheduledMeal(id, user_id, recipe_id, day_id, date, cooked, current_week);
         for (let product of usedProducts) {
-            const postUpdatedPantryProd = 
+            const postUpdatedPantryProd =
                 await CurrentPantryServices.updatePantryItemByProductID(product.product_id, product.weight_left);
         };
         response.status(200).json({
             'msg': `Success`,
         });
-    } catch(e) {
+    } catch (e) {
         response.status(400).json({
             'msg': `Something went wrong`,
             e: e.toString(),
@@ -114,36 +114,36 @@ const updateScheduledMeal = async (request, response) => {
 const deleteAScheduledMeal = (request, response) => {
     const { id } = request.params;
     MealScheduleServices.deleteAScheduledMeal(id)
-    .then(() => {
-        response.status(200).json({
-            'msg': `Successfully deleted scheduled meal with ID ${id}.`
+        .then(() => {
+            response.status(200).json({
+                'msg': `Successfully deleted scheduled meal with ID ${id}.`
+            });
+        })
+        .catch(e => {
+            console.log(e)
+            response.status(400).json({
+                'msg': `Something went wrong.`,
+                e,
+            });
         });
-    })
-    .catch(e => {
-        console.log(e)
-        response.status(400).json({
-            'msg': `Something went wrong.`,
-            e,
-        });
-    });
 };
 
 //DELETE ALL SCHEDULED MEALS FOR USER BY ID
 const deleteAllScheduledMealsForUser = (request, response) => {
     const { id } = request.params;
     MealScheduleServices.deleteAllScheduledMealsForUser(id)
-    .then(() => {
-        response.status(200).json({
-            'msg': `Successfully deleted all scheduled meal  for user with ID ${id}.`
+        .then(() => {
+            response.status(200).json({
+                'msg': `Successfully deleted all scheduled meal  for user with ID ${id}.`
+            });
+        })
+        .catch(e => {
+            console.log(e)
+            response.status(400).json({
+                'msg': `Something went wrong.`,
+                e,
+            });
         });
-    })
-    .catch(e => {
-        console.log(e)
-        response.status(400).json({
-            'msg': `Something went wrong.`,
-            e,
-        });
-    });
 };
 
 const getMealScheduleRouter = _ => {
