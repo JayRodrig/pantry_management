@@ -106,12 +106,31 @@ const updateCurrentScheduledMeals = (request, response) => {
     const { current_week } = request.body;
     let changeFrom = 'true'; //change from true or false to current week value
     if (current_week === 'true') {
-        changeFrom ='false'
+        changeFrom = 'false'
     }
     MealScheduleServices.updateCurrentScheduledMeals(current_week, changeFrom)
         .then(data => {
             response.status(200).json({
                 'msg': `Successfully updated all current meals from meal_schedule.`,
+                data,
+            });
+        })
+        .catch(e => {
+            console.log(e)
+            response.status(400).json({
+                'msg': `Something went wrong.`,
+                e,
+            });
+        });
+};
+
+//UPDATE A SCHEDULED MEAL CURRENT_WEEK STATUS FROM FALSE TO TRUE
+const updateCurrentScheduledMealsToTrue = (request, response) => {
+    const { fromDate, toDate } = request.body;
+    MealScheduleServices.updateCurrentScheduledMealsToTrue(fromDate, toDate)
+        .then(data => {
+            response.status(200).json({
+                'msg': `Successfully updated all current meals from false to true with dates between ${fromDate} to ${toDate}.`,
                 data,
             });
         })
@@ -213,6 +232,7 @@ const getMealScheduleRouter = _ => {
     MealScheduleRouter.get('/', getAllScheduledMeals);
     MealScheduleRouter.get('/current/:status', getCurrentScheduledMeals);
     MealScheduleRouter.put('/current', updateCurrentScheduledMeals);
+    MealScheduleRouter.put('/current/toTrue', updateCurrentScheduledMealsToTrue);
     MealScheduleRouter.use(authMiddleware);
     MealScheduleRouter.get('/user/:id', getScheduledMeals);
     MealScheduleRouter.post('/', createScheduledMeal);

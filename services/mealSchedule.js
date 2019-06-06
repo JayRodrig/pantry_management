@@ -114,6 +114,16 @@ const updateCurrentScheduledMeals = ( current_week, changeFrom ) => getDbConn(db
     , { current_week, changeFrom }
 );
 
+//UPDATE CURRENT_WEEK FROM FALSE TO TRUE WHERE DATE MATCHES A RANGE
+const updateCurrentScheduledMealsToTrue = ( fromDate, toDate ) => getDbConn(dbAddr).none(
+    `   
+    UPDATE meal_schedule
+    SET 
+    current_week = 'true'
+    WHERE meal_schedule.date BETWEEN $[fromDate] AND $[toDate];`
+    , { fromDate, toDate }
+);
+
 //DELETE A SCHEDULED MEAL BY ID
 const deleteAScheduledMeal = (id) => getDbConn(dbAddr).none(
     `
@@ -138,4 +148,5 @@ module.exports = {
     getAllScheduledMeals,
     getCurrentScheduledMeals,
     updateCurrentScheduledMeals,
+    updateCurrentScheduledMealsToTrue,
 };
