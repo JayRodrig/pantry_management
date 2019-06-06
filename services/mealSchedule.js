@@ -104,6 +104,16 @@ const updateScheduledMeal = ( id, user_id, recipe_id, day_id, date, cooked, curr
     , { id, user_id, recipe_id, day_id, date, cooked, current_week }
 );
 
+//UPDATE CURRENT_WEEK FROM TRUE TO FALSE AND VISE VERSA
+const updateCurrentScheduledMeals = ( current_week, changeFrom ) => getDbConn(dbAddr).none(
+    `   
+    UPDATE meal_schedule
+    SET 
+    current_week = $[current_week]
+    WHERE meal_schedule.current_week = $[changeFrom];`
+    , { current_week, changeFrom }
+);
+
 //DELETE A SCHEDULED MEAL BY ID
 const deleteAScheduledMeal = (id) => getDbConn(dbAddr).none(
     `
@@ -127,4 +137,5 @@ module.exports = {
     deleteAllScheduledMealsForUser,
     getAllScheduledMeals,
     getCurrentScheduledMeals,
+    updateCurrentScheduledMeals,
 };

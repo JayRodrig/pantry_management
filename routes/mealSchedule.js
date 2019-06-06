@@ -3,7 +3,7 @@ const express = require('express');
 
 // LOCAL MODULES
 const MealScheduleServices = require('../services/mealSchedule');
-const {authMiddleware,} = require('../services/firebase/authMiddleware');
+const { authMiddleware, } = require('../services/firebase/authMiddleware');
 const IngredientServices = require('../services/ingredient');
 const CurrentPantryServices = require('../services/currentPantry');
 
@@ -27,7 +27,7 @@ const createScheduledMeal = (request, response) => {
 };
 
 //GET ALL SCHEDULED MEALS
-const getAllScheduledMeals = (request, response) =>{
+const getAllScheduledMeals = (request, response) => {
     MealScheduleServices.getAllScheduledMeals()
         .then(data => {
             response.status(200).json({
@@ -89,6 +89,29 @@ const getCurrentScheduledMeals = (request, response) => {
         .then(data => {
             response.status(200).json({
                 'msg': `Successfully retrieved all current meals from meal_schedule.`,
+                data,
+            });
+        })
+        .catch(e => {
+            console.log(e)
+            response.status(400).json({
+                'msg': `Something went wrong.`,
+                e,
+            });
+        });
+};
+
+//UPDATE A SCHEDULED MEAL CURRENT_WEEK STATUS
+const updateCurrentScheduledMeals = (request, response) => {
+    const { current_week } = request.body;
+    let changeFrom = 'true'; //change from true or false to current week value
+    if (current_week === 'true') {
+        changeFrom ='false'
+    }
+    MealScheduleServices.updateCurrentScheduledMeals(current_week, changeFrom)
+        .then(data => {
+            response.status(200).json({
+                'msg': `Successfully updated all current meals from meal_schedule.`,
                 data,
             });
         })
@@ -187,8 +210,9 @@ const deleteAllScheduledMealsForUser = (request, response) => {
 const getMealScheduleRouter = _ => {
     const MealScheduleRouter = express.Router();
 
-    MealScheduleRouter.get('/',getAllScheduledMeals);
-    MealScheduleRouter.get('/current/:status',getCurrentScheduledMeals);
+    MealScheduleRouter.get('/', getAllScheduledMeals);
+    MealScheduleRouter.get('/current/:status', getCurrentScheduledMeals);
+    MealScheduleRouter.put('/current', updateCurrentScheduledMeals);
     MealScheduleRouter.use(authMiddleware);
     MealScheduleRouter.get('/user/:id', getScheduledMeals);
     MealScheduleRouter.post('/', createScheduledMeal);
