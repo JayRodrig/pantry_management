@@ -75,7 +75,7 @@ const getScheduledMeals = id => getDbConn(dbAddr).any(
 const getAScheduledMeal = (id) => getDbConn(dbAddr).any(
     `
     SELECT recipes.*,
-           weekday.*
+           weekday.*,
            meal_schedule.current_week,
            meal_schedule.date,
            meal_schedule.cooked,
