@@ -124,7 +124,7 @@ const updateCurrentScheduledMeals = (request, response) => {
         });
 };
 
-//UPDATE A SCHEDULED MEAL CURRENT_WEEK STATUS FROM FALSE TO TRUE
+//UPDATE A SCHEDULED MEAL CURRENT_WEEK STATUS FROM FALSE TO TRUE BY DATE RANGE
 const updateCurrentScheduledMealsToTrue = (request, response) => {
     const { fromDate, toDate } = request.body;
     MealScheduleServices.updateCurrentScheduledMealsToTrue(fromDate, toDate)
