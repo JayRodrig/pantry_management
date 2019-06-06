@@ -82,6 +82,25 @@ const getAScheduledMeal = (request, response) => {
         });
 };
 
+//GET A SCHEDULED MEAL WHERE CURRENT_WEEK IS TRUE 
+const getCurrentScheduledMeals = (request, response) => {
+    const { status } = request.params;
+    MealScheduleServices.getCurrentScheduledMeals(status)
+        .then(data => {
+            response.status(200).json({
+                'msg': `Successfully retrieved all current meals from meal_schedule.`,
+                data,
+            });
+        })
+        .catch(e => {
+            console.log(e)
+            response.status(400).json({
+                'msg': `Something went wrong.`,
+                e,
+            });
+        });
+};
+
 //UPDATE SCHEDULED MEAL FOR USER
 const updateScheduledMeal = async (request, response) => {
     const { user_id, recipe_id, day_id, date, cooked, current_week } = request.body;
@@ -169,6 +188,7 @@ const getMealScheduleRouter = _ => {
     const MealScheduleRouter = express.Router();
 
     MealScheduleRouter.get('/',getAllScheduledMeals);
+    MealScheduleRouter.get('/current/:status',getCurrentScheduledMeals);
     MealScheduleRouter.use(authMiddleware);
     MealScheduleRouter.get('/user/:id', getScheduledMeals);
     MealScheduleRouter.post('/', createScheduledMeal);

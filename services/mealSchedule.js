@@ -37,6 +37,22 @@ const getAllScheduledMeals = () => getDbConn(dbAddr).any(
     `
 )
 
+//GET ALL CURRENT SCHEDULE MEALS BY STATUS
+const getCurrentScheduledMeals = (status) => getDbConn(dbAddr).any(
+    `
+    SELECT recipes.*,
+ 		meal_schedule.day_id,
+ 		meal_schedule.current_week,
+ 		meal_schedule.date,
+ 		meal_schedule.cooked,
+ 		meal_schedule.id AS meal_schedule_id
+     FROM recipes
+     JOIN meal_schedule
+        ON recipes.recipe_id = meal_schedule.recipe_id
+     WHERE meal_schedule.current_week = $[status]  
+    `,{ status }
+)
+
 //GET SCHEDULED MEALS FOR SPECIFIC USER ID
 const getScheduledMeals = id => getDbConn(dbAddr).any(
     `
@@ -102,4 +118,5 @@ module.exports = {
     deleteAScheduledMeal,
     deleteAllScheduledMealsForUser,
     getAllScheduledMeals,
+    getCurrentScheduledMeals,
 };

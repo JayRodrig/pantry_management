@@ -6,7 +6,8 @@ const getDbConn = (_ => {
     let dbConn = null;
     return dbAddr => {
         if (!dbConn) {
-            dbConn = pgp({})(process.env.DATABASE_URL) || pgp({})(dbAddr);
+           // dbConn = pgp({})(process.env.DATABASE_URL) || pgp({})(dbAddr);
+            dbConn = pgp({})(dbAddr);
         };
         return dbConn;
     };
