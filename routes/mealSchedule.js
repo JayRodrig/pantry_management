@@ -3,6 +3,7 @@ const express = require('express');
 
 // LOCAL MODULES
 const MealScheduleServices = require('../services/mealSchedule');
+const {authMiddleware,} = require('../services/firebase/authMiddleware');
 const IngredientServices = require('../services/ingredient');
 const CurrentPantryServices = require('../services/currentPantry');
 
@@ -24,6 +25,24 @@ const createScheduledMeal = (request, response) => {
             });
         });
 };
+
+//GET ALL SCHEDULED MEALS
+const getAllScheduledMeals = (request, response) =>{
+    MealScheduleServices.getAllScheduledMeals()
+        .then(data => {
+            response.status(200).json({
+                'msg': `Successfully retrieved meal_schedule data.`,
+                data,
+            });
+        })
+        .catch(e => {
+            console.log(e)
+            response.status(400).json({
+                'msg': `Something went wrong.`,
+                e,
+            });
+        });
+}
 
 //GET ALL SCHEDULED MEALS FOR A SPECIFIC USER
 const getScheduledMeals = (request, response) => {
@@ -149,6 +168,8 @@ const deleteAllScheduledMealsForUser = (request, response) => {
 const getMealScheduleRouter = _ => {
     const MealScheduleRouter = express.Router();
 
+    MealScheduleRouter.get('/',getAllScheduledMeals);
+    MealScheduleRouter.use(authMiddleware);
     MealScheduleRouter.get('/user/:id', getScheduledMeals);
     MealScheduleRouter.post('/', createScheduledMeal);
     MealScheduleRouter.get('/:id', getAScheduledMeal);

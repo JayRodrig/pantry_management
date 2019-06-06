@@ -23,6 +23,21 @@ const createScheduledMeal = (user_id, recipe_id, day_id, date, cooked, current_w
 );
 
 //GET SCHEDULED MEALS FOR SPECIFIC USER ID
+const getAllScheduledMeals = () => getDbConn(dbAddr).any(
+    `
+    SELECT recipes.*,
+ 		meal_schedule.day_id,
+ 		meal_schedule.current_week,
+ 		meal_schedule.date,
+ 		meal_schedule.cooked,
+ 		meal_schedule.id AS meal_schedule_id
+     FROM recipes
+     JOIN meal_schedule
+        ON recipes.recipe_id = meal_schedule.recipe_id
+    `
+)
+
+//GET SCHEDULED MEALS FOR SPECIFIC USER ID
 const getScheduledMeals = id => getDbConn(dbAddr).any(
     `
     SELECT recipes.*,
@@ -86,4 +101,5 @@ module.exports = {
     updateScheduledMeal,
     deleteAScheduledMeal,
     deleteAllScheduledMealsForUser,
+    getAllScheduledMeals,
 };
