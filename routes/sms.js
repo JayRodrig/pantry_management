@@ -14,7 +14,7 @@ const sendSMS = async ( request, response ) => {
     const values = Object.values(ingredientsList)
     let textMessageBody = 'At least... ';
     values.forEach(e => {
-        textMessageBody += `At least ${e.needed_weight} grams of ${e.product_name} is needed. `
+        textMessageBody += `${e.needed_weight} grams of ${e.product_name} is needed. `
     })
 
     client.messages
@@ -24,15 +24,17 @@ const sendSMS = async ( request, response ) => {
             to: phone_number
         })
         .then(message => {
-            console.log(message)
-            response.json({
+            response.status(200).json({
                 message: 'Text Message Has Been Sent',
                 status: message.status
             })
         })
         .catch(err => {
-            console.log(err.toString())
-        })
+            response.status(400).json({
+                'msg': `Something went wrong`,
+                e: err.toString(),
+            });
+        });
 }
 
 

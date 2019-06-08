@@ -13,7 +13,7 @@ const {getProductRouter,} = require('./routes/product');
 const {getIngredientRouter,} = require('./routes/ingredient');
 const {getCurrentPantryRouter,} = require('./routes/currentPantry');
 const {getMealScheduleRouter,} = require('./routes/mealSchedule');
-const {getSMSRouter,} = require('./routes/sms')
+const {getSMSRouter,} = require('./routes/sms');
 
 
 // FUNCTION THAT RETURNS THE EXPRESS APP / SERVER
