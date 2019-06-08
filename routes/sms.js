@@ -40,7 +40,7 @@ const sendSMS = async ( request, response ) => {
 
 const getSMSRouter = _ => {
     const SMSRouter = express.Router();
-
+    
     SMSRouter.get('/:user_id/:phone_number', sendSMS);
     
     return SMSRouter;
