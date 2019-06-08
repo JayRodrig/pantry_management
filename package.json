@@ -7,7 +7,6 @@
     "test": "$(npm bin)/jest --coverage && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
     "start:local": "$(npm bin)/nodemon index.js",
     "write-coveralls": "rm -rf .coveralls.yml && echo \"repo_token:$COVERAGE_TOKEN\" >> .coveralls.yml",
-    "write-twilio": "rm -rf ./services/twilio/config.json && echo \"{acc_number:$TW_NUMBER, acc_sid:$TW_SID, acc_token:$TW_TOKEN}\" >> ./services/twilio/config.json",
     "start": "node index.js"
   },
   "author": "Osita, Erika, J, Heriberto",
