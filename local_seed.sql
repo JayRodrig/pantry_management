@@ -72,8 +72,8 @@ INSERT INTO weekday (name) VALUES
 ('Monday'), ('Tuesday'), ('Wednesday'), ('Thursday'), ('Friday');
 
 INSERT INTO users (name, username, email, firebase_uid, dob, phone_number, diet_preference, food_limitations, food_allergies) VALUES
-('Jose Rodriguez', 'josemlrod', 'joserodriguez@pursuit.org', 'sampleuid1', '01/01/1990', '1234567890', 'None', 'None', 'None'),
-('Heriberto Uroza', 'heriUroza', 'heribertouroza@pursuit.org', 'sampleuid2', '01/01/1990', '0987654321', 'None', 'None', 'None');
+('Jose Rodriguez', 'josemlrod', 'joserodriguez@pursuit.org', 'sampleuid1', '01/01/1990', '6466590036', 'None', 'None', 'None'),
+('Heriberto Uroza', 'heriUroza', 'heribertouroza@pursuit.org', 'sampleuid2', '01/01/1990', '7188442946', 'None', 'None', 'None');
 
 INSERT INTO recipes (recipe_name, health_tags, recipe_owner, recipe_notes, recipe_image_url) VALUES
 ('Chicken Over Rice', 'None', 1, 'Very tasteful Dominican recipe', 'https://images.pexels.com/photos/105588/pexels-photo-105588.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=1&w=500'),
