@@ -28,7 +28,7 @@ const getApp = _ => {
     app.use('/sms', getSMSRouter());
     app.use('/mealSchedule', getMealScheduleRouter());
 
-    app.use(authMiddleware);
+    // app.use(authMiddleware);
 
     app.use('/ingredient', getIngredientRouter());
     app.use('/product', getProductRouter());

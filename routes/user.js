@@ -151,7 +151,7 @@ const getUserRouter = _ => {
     const UserRouter = express.Router();
 
     UserRouter.post('/', createUser);
-    UserRouter.use(authMiddleware);
+    // UserRouter.use(authMiddleware);
     UserRouter.get('/id/:id', getUserByID);
     UserRouter.get('/email/:email', getUserByEmail);
     UserRouter.get('/recipebypantry/:email', recipesByPantry);
