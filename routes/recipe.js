@@ -102,7 +102,7 @@ const getRecipeRouter = _ => {
     const RecipeRouter = express.Router();
 
     RecipeRouter.get('/:id', getRecipeByID);
-    RecipeRouter.use(authMiddleware);
+    // RecipeRouter.use(authMiddleware);
     RecipeRouter.post('/', postRecipe);
     RecipeRouter.get('/user/:user_id', getRecipesByUserID);
     RecipeRouter.put('/:id', updateRecipe);

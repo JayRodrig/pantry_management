@@ -252,7 +252,7 @@ const getMealScheduleRouter = _ => {
     MealScheduleRouter.get('/current/:status', getCurrentScheduledMeals);
     MealScheduleRouter.put('/current', updateCurrentScheduledMeals);
     MealScheduleRouter.put('/current/toTrue', updateCurrentScheduledMealsToTrue);
-    MealScheduleRouter.use(authMiddleware);
+    // MealScheduleRouter.use(authMiddleware);
     MealScheduleRouter.get('/user/:user_id', getScheduledMeals);
     MealScheduleRouter.get('/currentTrue/:user_id',getCurrWeekTrueByUserID);
     MealScheduleRouter.post('/', createScheduledMeal);
