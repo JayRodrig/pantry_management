@@ -13,6 +13,7 @@ const {getProductRouter,} = require('./routes/product');
 const {getIngredientRouter,} = require('./routes/ingredient');
 const {getCurrentPantryRouter,} = require('./routes/currentPantry');
 const {getMealScheduleRouter,} = require('./routes/mealSchedule');
+const {getSMSRouter,} = require('./routes/sms');
 
 
 // FUNCTION THAT RETURNS THE EXPRESS APP / SERVER
@@ -24,6 +25,7 @@ const getApp = _ => {
 
     app.use('/user', getUserRouter());
     app.use('/recipe', getRecipeRouter());
+    app.use('/sms', getSMSRouter());
     app.use('/mealSchedule', getMealScheduleRouter());
 
     app.use(authMiddleware);

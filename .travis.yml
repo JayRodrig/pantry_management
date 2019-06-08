@@ -8,6 +8,9 @@ before_script:
   - export F_PRIVATE_KEY_ID=$F_PRIVATE_KEY_ID
   - export F_CLIENT_EMAIL=$F_CLIENT_EMAIL
   - export F_CLIENT_ID=$F_CLIENT_ID
+  - export TW_NUMBER=$TW_NUMBER
+  - export TW_SID=$TW_SID
+  - export TW_TOKEN=$TW_TOKEN
 script:
   - npm run write-coveralls
   - npm test
