@@ -36,14 +36,14 @@ const sendSMS = async ( request, response ) => {
 }
 
 
-const sendSMSRouter = _ => {
-    const sendSMSRouter = express.Router();
+const getSMSRouter = _ => {
+    const SMSRouter = express.Router();
 
-    sendSMSRouter.get('/:user_id/:phone_number', sendSMS);
+    SMSRouter.get('/:user_id/:phone_number', sendSMS);
     
-    return sendSMSRouter;
+    return SMSRouter;
 };
 
 module.exports = {
-    sendSMSRouter,
+    getSMSRouter,
 };
