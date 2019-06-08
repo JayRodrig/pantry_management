@@ -3,7 +3,7 @@ const express = require('express');
 
 // LOCAL MODULES
 const { upcomingMealsIngList, } = require('../services/shopping_list');
-const client = require('twilio')(process.env.TW_SID, process.env.TW_TOKEN);
+const client = require('twilio')('AC880819b90cc8125ec557a713684dfc9e', 'c13a5ce6e322eb9f77885bccf5335113');
 
 //SEND SMS
 const sendSMS = async ( request, response ) => {
