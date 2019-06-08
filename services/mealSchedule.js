@@ -3,28 +3,65 @@ const { getDbConn, } = require('./db/db');
 const { dbAddr, } = require('./db/config');
 
 //ADD SCHEDULED MEAL FOR USER
-const createScheduledMeal = (user_id, recipe_id, day_id, date, cooked) => getDbConn(dbAddr).one(
+const createScheduledMeal = (user_id, recipe_id, day_id, date, cooked, current_week) => getDbConn(dbAddr).one(
     `   
         INSERT INTO meal_schedule
         (user_id, 
         recipe_id, 
         day_id,
         date,
-        cooked) 
+        cooked,
+        current_week) 
         VALUES 
         ($[user_id], 
         $[recipe_id], 
         $[day_id],
         $[date],
-        $[cooked]) RETURNING id;`
-    , { user_id, recipe_id, day_id, date, cooked }
+        $[cooked],
+        $[current_week]) RETURNING id;`
+    , { user_id, recipe_id, day_id, date, cooked, current_week }
 );
+
+//GET SCHEDULED MEALS FOR SPECIFIC USER ID
+const getAllScheduledMeals = () => getDbConn(dbAddr).any(
+    `
+    SELECT recipes.*,
+ 		meal_schedule.day_id,
+ 		meal_schedule.current_week,
+ 		meal_schedule.date,
+ 		meal_schedule.cooked,
+ 		meal_schedule.id AS meal_schedule_id
+     FROM recipes
+     JOIN meal_schedule
+        ON recipes.recipe_id = meal_schedule.recipe_id
+    `
+)
+
+//GET ALL CURRENT SCHEDULE MEALS BY STATUS
+const getCurrentScheduledMeals = (status) => getDbConn(dbAddr).any(
+    `
+    SELECT recipes.*,
+ 		meal_schedule.day_id,
+ 		meal_schedule.current_week,
+ 		meal_schedule.date,
+ 		meal_schedule.cooked,
+ 		meal_schedule.id AS meal_schedule_id
+     FROM recipes
+     JOIN meal_schedule
+        ON recipes.recipe_id = meal_schedule.recipe_id
+     WHERE meal_schedule.current_week = $[status]  
+    `,{ status }
+)
 
 //GET SCHEDULED MEALS FOR SPECIFIC USER ID
 const getScheduledMeals = id => getDbConn(dbAddr).any(
     `
     SELECT recipes.*,
-           weekday.*
+           weekday.*,
+           meal_schedule.current_week,
+           meal_schedule.date,
+           meal_schedule.cooked,
+           meal_schedule.id AS meal_schedule_id
      FROM meal_schedule
      INNER JOIN recipes
         ON recipes.recipe_id = meal_schedule.recipe_id
@@ -38,7 +75,11 @@ const getScheduledMeals = id => getDbConn(dbAddr).any(
 const getAScheduledMeal = (id) => getDbConn(dbAddr).any(
     `
     SELECT recipes.*,
-           weekday.*
+           weekday.*,
+           meal_schedule.current_week,
+           meal_schedule.date,
+           meal_schedule.cooked,
+           meal_schedule.id AS meal_schedule_id
      FROM meal_schedule
      INNER JOIN recipes
         ON recipes.recipe_id = meal_schedule.recipe_id
@@ -49,7 +90,7 @@ const getAScheduledMeal = (id) => getDbConn(dbAddr).any(
 );
 
 //UPDATE SCHEDULED MEAL FOR USER
-const updateScheduledMeal = ( id, user_id, recipe_id, day_id, date, cooked ) => getDbConn(dbAddr).none(
+const updateScheduledMeal = ( id, user_id, recipe_id, day_id, date, cooked, current_week ) => getDbConn(dbAddr).none(
     `   
         UPDATE meal_schedule
         SET 
@@ -57,9 +98,30 @@ const updateScheduledMeal = ( id, user_id, recipe_id, day_id, date, cooked ) => 
         recipe_id = $[recipe_id], 
         day_id = $[day_id],
         date = $[date],
-        cooked = $[cooked]
+        cooked = $[cooked],
+        current_week = $[current_week]
         WHERE meal_schedule.id = $[id];`
-    , { id, user_id, recipe_id, day_id, date, cooked }
+    , { id, user_id, recipe_id, day_id, date, cooked, current_week }
+);
+
+//UPDATE CURRENT_WEEK FROM TRUE TO FALSE AND VISE VERSA
+const updateCurrentScheduledMeals = ( current_week, changeFrom ) => getDbConn(dbAddr).none(
+    `   
+    UPDATE meal_schedule
+    SET 
+    current_week = $[current_week]
+    WHERE meal_schedule.current_week = $[changeFrom];`
+    , { current_week, changeFrom }
+);
+
+//UPDATE CURRENT_WEEK FROM FALSE TO TRUE WHERE DATE MATCHES A RANGE
+const updateCurrentScheduledMealsToTrue = ( fromDate, toDate ) => getDbConn(dbAddr).none(
+    `   
+    UPDATE meal_schedule
+    SET 
+    current_week = 'true'
+    WHERE meal_schedule.date BETWEEN $[fromDate] AND $[toDate];`
+    , { fromDate, toDate }
 );
 
 //DELETE A SCHEDULED MEAL BY ID
@@ -83,4 +145,8 @@ module.exports = {
     updateScheduledMeal,
     deleteAScheduledMeal,
     deleteAllScheduledMealsForUser,
+    getAllScheduledMeals,
+    getCurrentScheduledMeals,
+    updateCurrentScheduledMeals,
+    updateCurrentScheduledMealsToTrue,
 };
