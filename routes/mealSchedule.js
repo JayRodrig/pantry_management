@@ -46,11 +46,11 @@ const getAllScheduledMeals = (request, response) => {
 
 //GET ALL SCHEDULED MEALS FOR A SPECIFIC USER
 const getScheduledMeals = (request, response) => {
-    const { id } = request.params;
-    MealScheduleServices.getScheduledMeals(id)
+    const { user_id } = request.params;
+    MealScheduleServices.getScheduledMeals(user_id)
         .then(data => {
             response.status(200).json({
-                'msg': `Successfully retrieved meal_schedule data for user with ID ${id}.`,
+                'msg': `Successfully retrieved meal_schedule data for user with ID ${user_id}.`,
                 data,
             });
         })
@@ -82,7 +82,26 @@ const getAScheduledMeal = (request, response) => {
         });
 };
 
-//GET A SCHEDULED MEAL WHERE CURRENT_WEEK IS TRUE 
+//GET SCHEDULED MEALS WHERE CURRENT_WEEK IS TRUE BY USER ID
+const getCurrWeekTrueByUserID = (request, response) => {
+    const { user_id } = request.params;
+    MealScheduleServices.getCurrWeekTrueByUserID(user_id )
+        .then(data => {
+            response.status(200).json({
+                'msg': `Successfully retrieved all current meals true for user ID ${user_id}.`,
+                data,
+            });
+        })
+        .catch(e => {
+            console.log(e)
+            response.status(400).json({
+                'msg': `Something went wrong.`,
+                e,
+            });
+        });
+};
+
+//GET SCHEDULED MEALS WHERE CURRENT_WEEK IS TRUE OR FALSE
 const getCurrentScheduledMeals = (request, response) => {
     const { status } = request.params;
     MealScheduleServices.getCurrentScheduledMeals(status)
@@ -210,11 +229,11 @@ const deleteAScheduledMeal = (request, response) => {
 
 //DELETE ALL SCHEDULED MEALS FOR USER BY ID
 const deleteAllScheduledMealsForUser = (request, response) => {
-    const { id } = request.params;
-    MealScheduleServices.deleteAllScheduledMealsForUser(id)
+    const { user_id } = request.params;
+    MealScheduleServices.deleteAllScheduledMealsForUser(user_id)
         .then(() => {
             response.status(200).json({
-                'msg': `Successfully deleted all scheduled meal  for user with ID ${id}.`
+                'msg': `Successfully deleted all scheduled meal  for user with ID ${user_id}.`
             });
         })
         .catch(e => {
@@ -234,12 +253,13 @@ const getMealScheduleRouter = _ => {
     MealScheduleRouter.put('/current', updateCurrentScheduledMeals);
     MealScheduleRouter.put('/current/toTrue', updateCurrentScheduledMealsToTrue);
     MealScheduleRouter.use(authMiddleware);
-    MealScheduleRouter.get('/user/:id', getScheduledMeals);
+    MealScheduleRouter.get('/user/:user_id', getScheduledMeals);
+    MealScheduleRouter.get('/currentTrue/:user_id',getCurrWeekTrueByUserID);
     MealScheduleRouter.post('/', createScheduledMeal);
     MealScheduleRouter.get('/:id', getAScheduledMeal);
     MealScheduleRouter.put('/:id', updateScheduledMeal);
     MealScheduleRouter.delete('/:id', deleteAScheduledMeal);
-    MealScheduleRouter.delete('/user/:id', deleteAllScheduledMealsForUser);
+    MealScheduleRouter.delete('/user/:user_id', deleteAllScheduledMealsForUser);
 
     return MealScheduleRouter;
 };
