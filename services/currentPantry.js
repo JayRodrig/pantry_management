@@ -16,7 +16,7 @@ const createProductInPantry = (product_id, owner_id, weight_left) => getDbConn(d
     , { product_id, owner_id, weight_left }
 );
 
-//GET INGREDIENT BY ID
+//GET PANTRY ITEM BY ID
 const getPantryItemByID = id => getDbConn(dbAddr).any(
     `
         SELECT current_pantry.*,
@@ -40,19 +40,15 @@ const getPantryItemByName = name => getDbConn(dbAddr).any(
     `, { name, }
 );
 
-//GET INGREDIENT BY ID
-const getPantryItemsOfUser = id => getDbConn(dbAddr).any(
+//GET PANTRY ITEMS BY USER ID
+const getPantryItemsOfUser = user_id => getDbConn(dbAddr).any(
     `
-        SELECT current_pantry.*,
-            products.*,
-            ingredients.*
-            FROM current_pantry
-            JOIN products
+        SELECT products.*
+            FROM products
+            JOIN current_pantry
             ON products.product_id = current_pantry.product_id
-            JOIN ingredients
-            ON ingredients.product_id = products.product_id
-        WHERE current_pantry.owner_id = $[id]
-    `, { id, }
+        WHERE current_pantry.owner_id = $[user_id]
+    `, { user_id, }
 );
 
 //GET PANTRY ITEMS THAT INCLUDE NAME FOR SPECIFIC USERS
