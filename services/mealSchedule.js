@@ -53,8 +53,24 @@ const getCurrentScheduledMeals = (status) => getDbConn(dbAddr).any(
     `,{ status }
 )
 
+//GET ALL SCHEDULE MEALS THAT CURRENT_WEEK IS TRUE BY USER ID
+const getCurrWeekTrueByUserID = (user_id) => getDbConn(dbAddr).any(
+    `
+    SELECT recipes.*,
+ 		meal_schedule.day_id,
+ 		meal_schedule.current_week,
+ 		meal_schedule.date,
+ 		meal_schedule.cooked,
+ 		meal_schedule.id AS meal_schedule_id
+     FROM recipes
+     JOIN meal_schedule
+        ON recipes.recipe_id = meal_schedule.recipe_id
+     WHERE meal_schedule.current_week = 'true' AND meal_schedule.user_id = $[user_id]
+    `,{ user_id }
+)
+
 //GET SCHEDULED MEALS FOR SPECIFIC USER ID
-const getScheduledMeals = id => getDbConn(dbAddr).any(
+const getScheduledMeals = user_id => getDbConn(dbAddr).any(
     `
     SELECT recipes.*,
            weekday.*,
@@ -67,8 +83,8 @@ const getScheduledMeals = id => getDbConn(dbAddr).any(
         ON recipes.recipe_id = meal_schedule.recipe_id
      INNER JOIN weekday
         ON meal_schedule.day_id = weekday.weekday_id
-     WHERE recipes.recipe_owner = $[id]
-    `, { id, }
+     WHERE recipes.recipe_owner = $[user_id]
+    `, { user_id, }
 );
 
 //GET SCHEDULED MEAL BY ID
@@ -149,4 +165,5 @@ module.exports = {
     getCurrentScheduledMeals,
     updateCurrentScheduledMeals,
     updateCurrentScheduledMealsToTrue,
+    getCurrWeekTrueByUserID,
 };
