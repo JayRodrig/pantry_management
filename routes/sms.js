@@ -3,8 +3,12 @@ const express = require('express');
 
 // LOCAL MODULES
 const { upcomingMealsIngList, } = require('../services/shopping_list');
+<<<<<<< HEAD
 const config = require('../services/twilio/config.js')
 const client = require('twilio')(config.acc_sid, config.acc_token);
+=======
+const client = require('twilio')(process.env.TW_SID, process.env.TW_TOKEN);
+>>>>>>> master
 
 //SEND SMS
 const sendSMS = async ( request, response ) => {
@@ -20,7 +24,11 @@ const sendSMS = async ( request, response ) => {
     client.messages
         .create({
             body: textMessageBody,
+<<<<<<< HEAD
             from: config.acc_number,
+=======
+            from: process.env.TW_NUMBER,
+>>>>>>> master
             to: phone_number
         })
         .then(message => {
