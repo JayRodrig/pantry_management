@@ -13,6 +13,7 @@ before_script:
   - export TW_TOKEN=$TW_TOKEN
 script:
   - npm run write-coveralls
+  - npm run write-twilio
   - npm test
 deploy:
   provider: heroku
