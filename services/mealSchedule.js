@@ -105,6 +105,23 @@ const getAScheduledMeal = (id) => getDbConn(dbAddr).any(
     `, { id, }
 );
 
+const getMealsFromRange = (user_id, fromDate, toDate) => getDbConn(dbAddr).any(
+    `
+        SELECT  recipes.*,
+                weekday.*,
+                meal_schedule.current_week,
+                meal_schedule.date,
+                meal_schedule.cooked,
+                meal_schedule.id AS meal_schedule_id
+        FROM meal_schedule
+        INNER JOIN recipes
+           ON recipes.recipe_id = meal_schedule.recipe_id
+        INNER JOIN weekday
+           ON meal_schedule.day_id = weekday.weekday_id
+        WHERE meal_schedule.date BETWEEN $[fromDate] AND $[toDate] AND meal_schedule.user_id = $[user_id];
+    `, {user_id, fromDate, toDate}
+)
+
 //UPDATE SCHEDULED MEAL FOR USER
 const updateScheduledMeal = ( id, user_id, recipe_id, day_id, date, cooked, current_week ) => getDbConn(dbAddr).none(
     `   
@@ -158,6 +175,7 @@ module.exports = {
     createScheduledMeal,  
     getScheduledMeals,
     getAScheduledMeal,
+    getMealsFromRange,
     updateScheduledMeal,
     deleteAScheduledMeal,
     deleteAllScheduledMealsForUser,
