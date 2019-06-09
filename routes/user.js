@@ -139,8 +139,8 @@ const recipesByPantry = (request, response) => {
 };
 
 const getUpcomingMealsIngList = async (request, response) => {
-    const {user_id,} = request.params;
-    const ingredientsList = await upcomingMealsIngList(user_id);
+    const {user_id, fromDate, toDate,} = request.params;
+    const ingredientsList = await upcomingMealsIngList(user_id, fromDate, toDate);
     response.status(200).json({
         'msg': `Successfully retrieved users upcoming meals ingredient list`,
         data: ingredientsList,
@@ -155,7 +155,7 @@ const getUserRouter = _ => {
     UserRouter.get('/id/:id', getUserByID);
     UserRouter.get('/email/:email', getUserByEmail);
     UserRouter.get('/recipebypantry/:email', recipesByPantry);
-    UserRouter.get('/upcomingIngList/:user_id', getUpcomingMealsIngList);
+    UserRouter.get('/upcomingIngList/:user_id/:fromDate/:toDate', getUpcomingMealsIngList);
     UserRouter.put('/:id', updateUser);
     UserRouter.delete('/:id', deleteUser);
 

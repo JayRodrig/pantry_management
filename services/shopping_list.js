@@ -25,10 +25,13 @@ const Ingredient = require('./ingredient');
 */
 
 
-const upcomingMealsIngList = async user_id => {
-    const weekRecipes = await MealSchedule.getMealsFromRange(user_id, 'June 01, 2019', 'June 04, 2019');
+const upcomingMealsIngList = async (user_id, fromDate, toDate) => {
+    const weekRecipes = await MealSchedule.getMealsFromRange(user_id, fromDate, toDate);
     const usersCurrPantryArr = await CurrentPantry.getPantryItemsOfUser_SL(user_id);
-
+    console.log('weekRecipes...', weekRecipes)
+    console.log('user_id...', user_id)
+    console.log('fromDate...', fromDate)
+    console.log('toDate...', toDate)
     let existingIng = {};
     for (let ingredient of usersCurrPantryArr) {
         if (!existingIng[ingredient.ingredient_name]) {
