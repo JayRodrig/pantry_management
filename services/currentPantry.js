@@ -64,6 +64,20 @@ const getPantryItemOfUserByName = (name, id) => getDbConn(dbAddr).any(
     `, { name, id, }
 );
 
+const getPantryItemsOfUser_SL = user_id => getDbConn(dbAddr).any(
+    `
+    SELECT current_pantry.*,
+        products.*,       
+        ingredients.*
+        FROM current_pantry
+        JOIN products
+        ON products.product_id = current_pantry.product_id
+        JOIN ingredients
+        ON ingredients.product_id = products.product_id
+    WHERE current_pantry.owner_id = $[id]	
+    `, { id, }
+);
+
 // UPDATE PANTRY ITEM BY PRODUCT_ID
 const updatePantryItemByProductID = (product_id, weight_left) => getDbConn(dbAddr).oneOrNone(
     `

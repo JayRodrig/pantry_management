@@ -1,3 +1,6 @@
+// NPM MODULES
+const moment = require('moment-timezone');
+
 // LOCAL MODULES
 const MealSchedule = require('./mealSchedule');
 const CurrentPantry = require('./currentPantry');
@@ -23,30 +26,34 @@ const Ingredient = require('./ingredient');
 
 
 const upcomingMealsIngList = async user_id => {
-    const weekRecipes = await MealSchedule.getScheduledMeals(user_id);
+    const weekRecipes = await MealSchedule.getMealsFromRange(user_id, 'June 01, 2019', 'June 04, 2019');
     const usersCurrPantryArr = await CurrentPantry.getPantryItemsOfUser(user_id);
 
-    console.log('weekRecipes are ...', weekRecipes);
-    console.log('usersCurrPantryArr ...', usersCurrPantryArr);
-    // let existingIng = {};
-    // for (let ingredient of usersCurrPantryArr) {
-    //     if (!existingIng[ingredient.ingredient_name]) {
-    //         existingIng[ingredient.ingredient_name] = {
-    //             weight_left: ingredient.weight_left,
-    //             product_used: ingredient.product_name,
-    //             product_img: ingredient.product_image,
-    //             product_url: ingredient.product_url
-    //         };
-    //     } else {
-    //         continue;
-    //     };
-    // };
+    // console.log('weekRecipes are ...', weekRecipes);
+    let existingIng = {};
+    for (let ingredient of usersCurrPantryArr) {
+        console.log(ingredient);
+        if (!existingIng[ingredient.ingredient_name]) {
+            existingIng[ingredient.ingredient_name] = {
+                weight_left: ingredient.weight_left,
+                product_used: ingredient.product_name,
+                product_img: ingredient.product_image,
+                product_url: ingredient.product_url
+            };
+        } else {
+            continue;
+        };
+    };
 
-    // let necessaryIng = [];
-    // for (let recipe of weekRecipes) {
-    //     const recipeIng = await Ingredient.getRecipeIngredients(recipe.recipe_id);
-    //     necessaryIng = necessaryIng.concat(recipeIng);
-    // };
+    console.log('existingIngObj...', existingIng);
+
+    let necessaryIng = [];
+    for (let recipe of weekRecipes) {
+        const recipeIng = await Ingredient.getRecipeIngredients(recipe.recipe_id);
+        necessaryIng = necessaryIng.concat(recipeIng);
+    };
+
+    // console.log('Necessary Ingredients... ', necessaryIng);
 
     // let ingredientsList = {};
 
