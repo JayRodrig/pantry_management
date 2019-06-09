@@ -74,8 +74,8 @@ const getPantryItemsOfUser_SL = user_id => getDbConn(dbAddr).any(
         ON products.product_id = current_pantry.product_id
         JOIN ingredients
         ON ingredients.product_id = products.product_id
-    WHERE current_pantry.owner_id = $[id]	
-    `, { id, }
+    WHERE current_pantry.owner_id = $[user_id]	
+    `, { user_id, }
 );
 
 // UPDATE PANTRY ITEM BY PRODUCT_ID
@@ -95,6 +95,7 @@ module.exports = {
     getPantryItemByName,
     createProductInPantry, 
     getPantryItemsOfUser, 
+    getPantryItemsOfUser_SL, 
     getPantryItemOfUserByName,  
     updatePantryItemByProductID,
 };

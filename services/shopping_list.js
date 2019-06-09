@@ -27,12 +27,10 @@ const Ingredient = require('./ingredient');
 
 const upcomingMealsIngList = async user_id => {
     const weekRecipes = await MealSchedule.getMealsFromRange(user_id, 'June 01, 2019', 'June 04, 2019');
-    const usersCurrPantryArr = await CurrentPantry.getPantryItemsOfUser(user_id);
+    const usersCurrPantryArr = await CurrentPantry.getPantryItemsOfUser_SL(user_id);
 
-    // console.log('weekRecipes are ...', weekRecipes);
     let existingIng = {};
     for (let ingredient of usersCurrPantryArr) {
-        console.log(ingredient);
         if (!existingIng[ingredient.ingredient_name]) {
             existingIng[ingredient.ingredient_name] = {
                 weight_left: ingredient.weight_left,
@@ -45,58 +43,54 @@ const upcomingMealsIngList = async user_id => {
         };
     };
 
-    console.log('existingIngObj...', existingIng);
-
     let necessaryIng = [];
     for (let recipe of weekRecipes) {
         const recipeIng = await Ingredient.getRecipeIngredients(recipe.recipe_id);
         necessaryIng = necessaryIng.concat(recipeIng);
     };
 
-    // console.log('Necessary Ingredients... ', necessaryIng);
+    let ingredientsList = {};
 
-    // let ingredientsList = {};
-
-    // for(let ingredient of necessaryIng) {
-    //     if (!existingIng[ingredient.ingredient_name]) {
-    //         // IF ING DOESN'T EXIST, JUST ADD IT TO THE LIST, DON'T GO FURTHER
-    //         if (ingredientsList[ingredient.ingredient_name]) {
-    //             ingredientsList[ingredient.ingredient_name].needed_weight += ingredient.ingredient_gram_weight;
-    //         } else {
-    //             ingredientsList[ingredient.ingredient_name] = {
-    //                 needed_weight: ingredient.ingredient_gram_weight,
-    //                 weightOnPantry: 0,
-    //                 product_name: ingredient.product_name,
-    //                 product_url: ingredient.product_url,
-    //                 product_price: ingredient.product_price,
-    //                 product_image: ingredient.product_image,
-    //             };
-    //         };
-    //     } else if (existingIng[ingredient.ingredient_name]) {
-    //         // CHECK IF THE WEIGHT ON THE EXISTINGING DICT IS LESSER THAN 
-    //         // THE WEIGHT THAT IS NECESSARY
-    //         if ((existingIng[ingredient.ingredient_name].weight_left - ingredient.ingredient_gram_weight) > 0) {
-    //             // IF ENOUGH WEIGHT EXISTS JUST GO ON
-    //             existingIng[ingredient.ingredient_name].weight_left = existingIng[ingredient.ingredient_name].weight_left - ingredient.ingredient_gram_weight;
-    //             continue;
-    //         } else if (!ingredientsList[ingredient.ingredient_name]) {
-    //             // IF NOT ENOUGH WEIGHT, CREATE A NEW KEY ON THE LIST DICT
-    //             ingredientsList[ingredient.ingredient_name] = {
-    //                 needed_weight: ingredient.ingredient_gram_weight,
-    //                 weightOnPantry: existingIng[ingredient.ingredient_name].weight_left,
-    //                 product_name: ingredient.product_name,
-    //                 product_url: ingredient.product_url,
-    //                 product_price: ingredient.product_price,
-    //                 product_image: ingredient.product_image,
-    //             }
-    //         }
-    //     } else {
-    //         // IF NOT ENOUGH WEIGHT AND KEY ALREADY EXISTS, JUST ADD TO NEEDED WEIGHT
-    //         ingredientsList[ingredient.ingredient_name].needed_weight += ingredient.ingredient_gram_weight;
-    //     };
-    // };
+    for(let ingredient of necessaryIng) {
+        if (!existingIng[ingredient.ingredient_name]) {
+            // IF ING DOESN'T EXIST, JUST ADD IT TO THE LIST, DON'T GO FURTHER
+            if (ingredientsList[ingredient.ingredient_name]) {
+                ingredientsList[ingredient.ingredient_name].needed_weight += ingredient.ingredient_gram_weight;
+            } else {
+                ingredientsList[ingredient.ingredient_name] = {
+                    needed_weight: ingredient.ingredient_gram_weight,
+                    weightOnPantry: 0,
+                    product_name: ingredient.product_name,
+                    product_url: ingredient.product_url,
+                    product_price: ingredient.product_price,
+                    product_image: ingredient.product_image,
+                };
+            };
+        } else if (existingIng[ingredient.ingredient_name]) {
+            // CHECK IF THE WEIGHT ON THE EXISTINGING DICT IS LESSER THAN 
+            // THE WEIGHT THAT IS NECESSARY
+            if ((existingIng[ingredient.ingredient_name].weight_left - ingredient.ingredient_gram_weight) > 0) {
+                // IF ENOUGH WEIGHT EXISTS JUST GO ON
+                existingIng[ingredient.ingredient_name].weight_left = existingIng[ingredient.ingredient_name].weight_left - ingredient.ingredient_gram_weight;
+                continue;
+            } else if (!ingredientsList[ingredient.ingredient_name]) {
+                // IF NOT ENOUGH WEIGHT, CREATE A NEW KEY ON THE LIST DICT
+                ingredientsList[ingredient.ingredient_name] = {
+                    needed_weight: ingredient.ingredient_gram_weight,
+                    weightOnPantry: existingIng[ingredient.ingredient_name].weight_left,
+                    product_name: ingredient.product_name,
+                    product_url: ingredient.product_url,
+                    product_price: ingredient.product_price,
+                    product_image: ingredient.product_image,
+                }
+            }
+        } else {
+            // IF NOT ENOUGH WEIGHT AND KEY ALREADY EXISTS, JUST ADD TO NEEDED WEIGHT
+            ingredientsList[ingredient.ingredient_name].needed_weight += ingredient.ingredient_gram_weight;
+        };
+    };
     // return ingredientsList;
-    // console.log(ingredientsList);
+    console.log(ingredientsList);
 };
 
 upcomingMealsIngList(1);
