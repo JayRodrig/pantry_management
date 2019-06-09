@@ -43,7 +43,8 @@ const getPantryItemByName = name => getDbConn(dbAddr).any(
 //GET PANTRY ITEMS BY USER ID
 const getPantryItemsOfUser = user_id => getDbConn(dbAddr).any(
     `
-        SELECT products.*
+        SELECT products.*,
+            current_pantry.weight_left
             FROM products
             JOIN current_pantry
             ON products.product_id = current_pantry.product_id
