@@ -89,12 +89,9 @@ const upcomingMealsIngList = async user_id => {
             ingredientsList[ingredient.ingredient_name].needed_weight += ingredient.ingredient_gram_weight;
         };
     };
-    // return ingredientsList;
-    console.log(ingredientsList);
+    return ingredientsList;
 };
 
-upcomingMealsIngList(1);
-
-// module.exports = {
-//     upcomingMealsIngList,
-// };
+module.exports = {
+    upcomingMealsIngList,
+};
