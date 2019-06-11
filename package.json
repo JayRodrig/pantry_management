@@ -17,6 +17,7 @@
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "firebase-admin": "^8.0.0",
+    "moment-timezone": "^0.5.25",
     "pg-promise": "^8.6.5",
     "twilio": "^3.31.1"
   },

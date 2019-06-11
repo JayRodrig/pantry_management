@@ -1,3 +1,6 @@
+// NPM MODULES
+const moment = require('moment-timezone');
+
 // LOCAL MODULES
 const MealSchedule = require('./mealSchedule');
 const CurrentPantry = require('./currentPantry');
@@ -22,9 +25,9 @@ const Ingredient = require('./ingredient');
 */
 
 
-const upcomingMealsIngList = async user_id => {
-    const weekRecipes = await MealSchedule.getScheduledMeals(user_id);
-    const usersCurrPantryArr = await CurrentPantry.getPantryItemsOfUser(user_id);
+const upcomingMealsIngList = async (user_id, fromDate, toDate) => {
+    const weekRecipes = await MealSchedule.getMealsFromRange(user_id, fromDate, toDate);
+    const usersCurrPantryArr = await CurrentPantry.getPantryItemsOfUser_SL(user_id);
 
     let existingIng = {};
     for (let ingredient of usersCurrPantryArr) {
