@@ -193,7 +193,7 @@ const updateScheduledMeal = async (request, response) => {
 
     try {
         const postMealSchedule =
-            await MealScheduleServices.updateScheduledMeal(id, user_id, recipe_id, day_id, date, cooked, current_week);
+            await MealScheduleServices.updateScheduledMeal(id, user_id, recipe_id, day_id, date, 'true', current_week);
         for (let product of usedProducts) {
             const postUpdatedPantryProd =
                 await CurrentPantryServices.updatePantryItemByProductID(product.product_id, product.weight_left);
