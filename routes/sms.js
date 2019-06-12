@@ -8,14 +8,39 @@ const config = require('../services/twilio/config.js')
 const client = require('twilio')(config.acc_sid, config.acc_token);
 
 // DATE RANGE HELPER FUNCTION
-const getWeekDateRange = _ => {
-    const weekStartTime = moment().day('monday');
-    const weekEndTime = moment().day('monday').add(4, 'days');
-
-    const weekStart = moment.tz(weekStartTime, 'America/New_York').format('MMMM DD, YYYY');
-    const weekEnd = moment.tz(weekEndTime, 'America/New_York').format('MMMM DD, YYYY');
-    return [weekStart, weekEnd];
-}
+getWeekDateRange = _ => {
+    const date = new Date();
+    const day = date.getDay();
+    let daysToAdd = 0;
+    let daysToEnd = 4;
+    if (day === 0) {
+        daysToAdd = 1;
+        daysToEnd = 5;
+    }
+    if (day === 2) {
+        daysToAdd = 6;
+        daysToEnd = 10;
+    }
+    if (day === 3) {
+        daysToAdd = 5;
+        daysToEnd = 9;
+    }
+    if (day === 4) {
+        daysToAdd = 4;
+        daysToEnd = 8;
+    }
+    if (day === 5) {
+        daysToAdd = 3;
+        daysToEnd = 7;
+    }
+    if (day === 6) {
+        daysToAdd = 2;
+        daysToEnd = 6;
+    }
+    const weekStartTime = moment.tz(date,'America/New_York').add(daysToAdd, 'days').format('MMMM DD, YYYY');
+    const weekEndTime = moment.tz(date,'America/New_York').add(daysToEnd, 'days').format('MMMM DD, YYYY');
+    return [weekStartTime, weekEndTime];
+};
 
 //SEND SMS
 const sendSMS = async ( request, response ) => {
