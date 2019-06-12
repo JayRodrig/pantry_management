@@ -223,6 +223,6 @@ INSERT INTO meal_schedule (user_id, recipe_id, day_id, date, cooked, current_wee
 (1, 1, 1, 'June 03, 2019', 'false', 'true'),
 (1, 2, 4, 'June 04, 2019', 'false', 'true'),
 (2, 3, 3, 'June 03, 2019', 'false', 'true'),
-(1, 3, 1, 'June 05, 2019', 'false', 'true'),
+(1, 10, 1, 'June 05, 2019', 'false', 'true'),
 (1, 4, 1, 'June 06, 2019', 'false', 'true'),
 (1, 5, 1, 'June 07, 2019', 'false', 'true');
