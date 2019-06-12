@@ -169,7 +169,7 @@ INSERT INTO products (product_name, product_url, product_image, product_original
 );
 
 INSERT INTO current_pantry (product_id, owner_id, weight_left) VALUES
-(1, 1, 1814),
+(1, 1, 1100),
 (2, 1, 2268),
 (3, 1, 454),
 (4, 2, 680),
