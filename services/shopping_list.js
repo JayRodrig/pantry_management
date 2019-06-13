@@ -64,6 +64,7 @@ const upcomingMealsIngList = async (user_id, fromDate, toDate) => {
                     product_url: ingredient.product_url,
                     product_price: ingredient.product_price,
                     product_image: ingredient.product_image,
+                    product_id: ingredient.product_id,
                 };
             };
         } else if (existingIng[ingredient.ingredient_name]) {
@@ -82,6 +83,7 @@ const upcomingMealsIngList = async (user_id, fromDate, toDate) => {
                     product_url: ingredient.product_url,
                     product_price: ingredient.product_price,
                     product_image: ingredient.product_image,
+                    product_id: ingredient.product_id,
                 }
             }
         } else {
