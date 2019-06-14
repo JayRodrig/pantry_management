@@ -105,7 +105,7 @@ const updateproductWeightLeft = (request, response) => {
     const { product_id, } = request.params;
     const { newWeight, } = request.body;
     console.log(product_id)
-    ProductServices.updateproductWeightLeft(product_id, newWeight)
+    ProductServices.updatePantryItemByProductID(product_id, newWeight)
         .then(data => {
             console.log(data)
             response.status(200).json({
