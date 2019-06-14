@@ -103,9 +103,10 @@ const getPantryItemOfUserByName = (request, response) => {
 //UPDATE A PRODUCT'S WEIGHT LEFT AFTER PURCHASE BY PRODUCT ID
 const updateproductWeightLeft = (request, response) => {
     const { product_id, } = request.params;
-    const { newWeight, } = request.body;
+    const { weight_left, } = request.body;
     console.log(product_id)
-    ProductServices.updatePantryItemByProductID(product_id, newWeight)
+    console.log(weight_left)
+    CurrentPantryServices.updatePantryItemByProductID(product_id, weight_left)
         .then(data => {
             console.log(data)
             response.status(200).json({
