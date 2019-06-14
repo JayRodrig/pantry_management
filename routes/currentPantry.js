@@ -82,8 +82,6 @@ const getPantryItemsOfUser= (request, response) => {
 const getPantryItemOfUserByName = (request, response) => {
     const { name, id } = request.params;
     const likeName = `%${name}%`;
-    console.log(likeName)
-    console.log(id)
     CurrentPantryServices.getPantryItemOfUserByName(likeName, id)
         .then(data => {
             response.status(200).json({
@@ -104,11 +102,8 @@ const getPantryItemOfUserByName = (request, response) => {
 const updateproductWeightLeft = (request, response) => {
     const { product_id, } = request.params;
     const { weight_left, } = request.body;
-    console.log(product_id)
-    console.log(weight_left)
     CurrentPantryServices.updatePantryItemByProductID(product_id, weight_left)
         .then(data => {
-            console.log(data)
             response.status(200).json({
                 'msg': `Successfully updated product.`,
                 data
