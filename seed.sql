@@ -169,7 +169,7 @@ INSERT INTO products (product_name, product_url, product_image, product_original
 );
 
 INSERT INTO current_pantry (product_id, owner_id, weight_left) VALUES
-(1, 1, 1814),
+(1, 1, 1100),
 (2, 1, 2268),
 (3, 1, 454),
 (4, 2, 680),
@@ -224,6 +224,6 @@ INSERT INTO meal_schedule (user_id, recipe_id, day_id, date, cooked, current_wee
 (1, 1, 1, 'June 03, 2019', 'false', 'true'),
 (1, 2, 4, 'June 04, 2019', 'false', 'true'),
 (2, 3, 3, 'June 03, 2019', 'false', 'true'),
-(1, 3, 1, 'June 05, 2019', 'false', 'true'),
+(1, 10, 1, 'June 05, 2019', 'false', 'true'),
 (1, 4, 1, 'June 06, 2019', 'false', 'true'),
 (1, 5, 1, 'June 07, 2019', 'false', 'true');
