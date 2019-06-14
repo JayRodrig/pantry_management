@@ -168,6 +168,8 @@ INSERT INTO products (product_name, product_url, product_image, product_original
     'https://images-na.ssl-images-amazon.com/images/I/711ejbnjXcL._SY550_.jpg', '1', 'pound', 453, '2.59', 1
 );
 
+
+
 INSERT INTO current_pantry (product_id, owner_id, weight_left) VALUES
 (1, 1, 1100),
 (2, 1, 2268),
