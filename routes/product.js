@@ -8,7 +8,7 @@ const express = require('express');
 
 // LOCAL MODULES
 const ProductServices = require('../services/products');
-const {convertToGrams,} = require('../services/weightConversions');
+const { convertToGrams, } = require('../services/weightConversions');
 
 const postProduct = (request, response) => {
     const {
@@ -32,7 +32,7 @@ const postProduct = (request, response) => {
 };
 
 const getProductByID = (request, response) => {
-    const {id,} = request.params;
+    const { id, } = request.params;
     ProductServices.getProductByID(id)
         .then(data => {
             response.status(200);
@@ -50,8 +50,31 @@ const getProductByID = (request, response) => {
         });
 };
 
+//UUPDATE A PRODUCT'S WEIGHT LEFT AFTER PURCHASE
+const updateproductWeightLeft = (request, response) => {
+    const { product_id, } = request.params;
+    const { newWeight, } = request.body;
+    console.log(product_id)
+    ProductServices.updateproductWeightLeft(product_id, newWeight)
+        .then(data => {
+            console.log(data)
+            response.status(200).json({
+                'msg': `Successfully updated product.`,
+                data
+            })
+        })
+        .catch(e => {
+            response.status(400);
+            response.json({
+                'msg': `Something went wrong.`,
+                e,
+            });
+        });
+}
+
+
 const updateProduct = (request, response) => {
-    const {id,} = request.params;
+    const { id, } = request.params;
     const {
         product_name, product_url, product_image, product_original_weight, product_original_weight_type, product_gram_weight, product_price, product_owner,
     } = request.body;
@@ -74,7 +97,7 @@ const updateProduct = (request, response) => {
 };
 
 const deleteProduct = (request, response) => {
-    const {id,} = request.params;
+    const { id, } = request.params;
     ProductServices.deleteProduct(id)
         .then(data => {
             response.status(200).json({
@@ -96,6 +119,7 @@ const getProductRouter = _ => {
     ProductRouter.post('/', postProduct);
     ProductRouter.get('/id/:id', getProductByID);
     ProductRouter.put('/:id', updateProduct);
+    ProductRouter.put('/weightLeft/:product_id', updateproductWeightLeft);
     ProductRouter.delete('/:id', deleteProduct);
 
     return ProductRouter;
