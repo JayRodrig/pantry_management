@@ -79,16 +79,16 @@ INSERT INTO users (name, username, email, firebase_uid, dob, phone_number, diet_
 ('Heriberto Uroza', 'heriUroza', 'heribertouroza@pursuit.org', 'sampleuid2', '01/01/1990', '7188442946', 'None', 'None', 'None');
 
 INSERT INTO recipes (recipe_name, health_tags, recipe_owner, recipe_notes, recipe_image_url) VALUES
-('Chicken Over Rice', 'None', 1, 'Very tasteful Dominican recipe', 'https://images.pexels.com/photos/105588/pexels-photo-105588.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=1&w=500'),
-('Beef Over Rice', 'None', 1, 'Very tasteful Dominican recipe', 'https://images.pexels.com/photos/769289/pexels-photo-769289.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'),
-('Chicken Alfredo', 'None', 2, 'Very tasteful Italian recipe', 'https://images.pexels.com/photos/769289/pexels-photo-769289.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'),
-('Mac and Cheese Pasta', 'None', 1, 'Best mac and cheese ever!', 'https://images.unsplash.com/photo-1543339494-b4cd4f7ba686?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80'),
-('Pasta Alfredo', 'None', 1, 'Moms recipe, so yummy', 'https://images.pexels.com/photos/1438672/pexels-photo-1438672.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
-('Steak Fajitas', 'None', 1, 'When you are very hungry', 'https://images.pexels.com/photos/2098110/pexels-photo-2098110.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
-('Fried Rice', 'None', 1, 'Easy and fast', 'https://images.pexels.com/photos/723198/pexels-photo-723198.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
-('Chicken Soup', 'None', 1, 'Healthy yummy soup', 'https://images.pexels.com/photos/772518/pexels-photo-772518.png?auto=format%2Ccompress&cs=tinysrgb&dpr=1&w=500'),
-('Lentle Soup', 'None', 1, 'My favorite', 'https://images.pexels.com/photos/724667/pexels-photo-724667.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
-('Steak Tacos', 'None', 1, 'For Mexican night', 'https://images.pexels.com/photos/2087748/pexels-photo-2087748.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=1&w=500');
+('Chicken Over Rice', 'None', 1, 'Very tasteful Dominican recipe', 'https://www.bunsinmyoven.com/wp-content/uploads/2019/03/creamy-garlic-chicken-and-rice-500x500.jpg'),
+('Beef Over Rice', 'None', 1, 'Very tasteful Dominican recipe', 'https://www.halfbakedharvest.com/wp-content/uploads/2019/02/30-Minute-Vietnamese-Beef-and-Crispy-Rice-Bowl-1-500x500.jpg'),
+('Chicken Alfredo', 'None', 2, 'Very tasteful Italian recipe', 'https://www.recipetineats.com/wp-content/uploads/2017/03/One-Pot-Chicken-Alfredo-2-500x500.jpg'),
+('Mac and Cheese Pasta', 'None', 1, 'Best mac and cheese ever!', 'https://www.momontimeout.com/wp-content/uploads/2018/10/homemade-mac-and-cheese-recipe-titled-500x500.jpg'),
+('Pasta Alfredo', 'None', 1, 'Moms recipe, so yummy', 'https://natashaskitchen.com/wp-content/uploads/2014/02/Creamy-Shrimp-Alfredo-Pasta-5-500x500.jpg'),
+('Steak Fajitas', 'None', 1, 'When you are very hungry', 'https://www.isabeleats.com/wp-content/uploads/2018/04/easy-steak-fajitas-small-1-500x500.jpg'),
+('Fried Rice', 'None', 1, 'Easy and fast', 'https://www.recipetineats.com/wp-content/uploads/2018/03/Egg-Fried-Rice_5-1-500x500.jpg'),
+('Chicken Soup', 'None', 1, 'Healthy yummy soup', 'https://feelgoodfoodie.net/wp-content/uploads/2019/01/Chicken-Lemon-Rice-Soup-8-500x500.jpg'),
+('Lentil Soup', 'None', 1, 'My favorite', 'https://www.kitchenkonfidence.com/wp-content/uploads/2019/01/Instant-Pot-Red-Lentil-Soup-3-1-500x500.jpg'),
+('Steak Tacos', 'None', 1, 'For Mexican night', 'https://whatshouldimakefor.com/wp-content/uploads/2019/05/IMG_9928-2-500x500.jpg');
 
 INSERT INTO products (product_name, product_url, product_image, product_original_weight, product_original_weight_type, product_gram_weight, product_price, product_owner) VALUES
 (
