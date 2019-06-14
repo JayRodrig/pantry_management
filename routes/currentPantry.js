@@ -61,7 +61,7 @@ const getPantryItemByName = (request, response) => {
 };
 
 //GET PANTRY ITEMS OF USER BY USER ID
-const getPantryItemsOfUser= (request, response) => {
+const getPantryItemsOfUser = (request, response) => {
     const { id, } = request.params;
     CurrentPantryServices.getPantryItemsOfUser(id)
         .then(data => {
