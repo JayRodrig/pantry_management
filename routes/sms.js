@@ -40,7 +40,7 @@ getWeekDateRange = _ => {
     const weekStartTime = moment.tz(date,'America/New_York').add(daysToAdd, 'days').format('MMMM DD, YYYY');
     const weekEndTime = moment.tz(date,'America/New_York').add(daysToEnd, 'days').format('MMMM DD, YYYY');
     return [weekStartTime, weekEndTime];
-};
+  }
 
 //SEND SMS
 const sendSMS = async ( request, response ) => {
