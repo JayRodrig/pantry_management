@@ -89,16 +89,16 @@ INSERT INTO recipes (recipe_name, health_tags, recipe_owner, recipe_notes, recip
 
 INSERT INTO products (product_name, product_url, product_image, product_original_weight, product_original_weight_type, product_gram_weight, product_price, product_owner) VALUES
 (
-    'Lundberg California White Basmati Rice', 'https://www.amazon.com/Lundberg-Family-Farms-Organic-Basmati/dp/B01E6OKVY0/ref=sr_1_3?keywords=organic%2Brice&qid=1557879879&s=gateway&sr=8-3&th=1', 
-    'https://images-na.ssl-images-amazon.com/images/I/91U%2Be2ZGLkL._SY679_.jpg', '4', 'Pounds', 1814, '11.49', 1
+    'Fotune Food Rozana Basmati Rice', 'https://www.amazon.com/Lundberg-Family-Farms-Organic-Basmati/dp/B01E6OKVY0/ref=sr_1_3?keywords=organic%2Brice&qid=1557879879&s=gateway&sr=8-3&th=1', 
+    'https://www.fortunefoods.com/sites/default/files/rozana-rice.png', '4', 'Pounds', 1814, '11.49', 1
 ),
 (
     'Organic Whole Chicken', 'https://www.amazon.com/Perdue-Harvestland-Organic-Chicken-Giblets/dp/B06XC94RYT/ref=sr_1_17?fpw=fresh&keywords=chicken&qid=1557880034&s=gateway&sr=8-17',
-    'https://images-na.ssl-images-amazon.com/images/I/91KY8eAtn3L._SX522_.jpg', '5', 'pound', 2268, '13.76', 1
+    'https://www.fosterfarms.com/wp-content/uploads/2016/01/3158_443085_ORG_YNGCHCKN_BAG_H.png', '5', 'pound', 2268, '13.76', 1
 ),
 (
     'Grass Fed, Lean Ground Beef', 'https://www.amazon.com/Pre-Lean-Ground-Beef-Pasture-Raised/dp/B01H0AI4VE/ref=sr_1_4?fpw=fresh&keywords=organic+beef&qid=1557880230&s=amazonfresh&sr=1-4',
-    'https://images-na.ssl-images-amazon.com/images/I/81LS2vPN-DL._SX522_.jpg', '16', 'ounce', 454, '8.24', 1
+    'https://mk0pedersonsfarpq8ip.kinstacdn.com/wp-content/uploads/2017/04/Organcic-Ground-Beef-Web.png', '16', 'ounce', 454, '8.24', 1
 ),
 (
     'Organic Chicken Breast', 'https://www.amazon.com/Pat-LaFrieda-Organic-Boneless-Skinless/dp/B00N8LTCKM/ref=sr_1_10?fpw=fresh&keywords=organic+chicken+breast&qid=1557880431&s=amazonfresh&sr=1-10',
@@ -109,60 +109,60 @@ INSERT INTO products (product_name, product_url, product_image, product_original
     'https://images-na.ssl-images-amazon.com/images/I/51ulslIRdML.jpg', '14.5', 'ounce', 411, '2.85', 2
 ),
 (
-    '365 Everyday Value, Elbows', 'https://www.amazon.com/365-Everyday-Value-Elbows-16/dp/B074J684YR/ref=sr_1_7?fpw=fresh&keywords=macaroni+pasta&qid=1560019079&s=gateway&sr=8-7',
-    'https://images-na.ssl-images-amazon.com/images/I/61nW2%2B4CQzL._SY606_.jpg', '16', 'ounce', 453.60, '.99', 1
+    'Skinner Pasta, Elbows', 'https://www.amazon.com/365-Everyday-Value-Elbows-16/dp/B074J684YR/ref=sr_1_7?fpw=fresh&keywords=macaroni+pasta&qid=1560019079&s=gateway&sr=8-7',
+    'https://cdn.skinnerpasta.com/Images/Library/6/Skinner_Large_Elbows_12oz.png', '16', 'ounce', 453.60, '.99', 1
 ),
 (
-    '365 Everyday Value, Mild Cheddar Shred', 'https://www.amazon.com/365-Everyday-Value-Cheddar-Shred/dp/B074J7BZCN/ref=sr_1_11?crid=2M0JFKIV4MMZN&fpw=fresh&keywords=cheddar+cheese&qid=1560019434&s=amazonfresh&sprefix=cheddar%2Camazonfresh%2C137&sr=1-11',
-    'https://images-na.ssl-images-amazon.com/images/I/61Jdh--TlcL._SX425_.jpg', '12', 'ounce', 340, '4.49', 1
+    'Cabot Cheddar Shred', 'https://www.amazon.com/365-Everyday-Value-Cheddar-Shred/dp/B074J7BZCN/ref=sr_1_11?crid=2M0JFKIV4MMZN&fpw=fresh&keywords=cheddar+cheese&qid=1560019434&s=amazonfresh&sprefix=cheddar%2Camazonfresh%2C137&sr=1-11',
+    'https://links.imagerelay.com/cdn/34/ql/50438dd8b6ff4b4ab74fd8cc08f8d390/Cabot_Shreds_FieryJack_8oz_FrontAngle-500x500-0f6d1ffa-a20b-4ce7-a4e1-c720ffcb2b54.png', '12', 'ounce', 340, '4.49', 1
 ),
 (
-    'Kraft Finely Shredded Parmesan Cheese', 'https://www.amazon.com/Kraft-Parmesan-Finely-Shredded-Natural/dp/B000Q6B8UY/ref=sr_1_1_sspa?fpw=fresh&keywords=parmesan+cheese&qid=1560019837&s=amazonfresh&sr=1-1-spons&psc=1',
-    'https://images-na.ssl-images-amazon.com/images/I/81tMyj5IcFL._SX425_.jpg', '6', 'ounce', 170, '4.69', 1
+    'Sargento Shredded Parmesan Cheese', 'https://www.amazon.com/Kraft-Parmesan-Finely-Shredded-Natural/dp/B000Q6B8UY/ref=sr_1_1_sspa?fpw=fresh&keywords=parmesan+cheese&qid=1560019837&s=amazonfresh&sr=1-1-spons&psc=1',
+    'https://res.cloudinary.com/hksqkdlah/image/upload/ar_1:1,c_fill,dpr_3.0,f_auto,q_auto:low,w_400/26652_sil-shredded-parmesan-sargento-artisan-blends-shredded-parmesan-cheese', '6', 'ounce', 170, '4.69', 1
 ),
 (
     'Barilla Pasta, Linguine', 'https://www.amazon.com/Barilla-Pasta-Linguine-16-Ounce/dp/B000RUNRK8/ref=sr_1_2?crid=3W4K4GVAMO6RF&fpw=fresh&keywords=linguine+pasta&qid=1560020059&s=amazonfresh&sprefix=linguine+%2Camazonfresh%2C643&sr=1-2',
-    'https://images-na.ssl-images-amazon.com/images/I/81-1ZPZLyKL._SX425_.jpg', '16', 'ounce', 453.60, '1.69', 1
+    'https://www.mymarkris.com.au/product/image/medium/3141_1.png', '16', 'ounce', 453.60, '1.69', 1
 ),
 (
     'New York Strip Steak – 100% Grass-Fed', 'https://www.amazon.com/Pre-York-Strip-Steak-Grass-Finished/dp/B01H0AI57M/ref=sr_1_1_sspa?fpw=fresh&keywords=steak&qid=1560020469&s=amazonfresh&sr=1-1-spons&psc=1',
-    'https://images-na.ssl-images-amazon.com/images/I/81WeK3vaGwL._SX425_.jpg', '10', 'ounce', 283, '13.17', 1
+    'http://mertsspecialtymeats.com/wp-content/uploads/2018/01/pre-beef-ribeye-steak-300x242.png', '10', 'ounce', 283, '13.17', 1
 ),
 (
-    'Birds Eye Pepper Stir Fry Vegetables', 'https://www.amazon.com/Birds-Eye-Pepper-Vegetables-Frozen/dp/B000SKNU0E/ref=sr_1_1_sspa?crid=1I4B2RS9IC6XF&fpw=fresh&keywords=bell+pepper&qid=1560020793&s=amazonfresh&sprefix=bell+pe%2Camazonfresh%2C127&sr=1-1-spons&psc=1',
-    'https://images-na.ssl-images-amazon.com/images/I/71cP8hAc%2BRL._SX425_.jpg', '16', 'ounce', 453, '2.49', 1
+    'Taylor Stir Fry Kit', 'https://www.amazon.com/Birds-Eye-Pepper-Vegetables-Frozen/dp/B000SKNU0E/ref=sr_1_1_sspa?crid=1I4B2RS9IC6XF&fpw=fresh&keywords=bell+pepper&qid=1560020793&s=amazonfresh&sprefix=bell+pe%2Camazonfresh%2C127&sr=1-1-spons&psc=1',
+    'https://i5.walmartimages.com/asr/3fd3a848-496d-45be-8b29-586005c045f7_4.88aa07dd8059d1039a53a76ade2da71d.png', '16', 'ounce', 453, '2.49', 1
 ),
 (
     'Organic Yellow Onions', 'https://www.amazon.com/Yellow-Onion-Organic-3-lb/dp/B00E3KSQ8Q/ref=sr_1_1?crid=AQ7O8DEHRQ3U&fpw=fresh&keywords=onions+yellow&qid=1560021123&s=amazonfresh&sprefix=onions%2Camazonfresh%2C1488&sr=1-1',
-    'https://images-na.ssl-images-amazon.com/images/I/81sk6a8H9wL._SX425_.jpg', '3', 'pound', 1360, '2.99', 1
+    'http://pngimg.com/uploads/onion/onion_PNG3821.png', '3', 'pound', 1360, '2.99', 1
 ),
 (
     'Organic Green Onion (Scallions)', 'https://www.amazon.com/Organic-Green-Onion-Scallions-Bunch/dp/B000P6G0RG/ref=sr_1_7?crid=YCINOLRKHWGR&fpw=fresh&keywords=ginger+root&qid=1560021623&s=amazonfresh&sprefix=ginger%2Camazonfresh%2C157&sr=1-7',
-    'https://images-na.ssl-images-amazon.com/images/I/71iYcmipTFL._SX425_.jpg', '.5', 'pound', 226, '1.29', 1
+    'http://bengardranch.com/wp-content/uploads/2012/03/greenonions_i.png', '.5', 'pound', 226, '1.29', 1
 ),
 (
     'Ginger', 'https://www.amazon.com/produce-aisle-B003IMCNIO-Ginger-oz/dp/B003IMCNIO/ref=sr_1_1?fpw=fresh&keywords=ginger+root&qid=1560021784&s=amazonfresh&sr=1-1',
-    'https://images-na.ssl-images-amazon.com/images/I/71AF67B5VaL._SX425_.jpg', '8', 'ounce', 226, '3.70', 1
+    'http://www.pngmart.com/files/5/Ginger-PNG-Clipart.png', '8', 'ounce', 226, '3.70', 1
 ),
 (
     'Organic Carrots', 'https://www.amazon.com/produce-aisle-mburring-Organic-Carrots/dp/B000P6G0FI/ref=sr_1_6?crid=79C62QLUCT35&fpw=fresh&keywords=celery+organic&qid=1560024263&s=amazonfresh&sprefix=celer%2Camazonfresh%2C130&sr=1-6',
-    'https://images-na.ssl-images-amazon.com/images/I/81pamPQpt8L._SX425_.jpg', '2', 'pound', 907, '1.60', 1
+    'https://purepng.com/public/uploads/large/purepng.com-carrotscarrotvegetablesfreshdeliciousefoodhealthycarrots-481521740717jmglq.png', '2', 'pound', 907, '1.60', 1
 ),
 (
-    '365 Everyday Value, Organic Chicken Broth', 'https://www.amazon.com/365-Everyday-Value-Organic-Chicken/dp/B074VBL8K3/ref=sr_1_21?crid=79C62QLUCT35&fpw=fresh&keywords=celery+organic&qid=1560024548&s=amazonfresh&sprefix=celer%2Camazonfresh%2C130&sr=1-21',
-    'https://images-na.ssl-images-amazon.com/images/I/61%2BgB1zkn0L._SY679_.jpg', '32', 'ounce', 907, '1.99', 1
+    'Imagine Organic Chicken Broth', 'https://www.amazon.com/365-Everyday-Value-Organic-Chicken/dp/B074VBL8K3/ref=sr_1_21?crid=79C62QLUCT35&fpw=fresh&keywords=celery+organic&qid=1560024548&s=amazonfresh&sprefix=celer%2Camazonfresh%2C130&sr=1-21',
+    'https://www.imaginefoods.com/wp-content/uploads/2018/05/IMG_FR_ChickBrothOrg_32oz.png', '32', 'ounce', 907, '1.99', 1
 ),
 (
     'Goya Dry Lentils', 'https://www.amazon.com/Goya-Dry-Lentils-16-oz/dp/B0000DIF38/ref=sr_1_3?crid=2RGRWP1GJSCKL&fpw=fresh&keywords=lentils&qid=1560030264&s=amazonfresh&sprefix=lentl%2Camazonfresh%2C163&sr=1-3',
-    'https://images-na.ssl-images-amazon.com/images/I/91671geZkqL._SX425_.jpg', '16', 'ounce', 453, '2.09', 1
+    'https://www.goya.com/media/1034/lentils-dry.png?width=470', '16', 'ounce', 453, '2.09', 1
 ),
 (
     'Hunts Organic Tomato Sauce', 'https://www.amazon.com/Hunts-Organic-Tomato-Sauce-15/dp/B016SE5D9O/ref=sr_1_2_sspa?crid=H7EZDUA652HR&fpw=fresh&keywords=tomato+sauce&qid=1560030461&s=amazonfresh&sprefix=tomatoe%2Camazonfresh%2C149&sr=1-2-spons&psc=1',
-    'https://images-na.ssl-images-amazon.com/images/I/81tvYgCpAnL._SX425_.jpg', '15', 'ounce', 400, '2.36', 1
+    'https://www.hunts.com/sites/g/files/qyyrlu211/files/images/products/organic-tomato-sauce-40096.png', '15', 'ounce', 400, '2.36', 1
 ),
 (
-    'Guerrero White Corn Tortillas', 'https://www.amazon.com/Guerrero-5-75-Inch-White-Tortillas/dp/B001MSTPCS/ref=sr_1_3?fpw=fresh&keywords=corn+tortillas&qid=1560030911&s=amazonfresh&sr=1-3',
-    'https://images-na.ssl-images-amazon.com/images/I/711ejbnjXcL._SY550_.jpg', '1', 'pound', 453, '2.59', 1
+    'Mission White Corn Tortillas', 'https://www.amazon.com/Guerrero-5-75-Inch-White-Tortillas/dp/B001MSTPCS/ref=sr_1_3?fpw=fresh&keywords=corn+tortillas&qid=1560030911&s=amazonfresh&sr=1-3',
+    'https://www.missionfoods.com.au/media/793677/mission_tortillas_whitecorn.png', '1', 'pound', 453, '2.59', 1
 );
 
 
