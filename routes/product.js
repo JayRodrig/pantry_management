@@ -50,29 +50,6 @@ const getProductByID = (request, response) => {
         });
 };
 
-//UUPDATE A PRODUCT'S WEIGHT LEFT AFTER PURCHASE
-const updateproductWeightLeft = (request, response) => {
-    const { product_id, } = request.params;
-    const { newWeight, } = request.body;
-    console.log(product_id)
-    ProductServices.updateproductWeightLeft(product_id, newWeight)
-        .then(data => {
-            console.log(data)
-            response.status(200).json({
-                'msg': `Successfully updated product.`,
-                data
-            })
-        })
-        .catch(e => {
-            response.status(400);
-            response.json({
-                'msg': `Something went wrong.`,
-                e,
-            });
-        });
-}
-
-
 const updateProduct = (request, response) => {
     const { id, } = request.params;
     const {
@@ -119,7 +96,6 @@ const getProductRouter = _ => {
     ProductRouter.post('/', postProduct);
     ProductRouter.get('/id/:id', getProductByID);
     ProductRouter.put('/:id', updateProduct);
-    ProductRouter.put('/weightLeft/:product_id', updateproductWeightLeft);
     ProductRouter.delete('/:id', deleteProduct);
 
     return ProductRouter;

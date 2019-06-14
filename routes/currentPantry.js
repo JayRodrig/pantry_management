@@ -100,6 +100,28 @@ const getPantryItemOfUserByName = (request, response) => {
 };
 
 
+//UPDATE A PRODUCT'S WEIGHT LEFT AFTER PURCHASE BY PRODUCT ID
+const updateproductWeightLeft = (request, response) => {
+    const { product_id, } = request.params;
+    const { newWeight, } = request.body;
+    console.log(product_id)
+    ProductServices.updateproductWeightLeft(product_id, newWeight)
+        .then(data => {
+            console.log(data)
+            response.status(200).json({
+                'msg': `Successfully updated product.`,
+                data
+            })
+        })
+        .catch(e => {
+            response.status(400);
+            response.json({
+                'msg': `Something went wrong.`,
+                e,
+            });
+        });
+}
+
 const getCurrentPantryRouter = _ => {
     const CurrentPantryRouter = express.Router();
 
@@ -108,6 +130,7 @@ const getCurrentPantryRouter = _ => {
     CurrentPantryRouter.get('/:id', getPantryItemByID);
     CurrentPantryRouter.get('/name/:name', getPantryItemByName);
     CurrentPantryRouter.get('/user/:id/:name', getPantryItemOfUserByName);
+    CurrentPantryRouter.put('/product/:product_id', updateproductWeightLeft);
 
     return CurrentPantryRouter;
 };
