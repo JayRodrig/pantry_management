@@ -89,7 +89,7 @@ INSERT INTO recipes (recipe_name, health_tags, recipe_owner, recipe_notes, recip
 
 INSERT INTO products (product_name, product_url, product_image, product_original_weight, product_original_weight_type, product_gram_weight, product_price, product_owner) VALUES
 (
-    'Fotune Food Rozana Basmati Rice', 'https://www.amazon.com/Lundberg-Family-Farms-Organic-Basmati/dp/B01E6OKVY0/ref=sr_1_3?keywords=organic%2Brice&qid=1557879879&s=gateway&sr=8-3&th=1', 
+    'Fotune Food Rozana Basmati Rice', 'https://www.amazon.com/Fortune-Rozana-Basmati-Rice-1kg/dp/B00YGMLWQO', 
     'https://www.fortunefoods.com/sites/default/files/rozana-rice.png', '4', 'Pounds', 1814, '11.49', 1
 ),
 (
@@ -97,7 +97,7 @@ INSERT INTO products (product_name, product_url, product_image, product_original
     'https://www.fosterfarms.com/wp-content/uploads/2016/01/3158_443085_ORG_YNGCHCKN_BAG_H.png', '5', 'pound', 2268, '13.76', 1
 ),
 (
-    'Grass Fed, Lean Ground Beef', 'https://www.amazon.com/Pre-Lean-Ground-Beef-Pasture-Raised/dp/B01H0AI4VE/ref=sr_1_4?fpw=fresh&keywords=organic+beef&qid=1557880230&s=amazonfresh&sr=1-4',
+    'Grass Fed, Lean Ground Beef', 'https://thesimplegrocer.com/collections/red-meat/products/100-grass-fed-organic-ground-beef-non-gmo',
     'https://mk0pedersonsfarpq8ip.kinstacdn.com/wp-content/uploads/2017/04/Organcic-Ground-Beef-Web.png', '16', 'ounce', 454, '8.24', 1
 ),
 (
@@ -109,15 +109,15 @@ INSERT INTO products (product_name, product_url, product_image, product_original
     'https://images-na.ssl-images-amazon.com/images/I/51ulslIRdML.jpg', '14.5', 'ounce', 411, '2.85', 2
 ),
 (
-    'Skinner Pasta, Elbows', 'https://www.amazon.com/365-Everyday-Value-Elbows-16/dp/B074J684YR/ref=sr_1_7?fpw=fresh&keywords=macaroni+pasta&qid=1560019079&s=gateway&sr=8-7',
+    'Skinner Pasta, Elbows', 'https://www.amazon.com/Skinner-Large-Elbow-Macaroni-Ounce/dp/B00LQY4U8M/ref=sr_1_2?crid=3S7CU65V2QX36&keywords=skinner+large+elbow+noodles&qid=1560564679&s=gateway&sprefix=skinner+elbow+noodl%2Caps%2C124&sr=8-2',
     'https://cdn.skinnerpasta.com/Images/Library/6/Skinner_Large_Elbows_12oz.png', '16', 'ounce', 453.60, '.99', 1
 ),
 (
-    'Cabot Cheddar Shred', 'https://www.amazon.com/365-Everyday-Value-Cheddar-Shred/dp/B074J7BZCN/ref=sr_1_11?crid=2M0JFKIV4MMZN&fpw=fresh&keywords=cheddar+cheese&qid=1560019434&s=amazonfresh&sprefix=cheddar%2Camazonfresh%2C137&sr=1-11',
+    'Cabot Cheddar Shred', 'https://www.amazon.com/Cabot-Seriously-Sharp-Cheddar-Cheese/dp/B0089WB6Y0/ref=sr_1_4?fpw=fresh&keywords=cabot+cheddar+shred&qid=1560564710&s=gateway&sr=8-4',
     'https://links.imagerelay.com/cdn/34/ql/50438dd8b6ff4b4ab74fd8cc08f8d390/Cabot_Shreds_FieryJack_8oz_FrontAngle-500x500-0f6d1ffa-a20b-4ce7-a4e1-c720ffcb2b54.png', '12', 'ounce', 340, '4.49', 1
 ),
 (
-    'Sargento Shredded Parmesan Cheese', 'https://www.amazon.com/Kraft-Parmesan-Finely-Shredded-Natural/dp/B000Q6B8UY/ref=sr_1_1_sspa?fpw=fresh&keywords=parmesan+cheese&qid=1560019837&s=amazonfresh&sr=1-1-spons&psc=1',
+    'Sargento Shredded Parmesan Cheese', 'https://www.amazon.com/Sargento-Reserve-Shaved-14-Month-Parmesan/dp/B07KBNZPT6/ref=sr_1_fkmr0_1?fpw=fresh&keywords=Sargento+Shredded+Parmesan+Cheese&qid=1560564747&s=amazonfresh&sr=1-1-fkmr0',
     'https://res.cloudinary.com/hksqkdlah/image/upload/ar_1:1,c_fill,dpr_3.0,f_auto,q_auto:low,w_400/26652_sil-shredded-parmesan-sargento-artisan-blends-shredded-parmesan-cheese', '6', 'ounce', 170, '4.69', 1
 ),
 (
@@ -129,7 +129,7 @@ INSERT INTO products (product_name, product_url, product_image, product_original
     'http://mertsspecialtymeats.com/wp-content/uploads/2018/01/pre-beef-ribeye-steak-300x242.png', '10', 'ounce', 283, '13.17', 1
 ),
 (
-    'Taylor Stir Fry Kit', 'https://www.amazon.com/Birds-Eye-Pepper-Vegetables-Frozen/dp/B000SKNU0E/ref=sr_1_1_sspa?crid=1I4B2RS9IC6XF&fpw=fresh&keywords=bell+pepper&qid=1560020793&s=amazonfresh&sprefix=bell+pe%2Camazonfresh%2C127&sr=1-1-spons&psc=1',
+    'Taylor Stir Fry Kit', 'https://www.amazon.com/Taylor-Farms-Ginger-Garlic-Stir/dp/B01LAYXIPI/ref=sr_1_1?crid=168KD0C0DSPQ0&fpw=fresh&keywords=taylor+farms+stir+fry&qid=1560564788&s=gateway&sprefix=taylor+stir+fr%2Camazonfresh%2C127&sr=8-1',
     'https://i5.walmartimages.com/asr/3fd3a848-496d-45be-8b29-586005c045f7_4.88aa07dd8059d1039a53a76ade2da71d.png', '16', 'ounce', 453, '2.49', 1
 ),
 (
@@ -149,7 +149,7 @@ INSERT INTO products (product_name, product_url, product_image, product_original
     'https://purepng.com/public/uploads/large/purepng.com-carrotscarrotvegetablesfreshdeliciousefoodhealthycarrots-481521740717jmglq.png', '2', 'pound', 907, '1.60', 1
 ),
 (
-    'Imagine Organic Chicken Broth', 'https://www.amazon.com/365-Everyday-Value-Organic-Chicken/dp/B074VBL8K3/ref=sr_1_21?crid=79C62QLUCT35&fpw=fresh&keywords=celery+organic&qid=1560024548&s=amazonfresh&sprefix=celer%2Camazonfresh%2C130&sr=1-21',
+    'Imagine Organic Chicken Broth', 'https://www.amazon.com/Imagine-Organic-Range-Chicken-Sodium/dp/B07979NV39/ref=sr_1_1?fpw=fresh&keywords=Imagine+Organic+Chicken+Broth&qid=1560564819&s=amazonfresh&sr=1-1',
     'https://www.imaginefoods.com/wp-content/uploads/2018/05/IMG_FR_ChickBrothOrg_32oz.png', '32', 'ounce', 907, '1.99', 1
 ),
 (
@@ -161,7 +161,7 @@ INSERT INTO products (product_name, product_url, product_image, product_original
     'https://www.hunts.com/sites/g/files/qyyrlu211/files/images/products/organic-tomato-sauce-40096.png', '15', 'ounce', 400, '2.36', 1
 ),
 (
-    'Mission White Corn Tortillas', 'https://www.amazon.com/Guerrero-5-75-Inch-White-Tortillas/dp/B001MSTPCS/ref=sr_1_3?fpw=fresh&keywords=corn+tortillas&qid=1560030911&s=amazonfresh&sr=1-3',
+    'Mission White Corn Tortillas', 'https://www.amazon.com/Mission-Organics-White-Tortillas-Count/dp/B06XJWNH7C/ref=sr_1_1_sspa?fpw=fresh&keywords=Mission+White+Corn+Tortillas&qid=1560564844&s=amazonfresh&sr=1-1-spons&psc=1',
     'https://www.missionfoods.com.au/media/793677/mission_tortillas_whitecorn.png', '1', 'pound', 453, '2.59', 1
 );
 
