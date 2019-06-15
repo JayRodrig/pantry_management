@@ -61,7 +61,7 @@ const getPantryItemByName = (request, response) => {
 };
 
 //GET PANTRY ITEMS OF USER BY USER ID
-const getPantryItemsOfUser= (request, response) => {
+const getPantryItemsOfUser = (request, response) => {
     const { id, } = request.params;
     CurrentPantryServices.getPantryItemsOfUser(id)
         .then(data => {
@@ -82,8 +82,6 @@ const getPantryItemsOfUser= (request, response) => {
 const getPantryItemOfUserByName = (request, response) => {
     const { name, id } = request.params;
     const likeName = `%${name}%`;
-    console.log(likeName)
-    console.log(id)
     CurrentPantryServices.getPantryItemOfUserByName(likeName, id)
         .then(data => {
             response.status(200).json({
@@ -100,6 +98,26 @@ const getPantryItemOfUserByName = (request, response) => {
 };
 
 
+//UPDATE A PRODUCT'S WEIGHT LEFT AFTER PURCHASE BY PRODUCT ID
+const updateproductWeightLeft = (request, response) => {
+    const { product_id, } = request.params;
+    const { weight_left, } = request.body;
+    CurrentPantryServices.updatePantryItemByProductID(product_id, weight_left)
+        .then(data => {
+            response.status(200).json({
+                'msg': `Successfully updated product.`,
+                data
+            })
+        })
+        .catch(e => {
+            response.status(400);
+            response.json({
+                'msg': `Something went wrong.`,
+                e,
+            });
+        });
+}
+
 const getCurrentPantryRouter = _ => {
     const CurrentPantryRouter = express.Router();
 
@@ -108,6 +126,7 @@ const getCurrentPantryRouter = _ => {
     CurrentPantryRouter.get('/:id', getPantryItemByID);
     CurrentPantryRouter.get('/name/:name', getPantryItemByName);
     CurrentPantryRouter.get('/user/:id/:name', getPantryItemOfUserByName);
+    CurrentPantryRouter.put('/product/:product_id', updateproductWeightLeft);
 
     return CurrentPantryRouter;
 };

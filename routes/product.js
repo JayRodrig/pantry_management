@@ -8,7 +8,7 @@ const express = require('express');
 
 // LOCAL MODULES
 const ProductServices = require('../services/products');
-const {convertToGrams,} = require('../services/weightConversions');
+const { convertToGrams, } = require('../services/weightConversions');
 
 const postProduct = (request, response) => {
     const {
@@ -32,7 +32,7 @@ const postProduct = (request, response) => {
 };
 
 const getProductByID = (request, response) => {
-    const {id,} = request.params;
+    const { id, } = request.params;
     ProductServices.getProductByID(id)
         .then(data => {
             response.status(200);
@@ -51,7 +51,7 @@ const getProductByID = (request, response) => {
 };
 
 const updateProduct = (request, response) => {
-    const {id,} = request.params;
+    const { id, } = request.params;
     const {
         product_name, product_url, product_image, product_original_weight, product_original_weight_type, product_gram_weight, product_price, product_owner,
     } = request.body;
@@ -74,7 +74,7 @@ const updateProduct = (request, response) => {
 };
 
 const deleteProduct = (request, response) => {
-    const {id,} = request.params;
+    const { id, } = request.params;
     ProductServices.deleteProduct(id)
         .then(data => {
             response.status(200).json({
