@@ -63,9 +63,6 @@ const sendSMS = async ( request, response ) => {
         .then(message => {
             response.status(200).json({
                 message: 'Text Message Has Been Sent',
-                date: weekDateRange,
-                message: textMessageBody,
-                values: values,
                 status: message.status
             })
         })
