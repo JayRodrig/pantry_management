@@ -17,6 +17,10 @@ getWeekDateRange = _ => {
         daysToAdd = 1;
         daysToEnd = 5;
     }
+    if (day === 1) {
+        daysToAdd = 7;
+        daysToEnd = 11;
+    }
     if (day === 2) {
         daysToAdd = 6;
         daysToEnd = 10;
@@ -63,6 +67,7 @@ const sendSMS = async ( request, response ) => {
         .then(message => {
             response.status(200).json({
                 message: 'Text Message Has Been Sent',
+                dates: weekDateRange,
                 status: message.status
             })
         })
